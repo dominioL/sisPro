@@ -1,0 +1,13 @@
+#rodapé {
+	background-color: #294E79;
+	border-top-color: #F5F5F5;
+	border-top-style: solid;
+	border-top-width: 3em;
+	box-align: center;
+	padding: 1em;
+}
+
+#rodapé p {
+	color: #FFF;
+	text-align: center;
+}

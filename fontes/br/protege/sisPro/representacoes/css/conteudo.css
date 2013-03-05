@@ -1,0 +1,158 @@
+#conteúdo {
+	box-flex: 1;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+	padding: 2em;
+}
+
+#conteúdo h1 {
+	color: #666;
+	font-size: 2.5em;
+}
+
+#conteúdo p {
+	color: #666;
+	margin-top: 2em;
+}
+
+#conteúdo form {
+	margin-top: 2em;
+	padding: 0 4em;
+}
+
+#conteúdo form .dadosDeFormulário {
+	column-count: 2;
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+	column-width: 100%;
+	-moz-column-width: 100%;
+	-webkit-column-width: 100%;
+	display: block;
+	text-align: right;
+}
+
+#conteúdo form input,
+#conteúdo form textarea {
+	border-radius: 1em;
+	-moz-border-radius: 1em;
+	-ms-border-radius: 1em;
+	-o-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	box-shadow: 0.1em 0.1em 0.1em #888;
+	-moz-box-shadow: 0.1em 0.1em 0.1em #888;
+	-webkit-box-shadow: 0.1em 0.1em 0.1em #888;
+	color: #666;
+	padding: 0.5em;
+}
+
+#conteúdo form input[type="text"],
+#conteúdo form textarea {
+	border-color: #EEE;
+	border-style: solid;
+	border-width: 0.1em;
+	color: #294E79;
+	margin-top: 1em;
+	margin-right: 1em;
+	width: 90%;
+}
+
+#conteúdo form input[type="text"]:focus,
+#conteúdo form textarea {
+	color: #3D73B1;
+	outline-width: 0;
+}
+
+#conteúdo form textarea {
+	height: 5em;
+}
+
+
+#conteúdo form input[type="button"],
+#conteúdo form input[type="submit"] {
+	background-color: #F5F5F5;
+	border-width: 0;
+	margin-right: 1em;
+	text-shadow: 0 0.1em 0.1em #FFF;
+}
+
+#conteúdo form input[type="button"]:hover,
+#conteúdo form input[type="submit"]:hover {
+	cursor: pointer;
+	background: #EEE;
+}
+
+#conteúdo form input[type="button"]:active,
+#conteúdo form input[type="submit"]:active {
+	background: #DDD;
+}
+
+#conteúdo form input[type="button"][disabled],
+#conteúdo form input[type="submit"][disabled] {
+	background-color: #AAA;	
+	cursor: default;
+}
+
+#conteúdo form .botõesDeAção {
+	margin-top: 1em;
+	text-align: right;
+}
+
+#conteúdo #sucessoContâiner,
+#conteúdo #erroContâiner,
+#conteúdo #fracassoContâiner {
+	display: none;
+	margin-bottom: 2em;
+	padding: 1em;
+}
+
+#conteúdo #sucessoTexto,
+#conteúdo #erroTexto,
+#conteúdo #fracassoTexto {
+	margin-top: 0;
+}
+
+#conteúdo #sucessoContâiner {
+	background-color: rgba(154, 205, 50, 0.9);
+}
+
+#conteúdo #sucessoTexto,
+#conteúdo #sucessoContâiner a {
+	color: #FFF;
+}
+
+#conteúdo #fracassoContâiner {
+	background-color: rgba(255, 173, 51  , 1);
+}
+
+#conteúdo #fracassoTexto {
+	color: #FFF;
+}
+
+#conteúdo #erroContâiner {
+	background-color: rgba(255, 0, 0, 0.7);
+}
+
+#conteúdo #erroTexto {
+	color: #FFF;	
+}
+
+#conteúdo #erroLista {
+	color: #FFF;
+	list-style-position: inside;
+	list-style-type: square;
+	margin-top: 1em;
+}
+
+#conteúdo .erroItemDeLista {
+	line-height: 1.5em;
+}
+
+#conteúdo .imagemCentralizada {
+	display: block;
+	margin-bottom: 1.5em;
+	text-align: center;
+}
+
+#conteúdo #íconeDeCarregamento {
+	display: none;
+}

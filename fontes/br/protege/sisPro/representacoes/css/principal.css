@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@import url("/estilos/reset");
+@import url("/estilos/cabecalho");
+@import url("/estilos/conteudo");
+@import url("/estilos/rodape");
+
+* {
+	font-family: Helvetica, Verdana, Arial, Sans-serif;
+	font-size: 1em;
+}
+
+#meio {
+	box-align: start;
+	-moz-box-align: start;
+	-webkit-box-align: start;
+/* 	box-direction: reverse; */
+/* 	-moz-box-direction: reverse; */
+/* 	-webkit-box-direction: reverse; */
+	box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	-webkit-box-orient: horizontal;
+	box-pack: justify; 
+	-moz-box-pack: justify;
+	-webkit-box-pack: justify;
+	display: box;
+	display: -moz-box;
+	display: -webkit-box;
+}
+
+#meio #navegaçãoTemática {
+	background-color: #F00;
+	box-flex: 0;
+	-moz-box-flex: 0;
+	-wekit-box-flex: 0;
+}
+
+#meio #navegaçãoTemática #menuTemático a {
+	background-color: #3D73B1;
+	color: #FFF;
+	display: block;
+	font-size: 0.9em;
+	font-weight: bold;
+	padding: 1em;
+	text-decoration: none;
+}
+
+#meio #navegaçãoTemática #menuTemático a:hover {
+	background-color: #294E79;
+}
