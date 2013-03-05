@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+#conteudo {
+	line-height: 1.5em;
+	margin: 0 0 0 20px;
+}
+
+#conteudo h1 {
+	background-color: #17C;
+	color: #FFF;
+	font-size: 1.5em;
+	padding: 10px;
+}
+
+#conteudo .divisao {
+	display: block;
+	-moz-column-count: 2;
+	padding: 20px;
+}
+
+#conteudo .divisao:hover {
+	background-color: #F0FFFF;
+}
+
+#conteudo form input[type="text"], #conteudo form input[type="email"], #conteudo form input[type="tel"],
+#conteudo form input[type="password"], #conteudo form select, #conteudo form textarea {
+	border-color: #DDD;
+	border-style: solid;
+	border-width: 2px;
+	color: #888;
+	display: block;
+	margin: 5px 0 0 0;
+	padding: 5px;
+	width: 400px;
+}
+
+#conteudo form input[type="text"]:hover, #conteudo form input[type="email"]:hover, 
+#conteudo form input[type="tel"]:hover, #conteudo form input[type="text"]:focus, 
+#conteudo form input[type="password"]:hover, #conteudo form input[type="password"]:focus, 
+#conteudo form select:hover, #conteudo form select:focus, #conteudo form textarea:hover,
+#conteudo form textarea:focus {
+	color: #000;
+	border-color: #17C;
+}
+
+#conteudo form select {
+	background-color: #FFF;
+}
+
+#conteudo form textarea {
+	height: 150px;
+}
+
+#conteudo form input[type="submit"] {
+	background-color: #17C;
+	border-color: #059;
+	border-style: solid;
+	border-width: 2px 0 0 2px;
+	color: #FFF;
+	padding: 5px;
+}
+
+#conteudo form input[type="submit"]:hover {
+	background-color: #059;
+	border-color: #17C;
+	border-width: 2px 0 0 2px;
+}
+
+#conteudo form label {
+	color: 	#333;
+	display: block;
+	margin: 20px 0;
+}
+
+#conteudo form label:last-child {
+	margin: 0;
+}
+
+#conteudo .erro {
+	background-color: #FF8C69;	
+}
+
+#conteudo .erro {
+	padding: 10px;	
+}
+
+#conteudo .erro {
+	list-style: square;
+	list-style-position: inside;
+}
+
+#conteudo .sucesso {
+	background-color: #CAFF70;
+}
+
+#conteudo strong {
+	color: inherit;
+	font-weight: bold;
