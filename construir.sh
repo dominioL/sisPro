@@ -1,3 +1,6 @@
+projeto=SisPro
+pacoteDoProjeto=sisPro
+
 fontes=fontes
 testes=testes
 bibliotecas=bibliotecas
@@ -10,12 +13,15 @@ fontesJs=${fontes}/js
 fontesHtml=${fontes}/html
 fontesCss=${fontes}/css
 testesJava=${testes}/java
+testesJs=${testes}/js
 bibliotecasJava=${bibliotecas}/jar
+bibliotecasJs=${bibliotecas}/js
+bibliotecasCss=${bibliotecas}/css
 binariosJava=${binarios}/class
 
 arquivosFontesJava=$(find ${fontesJava} -name *.java)
 arquivosTestesJava=$(find ${testesJava} -name *.java)
-classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${testesJava}:: -e s:/:.:g -e s:[.]java$:: -e s:^[.]:: -e s:[a-Z]*[.]figuracao[.][a-Z]*::)
+classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${testesJava}::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:[.]java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
 
 limpar() {
 	echo ":limpar";
@@ -34,35 +40,48 @@ criarEstrutura() {
 
 adicionarBibliotecas() {
 	echo ":adicionarBibliotecas";
-	ln -sf ~/projetos/estruturados -t ${bibliotecasJava}
+	ln -sf ~/projetos/estruturados/construcao/estruturados.jar -t ${bibliotecasJava}
+	ln -sf ~/projetos/conexaoH/construcao/conexaoH.jar -t ${bibliotecasJava}
 }
 
 construir() {
 	limpar;
 	criarEstrutura;
 	adicionarBibliotecas;
-	echo ":construir";
 }
 
 compilar() {
 	construir;
-	javac -classpath ${bibliotecasJava}:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -verbose -g ${arquivosFontesJava}
- 	javac -classpath ${bibliotecasJava}:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -verbose -g ${arquivosTestesJava}
 	echo ":compilar";
+	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava}
+	#javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava}
 }
 
 testar() {
 	compilar;
-	java -classpath ${bibliotecasJava}:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
 	echo ":testar";
+	java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
 }
 
 depurar() {
 	compilar;
-	jdb -classpath ${bibliotecasJava}:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
 	echo ":depurar";
+	jdb -classpath ${bibliotecasJava}:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
 }
 
+executar() {
+	compilar;
+	echo ":executar";
+	java -classpath ${bibliotecasJava}/*:${binariosJava} br.dominioL.${pacoteDoProjeto}.${projeto};
+}
+
+gerarVersao() {
+	compilar;
+	echo ":gerarVersao";
+	jar -cf ${construcao}/${pacoteDoProjeto}.jar -C ${binariosJava} .;
+}
+
+echo :${pacoteDoProjeto}
 if [ -n "$1" ]
 then
 	$1;
