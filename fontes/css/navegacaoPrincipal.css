@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+nav.navegacaoPrincipal {
+	border-color: #DDD;
+	border-style: solid;
+	border-right-width: 1px;
+}
+
+nav.navegacaoPrincipal > ul > li > a {
+	color: #444;
+	display: block;
+	padding: 5px 10px;
+}
+
+nav.navegacaoPrincipal > ul > li > a:hover {
+	background-color: #00A0B0;
+	color: #FFF;
+}

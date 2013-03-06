@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+footer.rodape {
+	background-image: linear-gradient(270deg, #F1F1F1 0%, #F5F5F5 100%);
+	background-image: -webkit-linear-gradient(270deg, #F1F1F1 0%, #F5F5F5 100%);
+	background-image: -moz-linear-gradient(270deg, #F1F1F1 0%, #F5F5F5 100%);
+	background-image: -o-linear-gradient(270deg, #F1F1F1 0%, #F5F5F5 100%);
+	background-image: -ms-linear-gradient(270deg, #F1F1F1 0%, #F5F5F5 100%);
+	border-color: #DDD;
+	border-style: solid;
+	border-top-width: 1px;
+	padding: 10px;
+}
+
+footer.rodape p {
+	color: #444;
+	text-align: center;
+}

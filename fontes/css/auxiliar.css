@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+section.auxiliar {
+/*	border-color: #F1F1F1;
+	border-style: solid;
+	border-left-width: 1px;*/
+	background-image: radial-gradient(elipse closest-side at left, #00A5A0, #00A0B0);
+	background-image: -webkit-radial-gradient(elipse closest-side at left, #00A5A0, #00A0B0);
+	background-image: -moz-radial-gradient(50% 0, 0, 50% 100, 400, from(#00A5A0), to(#00A0B0));
+	background-image: -o-radial-gradient(50% 0, 0, 50% 100, 400, from(#00A5A0), to(#00A0B0));
+	background-image: -ms-radial-gradient(50% 0, 0, 50% 100, 400, from(#00A5A0), to(#00A0B0));
+}

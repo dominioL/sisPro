@@ -1,0 +1,1 @@
+/home/lucas/projetos/lindaJs/construcao/linda.js

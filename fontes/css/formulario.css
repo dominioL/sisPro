@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+input[type="text"] {
+	background-color: #FFF;
+	border-color: #2070AA;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+}
