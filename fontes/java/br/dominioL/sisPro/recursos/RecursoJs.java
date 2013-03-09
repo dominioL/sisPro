@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 public final class RecursoJs extends Recurso {
 	@GET
 	@Produces(TiposDeMidia.JS)
-	public Response obterCss(@PathParam("nome") String nome) {
+	public Response obterJs(@PathParam("nome") String nome) {
 		File arquivo = Arquivo.JS.fornecerArquivo(nome);
 		return new RecursoArquivo().obterArquivo(arquivo, CodigoDeEstado.HTTP_200, TipoDeMidia.JS);
 	}

@@ -2,8 +2,9 @@
 
 input[type="text"] {
 	background-color: #FFF;
-	border-color: #2070AA;
+	border-color: #27B;
 	border-style: solid;
 	border-width: 1px;
-	padding: 5px;
+	color: #444;
+	padding: 3px;
 }

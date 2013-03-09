@@ -1,0 +1,152 @@
+@charset "utf-8";
+
+div.carregadorLinear {
+	height: 20px;
+	width: 90px;
+	display: -webkit-flex;
+	-webkit-flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-webkit-align-items: flex-end;
+	-webkit-justify-content: space-between;
+	-webkit-align-content: flex-start;
+}
+
+div.linear {
+	background-color: #C32;
+	border-radius: 0;
+	height: 90%;
+	width: 8%;
+	-webkit-animation-name: transparente;
+	-webkit-animation-duration: 1.5s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes transparente {
+	0% {
+		opacity: 1;
+		height: 50%;
+	}
+	
+	50% {
+		height: 100%;
+	}
+	
+	100% {
+		opacity: 0.5;
+		height: 50%;
+	}
+}
+
+div.linear1 {
+	-webkit-animation-delay: 0;
+}
+
+div.linear2 {
+	-webkit-animation-delay: 0.2s;
+}
+
+div.linear3 {
+	-webkit-animation-delay: 0.4s;
+}
+
+div.linear4 {
+	-webkit-animation-delay: 0.6s;
+}
+
+div.linear5 {
+	-webkit-animation-delay: 0.8s;
+}
+
+div.linear6 {
+	-webkit-animation-delay: 1.0s;
+}
+
+div.linear7 {
+	-webkit-animation-delay: 1.2s;
+}
+
+div.linear8 {
+	-webkit-animation-delay: 1.4s;
+}
+
+div.linear9 {
+	-webkit-animation-delay: 1.6s;
+}
+
+div.linear10 {
+	-webkit-animation-delay: 1.8s;
+}
+
+div.carregadorCircular {
+	margin: auto;
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100px;
+	height: 100px;
+}
+
+div.circular {
+	background-color: #C32;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 10%;
+	width: 10%;
+	-webkit-animation-name: girar;
+	-webkit-animation-duration: 1.6s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes girar {
+	0% { 
+		opacity: 1;
+	}
+	
+	100% {
+		opacity: 0.2;
+	}
+}
+
+div.circular1 {
+	-webkit-animation-delay: 0;
+	-webkit-transform: rotate(0deg) translate(0, -150%);
+}
+
+div.circular2 {
+	-webkit-animation-delay: 0.2s;
+	-webkit-transform: rotate(45deg) translate(0, -150%);
+}
+
+div.circular3 {
+	-webkit-animation-delay: 0.4s;
+	-webkit-transform: rotate(90deg) translate(0, -150%);
+}
+
+div.circular4 {
+	-webkit-animation-delay: 0.6s;
+	-webkit-transform: rotate(135deg) translate(0, -150%);
+}
+
+div.circular5 {
+	-webkit-animation-delay: 0.8s;
+	-webkit-transform: rotate(180deg) translate(0, -150%);
+}
+
+div.circular6 {
+	-webkit-animation-delay: 1.0s;
+	-webkit-transform: rotate(225deg) translate(0, -150%);
+}
+
+div.circular7 {
+	-webkit-animation-delay: 1.2s;
+	-webkit-transform: rotate(270deg) translate(0, -150%);
+}
+
+div.circular8 {
+	-webkit-animation-delay: 1.4s;
+	-webkit-transform: rotate(315deg) translate(0, -150%);
+}

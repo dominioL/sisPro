@@ -1,18 +1,23 @@
 @charset "utf-8";
 
 nav.navegacaoPrincipal {
-	border-color: #DDD;
+	background-color: #FFF;
+}
+
+nav.navegacaoPrincipal > ul {
+	border-color: #C32;
 	border-style: solid;
-	border-right-width: 1px;
+	border-right-width: 2px;
 }
 
 nav.navegacaoPrincipal > ul > li > a {
-	color: #444;
+	background-color: #FFF;
+	color: #C32;
 	display: block;
-	padding: 5px 10px;
+	padding: 10px;
 }
 
 nav.navegacaoPrincipal > ul > li > a:hover {
-	background-color: #00A0B0;
+	background-color: #C32;
 	color: #FFF;
 }

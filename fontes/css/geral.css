@@ -1,5 +1,6 @@
 @charset "utf-8";
 
-* {
+div.geral {
+	color: #444;
 	font-family: Tahoma, Arial, Verdana, sans-serif;
 }

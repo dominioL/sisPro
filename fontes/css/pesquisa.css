@@ -1,6 +1,21 @@
 @charset "utf-8";
 
-nav.pesquisa {
-	border-radius: 50px 0 0 50px;
-	padding: 10px;
+section.pesquisa {
+	background-image: -webkit-radial-gradient(top left, ellipse cover, #0AE, #0AB);
+	border-color: #27B;
+	border-style: solid;
+	border-bottom-width: 2px;
+	padding: 10px 50px;
+}
+
+section.pesquisa input {
+	width: 500px;
+}
+
+section.pesquisa > form {
+	margin-right: 50px;
+}
+
+section.pesquisa > div.carregadorLinear {
+	visibility: hidden;
 }

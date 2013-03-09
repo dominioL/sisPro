@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+section.sistema {
+	padding: 10px;
+}
+
+section.sistema > p.mensagem {
+	border-radius: 0.5em;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px 10px;
+}
+
+section.sistema > p.mensagem.sucesso {
+	background-color: #EFE;
+	border-color: #7C7;
+	color: #7A7;
+}
+
+section.sistema > p.mensagem.erro {
+	background-color: #FEE;
+	border-color: #C77;
+	color: #C77;
+}
+
+section.sistema > p.mensagem.aviso {
+	background-color: #FFE;
+	border-color: #CC7;
+	color: #CC7;
+}
+
+section.sistema > p.mensagem.informacao {
+	background-color: #EEF;
+	border-color: #EA0;
+	color: #EA0;
+}
