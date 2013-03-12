@@ -4,3 +4,163 @@ section.conteudo {
 	background-color: #FFF;
 	margin: 0 20px;
 }
+
+section.conteudo input[type="text"] {
+	border-color: #CCC;
+	border-style: solid;
+	border-width: 1px;
+	color: #333;
+	padding: 5px;
+	margin-bottom: 20px;
+	width: 300px;
+}
+
+section.conteudo input[type="text"]:hover {
+	border-color: #888;
+}
+
+section.conteudo input[type="text"]:focus {
+	border-color: #C32;
+}
+
+section.conteudo button > span {
+	background-color: #555;
+	color: #FFF;
+	border-radius: 0.5em;
+	margin: 0 2px;
+	padding: 1px 2px;
+}
+
+section.conteudo button {
+	background-color: #F5F5F5;
+	background-image: -webkit-radial-gradient(center, ellipse contain, #EEE, #F5F5F5);
+	border-color: #CCC;
+	border-style: solid;
+	border-width: 1px;
+	color: #666;
+	margin: 0 10px 10px 0;
+	font-size: 0.8rem;
+	font-weight: bold;
+	padding: 5px;
+}
+
+section.conteudo button.salvar {
+	background-color: #EFE;
+	background-image: -webkit-radial-gradient(center, ellipse contain, #DFD, #EFE);
+	border-color: #7C7;
+	color: #7A7;
+}
+
+section.conteudo button.apagar {
+	background-color: #FEE;
+	background-image: -webkit-radial-gradient(center, ellipse contain, #FDD, #FEE);
+	border-color: #C77;
+	color: #C77;
+}
+
+section.conteudo button:hover,
+section.conteudo button:focus {
+	cursor: pointer;
+	border-color: #AAA;
+	box-shadow: 0 1px 2px #CCC;
+}
+
+section.conteudo button:active {
+	border-color: #CCC;
+}
+
+section.conteudo button.salvar:hover,
+section.conteudo button.salvar:focus {
+	border-color: #5A5;
+}
+
+section.conteudo button.salvar:active {
+	border-color: #7C7;
+}
+
+section.conteudo button.apagar:hover,
+section.conteudo button.apagar:focus {
+	border-color: #A55;
+}
+
+section.conteudo button.apagar:active {
+	border-color: #C77;
+}
+
+section.conteudo button:disabled,
+section.conteudo button:disabled:hover {
+	background-color: #AAA;
+	background-image: none;
+	border-color: #AAA;
+	color: #666;
+	cursor: default;
+	box-shadow: none;
+}
+
+section.conteudo > nav {
+	margin-bottom: 30px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: flex-end;
+	align-content: flex-start;
+	display: -webkit-flex;
+	-webkit-flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	-webkit-align-items: stretch;
+	-webkit-justify-content: flex-end;
+	-webkit-align-content: flex-start;
+	display: -moz-flex;
+	-moz-flex-direction: row;
+	-moz-flex-wrap: wrap;
+	-moz-align-items: stretch;
+	-moz-justify-content: flex-end;
+	-moz-align-content: flex-start;
+	display: -o-flex;
+	-o-flex-direction: row;
+	-o-flex-wrap: wrap;
+	-o-align-items: stretch;
+	-o-justify-content: flex-end;
+	-o-align-content: flex-start;
+	display: -ms-flex;
+	-ms-flex-direction: row;
+	-ms-flex-wrap: wrap;
+	-ms-align-items: stretch;
+	-ms-justify-content: flex-end;
+	-ms-align-content: flex-start;
+}
+
+section.conteudo > form {
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: space-around;
+	align-content: space-between;
+	display: -webkit-flex;
+	-webkit-flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	-webkit-align-items: stretch;
+	-webkit-justify-content: space-around;
+	-webkit-align-content: space-between;
+	display: -moz-flex;
+	-moz-flex-direction: row;
+	-moz-flex-wrap: wrap;
+	-moz-align-items: stretch;
+	-moz-justify-content: space-around;
+	-moz-align-content: space-between;
+	display: -o-flex;
+	-o-flex-direction: row;
+	-o-flex-wrap: wrap;
+	-o-align-items: stretch;
+	-o-justify-content: space-around;
+	-o-align-content: space-between;
+	display: -ms-flex;
+	-ms-flex-direction: row;
+	-ms-flex-wrap: wrap;
+	-ms-align-items: stretch;
+	-ms-justify-content: space-around;
+	-ms-align-content: space-between;
+}

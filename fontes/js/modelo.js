@@ -8,6 +8,7 @@
 		
 		inicializarSistema: function () {
 			SisProVisao.instancia();
+			SisProControle.instancia();
 			this.carregarConteudo();
 		},
 		
@@ -18,15 +19,36 @@
 		},
 		
 		carregarPagina: function (uriDaPagina) {
-			SisProVisao.instancia.iniciarAtualizacao();
+			this.iniciarAtualizacao();
 			var requisicao = Requeridor.instancia.fornecerRequisicaoDePagina(uriDaPagina);
 			requisicao.tratarSucesso = this.receberPagina.vincularEscopo(this);
 			requisicao.enviarGet(true);
 		},
 		
+		carregarScripts: function () {
+			var scripts = Linda.selecionarTodos("section.conteudo script");
+			for (var indice = 0; indice < scripts.length; indice++) {
+				var novoScript = Linda.documento.createElement("script");
+				novoScript.type = scripts[indice].type;
+				novoScript.src = scripts[indice].src;
+				Linda.selecionar("head").appendChild(novoScript);
+			}
+		},
+		
 		receberPagina: function (pagina) {
 			SisProVisao.instancia.carregarConteudo(pagina);
+			this.carregarScripts();
+			this.finalizarAtualizacao();
+		},
+		
+		iniciarAtualizacao: function () {
+			SisProVisao.instancia.iniciarAtualizacao();
+			SisProControle.instancia.bloquearTodosBotoes();
+		},
+		
+		finalizarAtualizacao: function () {
 			SisProVisao.instancia.finalizarAtualizacao();
+			SisProControle.instancia.desbloquearTodosBotoes();
 		}
 	});
 	SisPro.instancia();
@@ -70,21 +92,25 @@
 		tratarRedirecionamento: function (resposta, codigoDeEstado, carregado, total, estampaDeTempo) {
 			var mensagem = String.concatenarComEspaco(codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
 			SisProVisao.instancia.mostrarMensagemDeInformacao(mensagem);
+			SisPro.instancia.finalizarAtualizacao();
 		},
 		
 		tratarSucesso: function (resposta, codigoDeEstado, carregado, total, estampaDeTempo) {
 			var mensagem = String.concatenarComEspaco(codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
 			SisProVisao.instancia.mostrarMensagemDeSucesso(mensagem);
+			SisPro.instancia.finalizarAtualizacao();
 		},
 		
 		tratarErroDoCliente: function (resposta, codigoDeEstado, carregado, total, estampaDeTempo) {
 			var mensagem = String.concatenarComEspaco(codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
 			SisProVisao.instancia.mostrarMensagemDeErro(mensagem);
+			SisPro.instancia.finalizarAtualizacao();
 		},
 		
 		tratarErroDoServidor: function (resposta, codigoDeEstado, carregado, total, estampaDeTempo) {
 			var mensagem = String.concatenarComEspaco(codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
 			SisProVisao.instancia.mostrarMensagemDeAviso(mensagem);
+			SisPro.instancia.finalizarAtualizacao();
 		}
 	});
 	Requeridor.instancia();

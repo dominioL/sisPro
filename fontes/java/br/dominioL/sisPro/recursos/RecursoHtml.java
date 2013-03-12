@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("/html/{nome}")
+@Path("/html/{nome: .+}")
 public final class RecursoHtml extends Recurso {
 	@GET
 	@Produces(TiposDeMidia.HTML)

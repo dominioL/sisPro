@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("/js/{nome}")
+@Path("/js/{nome: .+}")
 public final class RecursoJs extends Recurso {
 	@GET
 	@Produces(TiposDeMidia.JS)

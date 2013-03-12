@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 @Path("/clientes")
 public final class RecursoClientes extends Recurso {
 	@GET
-	@Path("cadastro")
+	@Path("/cadastro")
 	@Produces(TiposDeMidia.HTML)
 	public Response obterHtml() {
 		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.HTML, Arquivo.PRINCIPAL.fornecerArquivo());

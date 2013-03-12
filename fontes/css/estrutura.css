@@ -119,7 +119,7 @@ section.pesquisa {
 	-moz-flex-direction: row;
 	-moz-flex-wrap: nowrap;
 	-moz-align-items: center;
-	-moz-justify-content: spacedisplay-between;
+	-moz-justify-content: flex-start;
 	-moz-align-content: flex-start;
 	display: -o-flex;
 	-o-flex-direction: row;
