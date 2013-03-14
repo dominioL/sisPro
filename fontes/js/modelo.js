@@ -27,11 +27,14 @@
 		
 		carregarScripts: function () {
 			var scripts = Linda.selecionarTodos("section.conteudo script");
+			var cabecalho = Linda.selecionar("head");
 			for (var indice = 0; indice < scripts.length; indice++) {
-				var novoScript = Linda.documento.createElement("script");
-				novoScript.type = scripts[indice].type;
-				novoScript.src = scripts[indice].src;
-				Linda.selecionar("head").appendChild(novoScript);
+				var script = scripts[indice];
+				var novoScript = Linda.criarElemento("script");
+				novoScript.type = script.type;
+				novoScript.src = script.src;
+				cabecalho.appendChild(novoScript);
+				script.remove();
 			}
 		},
 		
@@ -49,6 +52,21 @@
 		finalizarAtualizacao: function () {
 			SisProVisao.instancia.finalizarAtualizacao();
 			SisProControle.instancia.desbloquearTodosBotoes();
+		},
+		
+		incluirCampoEmConteudo: function (classeDoBotao, classeDoCampo) {
+			var botao = Linda.selecionar(String.formatar("section.conteudo button.%@", classeDoBotao));
+			var template = Linda.selecionar(String.formatar("section.conteudo template.%@", classeDoCampo));
+			var formulario  = Linda.selecionar("section.conteudo > form");
+			SisProControle.instancia.bloquearBotao(botao);
+			formulario.appendChild(template.content.cloneNode(true));
+			template.remove();
+		},
+		
+		adicionarCampoEmConteudo: function (classeDoCampo) {
+			var template = Linda.selecionar(String.formatar("section.conteudo template.%@", classeDoCampo));
+			var formulario  = Linda.selecionar("section.conteudo > form");
+			formulario.appendChild(template.content.cloneNode(true));
 		}
 	});
 	SisPro.instancia();

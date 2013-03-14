@@ -1,11 +1,21 @@
-<script defer src="/js/clientes/cadastro" type="application/javascript"></script>
+<script src="/js/clientes/cadastro" type="application/javascript"></script>
 <form>
 	<input type="text" class="nome" placeholder="nome" title="nome (formato: João da Silva)" />
-	<input type="text" class="telefone" placeholder="telefone" title="telefone (formato: 4711112222)" />
-	<input type="text" class="enderecoEletronico" placeholder="endereço eletrônico" title="endereço eletrônico (formato: endereco@dominio.com.br)" />
-	<input type="text" class="cpf" placeholder="CPF" title="CPF (formato: 00011122233)" />
-	<input type="text" class="cnpj" placeholder="CNPJ" title="CNPJ (formato: 00111222333344)" />
-	<input type="text" class="inscricaoEstadual" placeholder="inscrição estadual" title="inscrição estadual (formato: 000111222333444)" />
+	<template class="telefone">
+		<input type="text" class="telefone" placeholder="telefone" title="telefone (formato: 4711112222)" />
+	</template>
+	<template class="enderecoEletronico">
+		<input type="text" class="enderecoEletronico" placeholder="endereço eletrônico" title="endereço eletrônico (formato: endereco@dominio.com.br)" />
+	</template>
+	<template class="cpf">
+		<input type="text" class="cpf" placeholder="CPF" title="CPF (formato: 00011122233)" />
+	</template>
+	<template class="cnpj">
+		<input type="text" class="cnpj" placeholder="CNPJ" title="CNPJ (formato: 00111222333344)" />
+	</template>
+	<template class="inscricaoEstadual">
+		<input type="text" class="inscricaoEstadual" placeholder="inscrição estadual" title="inscrição estadual (formato: 000111222333444)" />
+	</template>
 </form>
 <nav class="navegacaoSecundaria">
 	<button class="adicionarTelefone">Adicionar telefone</button>

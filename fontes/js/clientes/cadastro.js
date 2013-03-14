@@ -5,7 +5,7 @@
 		inicializarUnico: function () {
 			new TratadorDeMouse(Linda.selecionar("section.conteudo button.adicionarTelefone"))
 				.paraClique(this.adicionarTelefone.vincularEscopo(this));
-			new TratadorDeMouse(Linda.selecionar("section.conteudo button.adicioanrEnderecoEletronico"))
+			new TratadorDeMouse(Linda.selecionar("section.conteudo button.adicionarEnderecoEletronico"))
 				.paraClique(this.adicionarEnderecoEletronico.vincularEscopo(this));
 			new TratadorDeMouse(Linda.selecionar("section.conteudo button.incluirCpf"))
 				.paraClique(this.incluirCpf.vincularEscopo(this));
@@ -16,24 +16,24 @@
 		},
 		
 		adicionarTelefone: function () {
-			
+			SisPro.instancia.adicionarCampoEmConteudo("telefone");
 		},
-			
+		
 		adicionarEnderecoEletronico: function () {
-			
+			SisPro.instancia.adicionarCampoEmConteudo("enderecoEletronico");
 		},
-			
+		
 		incluirCpf: function () {
-			SisProControle.instancia.bloquearBotao(Linda.selecionar("section.conteudo button.incluirCpf"));
+			SisPro.instancia.incluirCampoEmConteudo("incluirCpf", "cpf");
 		},
 		
 		incluirCnpj: function () {
-			SisProControle.instancia.bloquearBotao(Linda.selecionar("section.conteudo button.incluirCnpj"));
+			SisPro.instancia.incluirCampoEmConteudo("incluirCnpj", "cnpj");
 		},
 		
 		incluirInscricaoEstadual: function () {
-			SisProControle.instancia.bloquearBotao(Linda.selecionar("section.conteudo button.incluirInscricaoEstadual"));
+			SisPro.instancia.incluirCampoEmConteudo("incluirInscricaoEstadual", "inscricaoEstadual");
 		}
-	}); 
+	});
 	Cadastro.instancia();
 }());

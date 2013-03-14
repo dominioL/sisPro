@@ -38,7 +38,7 @@ section.conteudo button {
 	border-style: solid;
 	border-width: 1px;
 	color: #666;
-	margin: 0 10px 10px 0;
+	margin: 0 0 10px 10px;
 	font-size: 0.8rem;
 	font-weight: bold;
 	padding: 5px;
@@ -97,8 +97,8 @@ section.conteudo button:disabled:hover {
 	box-shadow: none;
 }
 
-section.conteudo > nav {
-	margin-bottom: 30px;
+section.conteudo > nav.navegacaoSecundaria {
+ 	margin-bottom: 30px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -137,30 +137,30 @@ section.conteudo > form {
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: stretch;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-content: space-between;
 	display: -webkit-flex;
 	-webkit-flex-direction: row;
 	-webkit-flex-wrap: wrap;
 	-webkit-align-items: stretch;
-	-webkit-justify-content: space-around;
+	-webkit-justify-content: space-between;
 	-webkit-align-content: space-between;
 	display: -moz-flex;
 	-moz-flex-direction: row;
 	-moz-flex-wrap: wrap;
 	-moz-align-items: stretch;
-	-moz-justify-content: space-around;
+	-moz-justify-content: space-between;
 	-moz-align-content: space-between;
 	display: -o-flex;
 	-o-flex-direction: row;
 	-o-flex-wrap: wrap;
 	-o-align-items: stretch;
-	-o-justify-content: space-around;
+	-o-justify-content: space-between;
 	-o-align-content: space-between;
 	display: -ms-flex;
 	-ms-flex-direction: row;
 	-ms-flex-wrap: wrap;
 	-ms-align-items: stretch;
-	-ms-justify-content: space-around;
+	-ms-justify-content: space-between;
 	-ms-align-content: space-between;
 }

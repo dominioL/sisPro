@@ -17,7 +17,12 @@
 		},
 		
 		carregarConteudo: function (conteudo) {
-			Linda.selecionar("section.conteudo").innerHTML = conteudo;
+			var secaoConteudo = Linda.selecionar("section.conteudo");
+			var templateConteudo = Linda.selecionar("template.conteudo");
+			var sombraConteudo = secaoConteudo.webkitCreateShadowRoot();
+			secaoConteudo.innerHTML = conteudo;
+			sombraConteudo.appendChild(templateConteudo.content);
+			templateConteudo.remove();
 		},
 		
 		mostrarMensagemDeSucesso: function (mensagem) {
