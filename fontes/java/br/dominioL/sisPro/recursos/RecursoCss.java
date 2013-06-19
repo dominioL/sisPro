@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Path("/css/{nome}")
+@Path("/css/{nome: .+}")
 public final class RecursoCss extends Recurso {
 	@GET
 	@Produces(TiposDeMidia.CSS)

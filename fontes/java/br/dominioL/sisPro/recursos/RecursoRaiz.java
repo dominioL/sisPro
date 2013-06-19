@@ -19,7 +19,7 @@ public final class RecursoRaiz extends Recurso {
 	public Response obterTexto() {
 		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.TEXTO, "SisPro");
 	}
-	
+
 	@GET
 	@Produces(TiposDeMidia.HTML)
 	public Response obterHtml() {

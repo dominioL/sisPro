@@ -1,38 +1,56 @@
+/*global Classe*/
+/*global Linda*/
+/*global Requeridor*/
+/*global SisPro*/
+
 (function () {
 	"use strict";
-	
-	var Cadastro = new PrototipoUnico({
-		inicializarUnico: function () {
-			new TratadorDeMouse(Linda.selecionar("section.conteudo button.adicionarTelefone"))
-				.paraClique(this.adicionarTelefone.vincularEscopo(this));
-			new TratadorDeMouse(Linda.selecionar("section.conteudo button.adicionarEnderecoEletronico"))
-				.paraClique(this.adicionarEnderecoEletronico.vincularEscopo(this));
-			new TratadorDeMouse(Linda.selecionar("section.conteudo button.incluirCpf"))
-				.paraClique(this.incluirCpf.vincularEscopo(this));
-			new TratadorDeMouse(Linda.selecionar("section.conteudo button.incluirCnpj"))
-				.paraClique(this.incluirCnpj.vincularEscopo(this));
-			new TratadorDeMouse(Linda.selecionar("section.conteudo button.incluirInscricaoEstadual"))
-				.paraClique(this.incluirInscricaoEstadual.vincularEscopo(this));
+
+	var Cadastro = Classe.criarSingleton({
+		inicializar: function () {
+			var secaoConteudo = Linda.selecionar("section.conteudo");
+			secaoConteudo.selecionar("button.adicionarTelefone").tratadorDeClique(this.adicionarTelefone.vincularEscopo(this));
+			secaoConteudo.selecionar("button.adicionarEnderecoEletronico").tratadorDeClique(this.adicionarEnderecoEletronico.vincularEscopo(this));
+			secaoConteudo.selecionar("button.incluirCpf").tratadorDeClique(this.incluirCpf.vincularEscopo(this));
+			secaoConteudo.selecionar("button.incluirCnpj").tratadorDeClique(this.incluirCnpj.vincularEscopo(this));
+			secaoConteudo.selecionar("button.incluirInscricaoEstadual").tratadorDeClique(this.incluirInscricaoEstadual.vincularEscopo(this));
+			secaoConteudo.selecionar("button.cadastrar").tratadorDeClique(this.cadastrar.vincularEscopo(this));
 		},
-		
+
 		adicionarTelefone: function () {
 			SisPro.instancia.adicionarCampoEmConteudo("telefone");
 		},
-		
+
 		adicionarEnderecoEletronico: function () {
 			SisPro.instancia.adicionarCampoEmConteudo("enderecoEletronico");
 		},
-		
+
 		incluirCpf: function () {
 			SisPro.instancia.incluirCampoEmConteudo("incluirCpf", "cpf");
 		},
-		
+
 		incluirCnpj: function () {
 			SisPro.instancia.incluirCampoEmConteudo("incluirCnpj", "cnpj");
 		},
-		
+
 		incluirInscricaoEstadual: function () {
 			SisPro.instancia.incluirCampoEmConteudo("incluirInscricaoEstadual", "inscricaoEstadual");
+		},
+
+		cadastrar: function () {
+			SisPro.instancia.iniciarAtualizacao();
+			var requisicao = Requeridor.instancia.fornecerRequisicaoDeSalvamento("/clientes");
+			// requisicao.tratarErro = this.finalizarCadastroComErro.vincularEscopo(this);
+			// requisicao.tratarSucesso = this.finalizarCadastroComSucesso.vincularEscopo(this);
+			requisicao.enviarPost(JSON.stringify({}), true);
+		},
+
+		finalizarCadastroComErro: function () {
+			//TODO
+		},
+
+		finalizarCadastroComSucesso: function () {
+			//TODO
 		}
 	});
 	Cadastro.instancia();

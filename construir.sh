@@ -2,6 +2,7 @@
 
 projeto=SisPro
 pacoteDoProjeto=sisPro
+pacoteGeral=br.dominioL
 
 bibliotecas=bibliotecas
 binarios=binarios
@@ -22,6 +23,7 @@ fontesCss=${fontes}/css
 fontesHtml=${fontes}/html
 fontesJava=${fontes}/java
 fontesJs=${fontes}/js
+testesHtml=${testes}/html
 testesJava=${testes}/java
 testesJs=${testes}/js
 
@@ -49,16 +51,20 @@ criarEstrutura() {
 	mkdir -p ${fontesHtml};
 	mkdir -p ${fontesJava};
 	mkdir -p ${fontesJs};
+	mkdir -p ${testesHtml};
 	mkdir -p ${testesJava};
 	mkdir -p ${testesJs};
 }
 
 adicionarBibliotecas() {
 	echo ":adicionarBibliotecas";
-	ln -sf ~/projetos/estilos/construcao/limpo.css -t ${bibliotecasCss};
-	ln -sf ~/projetos/estruturados/construcao/estruturados.jar -t ${bibliotecasJava};
-	ln -sf ~/projetos/conexaoH/construcao/conexaoH.jar -t ${bibliotecasJava};
-	ln -sf ~/projetos/lindaJs/construcao/linda.js -t ${bibliotecasJs};
+	cp -f ~/projetos/estilos/construcao/limpo.css ${bibliotecasCss};
+	cp -f ~/projetos/verificaJs/construcao/verifica.css ${bibliotecasCss};
+	cp -f ~/projetos/estruturados/construcao/estruturados.jar ${bibliotecasJava};
+	cp -f ~/projetos/conexaoH/construcao/conexaoH.jar ${bibliotecasJava};
+	cp -f ~/projetos/lindaJs/construcao/linda.js ${bibliotecasJs};
+	cp -f ~/projetos/verificaJs/construcao/verifica.js ${bibliotecasJs};
+	cp -f ~/projetos/verificaJs/construcao/jsHint.js ${bibliotecasJs};
 }
 
 compilar() {
@@ -67,10 +73,10 @@ compilar() {
 	adicionarBibliotecas;
 	echo ":compilar";
 	cp -rf ${bibliotecasJs}/* ${fontesJs}/* ${binariosJs};
-	cp -rf ${fontesHtml}/* ${binariosHtml};
+	cp -rf ${fontesHtml}/* ${testesHtml}/* ${binariosHtml};
 	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss};
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava};
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava};
+	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
+	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
 }
 
 construir() {
@@ -81,7 +87,8 @@ construir() {
 testar() {
 	construir;
 	echo ":testar";
-	java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
+	# java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
+	chromium-browser ${binariosHtml}/testeDeCodigo.html --allow-file-access-from-files;
 }
 
 depurar() {
@@ -93,7 +100,7 @@ depurar() {
 executar() {
 	construir;
 	echo ":executar";
-	java -classpath ${bibliotecasJava}/*:${binariosJava} br.dominioL.${pacoteDoProjeto}.${projeto};
+	java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto};
 }
 
 echo :${pacoteDoProjeto}
