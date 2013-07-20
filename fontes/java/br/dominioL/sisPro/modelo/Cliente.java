@@ -2,19 +2,14 @@ package br.dominioL.sisPro.modelo;
 
 import br.dominioL.estruturados.json.ObjetoJson;
 
-public final class Cliente {
-	private ObjetoJson dados;
-
+public final class Cliente extends Entidade {
 	public Cliente(ObjetoJson dados) {
-		this.dados = dados;
+		super(dados);
 	}
 
-	public Boolean validarDados() {
+	@Override
+	public Boolean validar() {
 		return true;
 		//TODO
-	}
-
-	public ObjetoJson fornecerComoJson() {
-		return dados;
 	}
 }

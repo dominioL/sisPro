@@ -1,5 +1,7 @@
 package br.dominioL.sisPro;
 
+import br.dominioL.sisPro.dados.couch.Couch;
+
 import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
 import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
@@ -16,6 +18,7 @@ public final class SisPro {
 	private static final String URI_BASE = "http://localhost:7000";
 
 	public static void main(String[] argumentos) throws IOException {
+		Couch.fornecerInstancia().popular();
 		URI uriBase = UriBuilder.fromUri(URI_BASE).build();
 		ResourceConfig configuracaoDeRecurso = new PackagesResourceConfig(PACOTE_DOS_RECURSOS);
 		HttpServer servidorHttp = GrizzlyServerFactory.createHttpServer(uriBase, configuracaoDeRecurso);

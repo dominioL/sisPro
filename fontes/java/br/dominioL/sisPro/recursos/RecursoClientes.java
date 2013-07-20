@@ -28,6 +28,6 @@ public final class RecursoClientes extends Recurso {
 	@Produces(TiposDeMidia.JSON)
 	@Consumes(TiposDeMidia.JSON)
 	public Response postarJson(String dados) {
-		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.JSON, Json.criarObjeto().fornecerComoJson());
+		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.JSON, Json.criarObjeto().fornecerComoTextoJson());
 	}
 }
