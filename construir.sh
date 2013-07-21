@@ -100,8 +100,9 @@ depurar() {
 executar() {
 	construir;
 	echo ":executar";
-	touch ${construcao}/execucao.txt;
-	java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto} 2> ${construcao}/execucao.txt;
+	# touch ${construcao}/execucao.txt;
+	# java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto} 2> ${construcao}/execucao.txt;
+	java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto};
 }
 
 echo :${pacoteDoProjeto}

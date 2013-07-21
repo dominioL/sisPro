@@ -58,7 +58,7 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 		RequisicaoCouch requisicao = RequisicaoCouch.criar();
 		RespostaCouch resposta = colocar(requisicao);
 		System.out.println(resposta.fornecerCodigoDeEstado().comoTextoFormatado());
-		System.out.println(resposta.fornecerEntidade().fornecerComoTextoJson());
+		System.out.println(resposta.fornecerEntidade().comoTextoJson());
 	}
 
 	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ConstrutorDeUri construtorDeUri) {
@@ -68,6 +68,9 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 		ClientResponse respostaHttp = recurso.method(metodo.comoTexto(), ClientResponse.class);
 		RespostaCouch resposta = RespostaCouch.criar().comCodigoDeEstado(respostaHttp.getStatus());
 		resposta.comEntidade(respostaHttp.getEntity(String.class));
+		if (respostaHttp.getLocation() != null) {
+			resposta.comLocalizacao(respostaHttp.getLocation().toString());
+		}
 		return resposta;
 	}
 
@@ -75,11 +78,14 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 		String uri = construtorDeUri.construirAbsoluto();
 		Client cliente = Client.create();
 		WebResource recurso = cliente.resource(uri);
-		recurso.entity(entidade.fornecerComoTextoJson());
+		recurso.entity(entidade.comoTextoJson());
 		recurso.type(TipoDeMidia.JSON.comoTexto());
 		ClientResponse respostaHttp = recurso.method(metodo.comoTexto(), ClientResponse.class);
 		RespostaCouch resposta = RespostaCouch.criar().comCodigoDeEstado(respostaHttp.getStatus());
 		resposta.comEntidade(respostaHttp.getEntity(String.class));
+		if (respostaHttp.getLocation() != null) {
+			resposta.comLocalizacao(respostaHttp.getLocation().toString());
+		}
 		return resposta;
 	}
 

@@ -15,7 +15,12 @@ public abstract class Entidade implements RepresentavelComoJson, Validavel {
 	}
 
 	@Override
-	public final ObjetoJson fornecerComoJson() {
+	public final ObjetoJson comoJson() {
 		return dados;
+	}
+
+	@Override
+	public final void fixarDados(ObjetoJson dados) {
+		this.dados = dados;
 	}
 }

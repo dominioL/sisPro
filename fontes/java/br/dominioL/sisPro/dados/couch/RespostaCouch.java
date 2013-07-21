@@ -8,6 +8,7 @@ import br.dominioL.estruturados.json.ObjetoJson;
 public final class RespostaCouch {
 	private CodigoDeEstado codigoDeEstado;
 	private ObjetoJson entidade;
+	private String localizacao;
 
 	private RespostaCouch() {
 		//TODO
@@ -27,11 +28,20 @@ public final class RespostaCouch {
 		return this;
 	}
 
+	public RespostaCouch comLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
+		return this;
+	}
+
 	public CodigoDeEstado fornecerCodigoDeEstado() {
 		return codigoDeEstado;
 	}
 
 	public ObjetoJson fornecerEntidade() {
 		return entidade;
+	}
+
+	public String fornecerLocalizacao() {
+		return localizacao;
 	}
 }

@@ -4,9 +4,9 @@ import br.dominioL.conexaoH.CodigoDeEstado;
 import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.conexaoH.TiposDeMidia;
 
-import br.dominioL.estruturados.json.Json;
-
+import br.dominioL.sisPro.dados.couch.RepositorioDeClientes;
 import br.dominioL.sisPro.interno.Arquivo;
+import br.dominioL.sisPro.modelo.Cliente;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -28,6 +28,8 @@ public final class RecursoClientes extends Recurso {
 	@Produces(TiposDeMidia.JSON)
 	@Consumes(TiposDeMidia.JSON)
 	public Response postarJson(String dados) {
-		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.JSON, Json.criarObjeto().fornecerComoTextoJson());
+		RepositorioDeClientes repositorio = RepositorioDeClientes.fornecerInstancia();
+		Cliente cliente = new Cliente();
+		return postarEntidadeJson(repositorio, cliente, dados);
 	}
 }
