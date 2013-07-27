@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+section.busca {
+	background-image: linear-gradient(90deg, #F9F9F9 0%, #F3F3F3 100%);
+	background-color: #F3F3F3;
+	border-color: #E5E5E5;
+	border-style: solid;
+	border-bottom-width: 1px;
+	padding: 10px 50px;
+}
+
+section.busca > a,
+section.busca > form {
+	margin-right: 50px;
+}
+
+section.busca > div.carregadorLinear {
+	background-color: transparent;
+	visibility: hidden;
+}
+
+section.busca input[type="text"] {
+	background-image: url("/png/busca");
+	background-color: #FCFCFC;
+	background-position: center right;
+	border-color: #DDD;
+	border-style: solid;
+	border-radius: 0.3em;
+	border-width: 1px;
+	box-shadow: 1px 1px 0 #FFF;
+	color: #444;
+	font-size: 0.8rem;
+	padding: 5px 28px 5px 5px;
+	width: 500px;
+}
+
+section.busca input[type="text"]:hover,
+section.busca input[type="text"]:focus {
+	border-color: #4183C4;
+}
+
+section.busca input[type="text"]::-webkit-input-placeholder {
+	color: #AAA;
+}

@@ -1,8 +1,9 @@
 @charset "utf-8";
 
 section.auxiliar {
-	background-image: -webkit-linear-gradient(360deg, #0AD 0%, #0AB 100%);
-	border-color: #27B;
+	background-image: -webkit-radial-gradient(top left, ellipse cover, #F9F9F9, #F3F3F3);
+	background-color: #F3F3F3;
+	border-color: #E5E5E5;
 	border-style: solid;
-	border-left-width: 2px;
+	border-left-width: 1px;
 }

@@ -12,7 +12,7 @@ div.carregadorLinear {
 }
 
 div.linear {
-	background-color: #C32;
+	background-image: -webkit-linear-gradient(90deg, #4183C4 0%, #4183C4 100%);
 	border-radius: 0;
 	height: 90%;
 	width: 8%;

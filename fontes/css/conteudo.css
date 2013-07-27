@@ -5,25 +5,39 @@ section.conteudo {
 	margin: 0 20px;
 }
 
-section.conteudo input[type="text"] {
+section.conteudo > form > input[type="text"] {
+	background-color: #FAFAFA;
 	border-color: #CCC;
+	border-radius: 0.3em;
 	border-style: solid;
 	border-width: 1px;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
 	color: #333;
-	padding: 5px;
+	font-size: 0.9rem;
+	padding: 7px 28px 7px 7px;
 	margin-bottom: 20px;
 	width: 300px;
 }
 
-section.conteudo input[type="text"]:hover {
-	border-color: #888;
+section.conteudo > form > input[type="text"]:hover {
+	background-color: #FEFEFE;
 }
 
-section.conteudo input[type="text"]:focus {
-	border-color: #C32;
+section.conteudo > form > input[type="text"]::-webkit-input-placeholder {
+	color: #AAA;
 }
 
-section.conteudo button > span {
+section.conteudo > form > input[type="text"]:valid {
+	background-image: url("/png/valido");
+	background-position: center right;
+}
+
+section.conteudo > form > input[type="text"]:invalid {
+	background-image: url("/png/invalido");
+	background-position: center right;
+}
+
+section.conteudo > nav > button > span {
 	background-color: #555;
 	color: #FFF;
 	border-radius: 0.5em;
@@ -31,70 +45,84 @@ section.conteudo button > span {
 	padding: 1px 2px;
 }
 
-section.conteudo button {
-	background-color: #F5F5F5;
-	background-image: -webkit-radial-gradient(center, ellipse contain, #EEE, #F5F5F5);
-	border-color: #CCC;
+section.conteudo > nav > button {
+	border-radius: 0.3em;
 	border-style: solid;
 	border-width: 1px;
-	color: #666;
 	margin: 0 0 10px 10px;
 	font-size: 0.8rem;
-	font-weight: bold;
 	padding: 5px;
 }
 
-section.conteudo button.salvar {
-	background-color: #EFE;
-	background-image: -webkit-radial-gradient(center, ellipse contain, #DFD, #EFE);
-	border-color: #7C7;
-	color: #7A7;
+section.conteudo > nav > button {
+	background-color: #EAEAEA;
+	background-image: linear-gradient(180deg, #FAFAFA 0, #EAEAEA 100%);
+	border-color: #C5C5C5;
+	color: #333;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-section.conteudo button.apagar {
-	background-color: #FEE;
-	background-image: -webkit-radial-gradient(center, ellipse contain, #FDD, #FEE);
-	border-color: #C77;
-	color: #C77;
+section.conteudo > nav > button:hover,
+section.conteudo > nav > button:focus {
+	background-color: #DADADA;
+	background-image: linear-gradient(180deg, #EAEAEA 0, #DADADA 100%);
+	border-color: #B5B5B5;
 }
 
-section.conteudo button:hover,
-section.conteudo button:focus {
+section.conteudo > nav > button.salvar {
+	background-color: #60B044;
+	background-image: linear-gradient(180deg, #8ADD6D 0, #60B044 100%);
+	border-color: #5CA941;
+	color: #FFF;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+section.conteudo > nav > button.salvar:hover,
+section.conteudo > nav > button.salvar:focus {
+	background-color: #569E3D;
+	background-image: linear-gradient(180deg, #79D858 0, #569E3D 100%);
+	border-color: #4A993E;
+}
+
+section.conteudo > nav > button.apagar {
+	background-color: #B33630;
+	background-image: linear-gradient(180deg, #DC5F59 0, #B33630 100%);
+	border-color: #CD504A;
+	color: #FFF;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+section.conteudo > nav > button.apagar:hover,
+section.conteudo > nav > button.apagar:focus {
+	background-color: #A55;
+	background-image: linear-gradient(180deg, #DC5F59 0, #A55 100%);
+	border-color: #B33630;
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+section.conteudo > nav > button:hover,
+section.conteudo > nav > button:focus {
 	cursor: pointer;
-	border-color: #AAA;
 	box-shadow: 0 1px 2px #CCC;
 }
 
-section.conteudo button:active {
-	border-color: #CCC;
+section.conteudo > nav > button:active {
+	cursor: pointer;
+	box-shadow: none;
 }
 
-section.conteudo button.salvar:hover,
-section.conteudo button.salvar:focus {
-	border-color: #5A5;
-}
-
-section.conteudo button.salvar:active {
-	border-color: #7C7;
-}
-
-section.conteudo button.apagar:hover,
-section.conteudo button.apagar:focus {
-	border-color: #A55;
-}
-
-section.conteudo button.apagar:active {
-	border-color: #C77;
-}
-
-section.conteudo button:disabled,
-section.conteudo button:disabled:hover {
+section.conteudo > nav > button:disabled,
+section.conteudo > nav > button:disabled:hover {
 	background-color: #AAA;
 	background-image: none;
 	border-color: #AAA;
 	color: #666;
 	cursor: default;
 	box-shadow: none;
+	text-shadow: none;
 }
 
 section.conteudo > nav.navegacaoSecundaria {

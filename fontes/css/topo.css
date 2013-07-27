@@ -4,3 +4,6 @@ header.topo {
 	position: -webkit-sticky;
 	top: 0;
 }
+
+header.topo > img {
+}

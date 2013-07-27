@@ -5,19 +5,19 @@ nav.navegacaoPrincipal {
 }
 
 nav.navegacaoPrincipal > ul {
-	border-color: #C32;
+	border-color: #4183C4;
 	border-style: solid;
 	border-right-width: 2px;
 }
 
 nav.navegacaoPrincipal > ul > li > a {
 	background-color: #FFF;
-	color: #C32;
+	color: #4183C4;
 	display: block;
 	padding: 10px;
 }
 
 nav.navegacaoPrincipal > ul > li > a:hover {
-	background-color: #C32;
+	background-color: #4183C4;
 	color: #FFF;
 }

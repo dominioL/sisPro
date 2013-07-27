@@ -102,7 +102,7 @@ header.topo > * {
 	-ms-flex-basis: auto;
 }
 
-section.pesquisa {
+section.busca {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
