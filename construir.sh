@@ -75,6 +75,7 @@ compilar() {
 	cp -rf ${bibliotecasJs}/* ${fontesJs}/* ${binariosJs};
 	cp -rf ${fontesHtml}/* ${testesHtml}/* ${binariosHtml};
 	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss};
+	cp -rf ${recursos}/* ${binarios};
 	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
 	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
 }

@@ -10,12 +10,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Validador {
-	public static final String NOME = "(\\{L}{1,32}( \\{L}{1,32})?){1,8}";
-	public static final String TELEFONE = "\\(\\p{Digit}{2}\\) \\p{Digit}{4}-\\p{Digit}{4}";
-	public static final String EMAIL = "[\\p{Lower}._-]{1,32}@[\\p{Lower}._-]{1,32}(\\.\\p{Lower}{2,3}){1,4}";
-	public static final String CPF = "\\p{Digit}{3}\\.\\p{Digit}{3}\\.\\p{Digit}{3}-\\p{Digit}{2}";
-	public static final String CNPJ = "\\p{Digit}{2}\\.\\p{Digit}{3}\\.\\p{Digit}{3}/\\p{Digit}{4}-\\p{Digit}{2}";
-	public static final String IE = "(\\p{Digit}{1,16}[.-/]?){1,8}";
+	public static final String NOME = "^(\\p{L}{1,32}( \\p{L}{1,32})?){1,8}$";
+	public static final String TELEFONE = "^[(]\\p{Digit}{2}[)] \\p{Digit}{4,5}-\\p{Digit}{4}$";
+	public static final String EMAIL = "^[\\p{Lower}\\p{Digit}._-]{1,32}@[\\p{Lower}\\p{Digit}._-]{1,32}([.]\\p{Lower}{2,3}){1,2}$";
+	public static final String CPF = "^\\p{Digit}{3}[.]\\p{Digit}{3}[.]\\p{Digit}{3}-\\p{Digit}{2}$";
+	public static final String CNPJ = "^\\p{Digit}{2}[.]\\p{Digit}{3}[.]\\p{Digit}{3}/\\p{Digit}{4}-\\p{Digit}{2}$";
+	public static final String IE = "^(\\p{Digit}{1,16}([./-]\\p{Digit}{1,16})?){1,8}$";
 
 	private Boolean valido;
 
@@ -64,7 +64,9 @@ public final class Validador {
 			String valor = valorJson.comoTexto();
 			Pattern padrao = Pattern.compile(validacao);
 			Matcher validador = padrao.matcher(valor);
-			valido = valido && validador.matches();
+			if(!validador.matches()) {
+				invalidarCampo(valor, nomeDoCampo);
+			}
 		} catch (ExcecaoJsonDeTipo excecao) {
 			invalidarCampo(valorJson.comoTextoJson(), nomeDoCampo);
 		}

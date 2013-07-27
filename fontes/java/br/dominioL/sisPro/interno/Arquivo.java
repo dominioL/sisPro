@@ -3,13 +3,15 @@ package br.dominioL.sisPro.interno;
 import java.io.File;
 
 public enum Arquivo {
-	CSS("css", "css"),
+	CSS("", "css"),
 	LIMPO("limpo", "css"),
-	HTML("html", "html"),
+	HTML("", "html"),
 	INICIO("inicio", "html"),
 	PRINCIPAL("principal", "html"),
-	JS("js", "js"),
-	LINDA("linda", "js");
+	JS("", "js"),
+	LINDA("linda", "js"),
+	JPG("", "jpg"),
+	PNG("", "png");
 
 	private static final String CAMINHO = "binarios";
 	private final String nome;

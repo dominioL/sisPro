@@ -382,6 +382,10 @@
 			this.push.aplicarComEscopo(this, outra);
 		},
 
+		limpar: function () {
+			this.splice(0, this.length);
+		},
+
 		paraCada: function (funcaoDeIteracao, escopo) {
 			funcaoDeIteracao = funcaoDeIteracao.vincularEscopo(escopo);
 			for (var indice = 0; indice < this.length; indice++) {
@@ -479,6 +483,11 @@
 	"use strict";
 
 	String.implementar({
+		emBranco: function () {
+			var padraoSemEspaco = /^\s*$/;
+			return padraoSemEspaco.test(this);
+		},
+
 		paraInteiro: function () {
 			return parseInt(this, 10);
 		},
@@ -705,11 +714,12 @@
 	var Tipo = Classe.criarEnumeracaoDeConstantes(Linda.tipos);
 
 	var Evento = Classe.criarEnumeracaoDeConstantes({
-		TECLA_PRESSIONADA: "keydown",
-		TECLA_SOLTA: "keyup",
+		ALTERADO: "change",
 		CARREGADO: "load",
 		CLIQUE: "click",
-		DUPLO_CLIQUE: "dbclick"
+		DUPLO_CLIQUE: "dbclick",
+		TECLA_PRESSIONADA: "keydown",
+		TECLA_SOLTA: "keyup"
 	});
 
 	var Tecla = Classe.criarEnumeracaoDeConstantes({
@@ -1160,17 +1170,32 @@
 		}
 	});
 
+	var TratadorDeAlteracao = Classe.criar({
+		estende: Tratador,
+
+		inicializar: function (elemento) {
+			Tratador.prototipo.inicializar.chamarComEscopo(this, elemento);
+		},
+
+		paraAlteracao: function (tratador) {
+			this.adicionar(Evento.ALTERADO, tratador);
+			return this;
+		}
+	});
+
 	global.RequisicaoJson = RequisicaoJson;
 	global.RequisicaoDocumento = RequisicaoDocumento;
 	global.RequisicaoTexto = RequisicaoTexto;
 	global.TratadorDeTeclado = TratadorDeTeclado;
 	global.TratadorDeMouse = TratadorDeMouse;
 	global.TratadorDePagina = TratadorDePagina;
+	global.TratadorDeAlteracao = TratadorDeAlteracao;
 }(this));
 /*global HTMLCollection*/
 /*global HTMLTemplateElement*/
 /*global Linda*/
 /*global NodeList*/
+/*global TratadorDeAlteracao*/
 /*global TratadorDeMouse*/
 /*global TratadorDePagina*/
 /*global TratadorDeTeclado*/
@@ -1216,6 +1241,10 @@
 
 		tratadorDeTeclaSolta: function (tecla, tratador) {
 			return new TratadorDeTeclado(tecla, this).paraTeclaSolta(tratador);
+		},
+
+		tratadorDeAlteracao: function (tratador) {
+			return new TratadorDeAlteracao(this).paraAlteracao(tratador);
 		}
 	});
 

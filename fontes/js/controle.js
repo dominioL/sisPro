@@ -27,6 +27,31 @@
 
 		desbloquearBotao: function (botao) {
 			botao.removeAttribute("disabled");
+		},
+
+		adicionarTratadorDeInclusaoDeCampo: function (classeDoBotao, classeDoCampo, validador, padraoDeValidacao) {
+			var botao = SisProVisao.instancia.selecionarBotao(classeDoBotao);
+			botao.tratadorDeClique(function () {
+				SisPro.instancia.incluirCampo(classeDoCampo, botao, validador, padraoDeValidacao);
+			}.vincularEscopo(this));
+		},
+
+		adicionarTratadorDeAdicaoDeCampo: function (classeDoBotao, classeDoCampo, validador, padraoDeValidacao) {
+			var botao = SisProVisao.instancia.selecionarBotao(classeDoBotao);
+			botao.tratadorDeClique(function () {
+				SisPro.instancia.adicionarCampo(classeDoCampo, validador, padraoDeValidacao);
+			}.vincularEscopo(this));
+		},
+
+		adicionarTratadorDeAlteracaoEmCampo: function (campo, validador) {
+			campo.tratadorDeAlteracao(function () {
+				SisPro.instancia.validarFormulario(validador);
+			}.vincularEscopo(this));
+		},
+
+		adicionarTratadorDeBotao: function (classeDoBotao, tratador, escopo) {
+			var botao = SisProVisao.instancia.selecionarBotao(classeDoBotao);
+			botao.tratadorDeClique(tratador.vincularEscopo(escopo));
 		}
 	});
 

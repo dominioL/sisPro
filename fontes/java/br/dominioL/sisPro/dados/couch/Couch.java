@@ -1,5 +1,6 @@
 package br.dominioL.sisPro.dados.couch;
 
+import br.dominioL.conexaoH.Atributo;
 import br.dominioL.conexaoH.ConstrutorDeUri;
 import br.dominioL.conexaoH.Metodo;
 import br.dominioL.conexaoH.TipoDeMidia;
@@ -20,9 +21,7 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 	private static final String ENDERECO = "localhost";
 	private static final String NOME = "sispro";
 
-	private Couch() {
-		//TODO
-	}
+	private Couch() {}
 
 	public static final Couch fornecerInstancia() {
 		return (INSTANCIA != null) ? (INSTANCIA) : (INSTANCIA = new Couch());
@@ -57,8 +56,6 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 	private void criarBanco() {
 		RequisicaoCouch requisicao = RequisicaoCouch.criar();
 		RespostaCouch resposta = colocar(requisicao);
-		System.out.println(resposta.fornecerCodigoDeEstado().comoTextoFormatado());
-		System.out.println(resposta.fornecerEntidade().comoTextoJson());
 	}
 
 	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ConstrutorDeUri construtorDeUri) {
@@ -78,9 +75,7 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 		String uri = construtorDeUri.construirAbsoluto();
 		Client cliente = Client.create();
 		WebResource recurso = cliente.resource(uri);
-		recurso.entity(entidade.comoTextoJson());
-		recurso.type(TipoDeMidia.JSON.comoTexto());
-		ClientResponse respostaHttp = recurso.method(metodo.comoTexto(), ClientResponse.class);
+		ClientResponse respostaHttp = recurso.entity(entidade.comoTextoJson(), TipoDeMidia.JSON.comoTextoSemCharset()).method(metodo.comoTexto(), ClientResponse.class);
 		RespostaCouch resposta = RespostaCouch.criar().comCodigoDeEstado(respostaHttp.getStatus());
 		resposta.comEntidade(respostaHttp.getEntity(String.class));
 		if (respostaHttp.getLocation() != null) {

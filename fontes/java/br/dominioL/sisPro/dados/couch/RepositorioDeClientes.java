@@ -10,11 +10,9 @@ import br.dominioL.sisPro.modelo.Cliente;
 public final class RepositorioDeClientes implements RepositorioCouch<Cliente> {
 	private static RepositorioDeClientes INSTANCIA;
 	private static final TextoJson TIPO = Json.criarTexto("cliente");
-	private static final String IDENTIFICADOR_TIPO = "tipo";
+	private static final IdentificadorJson IDENTIFICADOR_TIPO = Json.criarIdentificador("tipo");
 
-	private RepositorioDeClientes() {
-		//TODO
-	}
+	private RepositorioDeClientes() {}
 
 	public static RepositorioDeClientes fornecerInstancia() {
 		return (INSTANCIA == null) ? (INSTANCIA = new RepositorioDeClientes()) : INSTANCIA;

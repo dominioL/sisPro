@@ -10,9 +10,7 @@ public final class RespostaCouch {
 	private ObjetoJson entidade;
 	private String localizacao;
 
-	private RespostaCouch() {
-		//TODO
-	}
+	private RespostaCouch() {}
 
 	public static RespostaCouch criar() {
 		return new RespostaCouch();

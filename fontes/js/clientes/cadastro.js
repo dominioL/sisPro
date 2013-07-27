@@ -2,55 +2,53 @@
 /*global Linda*/
 /*global Requeridor*/
 /*global SisPro*/
+/*global Validador*/
 
 (function () {
 	"use strict";
 
 	var Cadastro = Classe.criarSingleton({
 		inicializar: function () {
-			var secaoConteudo = Linda.selecionar("section.conteudo");
-			secaoConteudo.selecionar("button.adicionarTelefone").tratadorDeClique(this.adicionarTelefone.vincularEscopo(this));
-			secaoConteudo.selecionar("button.adicionarEnderecoEletronico").tratadorDeClique(this.adicionarEnderecoEletronico.vincularEscopo(this));
-			secaoConteudo.selecionar("button.incluirCpf").tratadorDeClique(this.incluirCpf.vincularEscopo(this));
-			secaoConteudo.selecionar("button.incluirCnpj").tratadorDeClique(this.incluirCnpj.vincularEscopo(this));
-			secaoConteudo.selecionar("button.incluirInscricaoEstadual").tratadorDeClique(this.incluirInscricaoEstadual.vincularEscopo(this));
-			secaoConteudo.selecionar("button.cadastrar").tratadorDeClique(this.cadastrar.vincularEscopo(this));
-		},
-
-		adicionarTelefone: function () {
-			SisPro.instancia.adicionarCampoEmConteudo("telefone");
-		},
-
-		adicionarEnderecoEletronico: function () {
-			SisPro.instancia.adicionarCampoEmConteudo("enderecoEletronico");
-		},
-
-		incluirCpf: function () {
-			SisPro.instancia.incluirCampoEmConteudo("incluirCpf", "cpf");
-		},
-
-		incluirCnpj: function () {
-			SisPro.instancia.incluirCampoEmConteudo("incluirCnpj", "cnpj");
-		},
-
-		incluirInscricaoEstadual: function () {
-			SisPro.instancia.incluirCampoEmConteudo("incluirInscricaoEstadual", "inscricaoEstadual");
+			this.validador = new Validador();
+			var controle = SisProControle.instancia;
+			var modelo = SisPro.instancia;
+			modelo.iniciarCampo("nome", this.validador, Validador.NOME);
+			controle.adicionarTratadorDeAdicaoDeCampo("adicionarTelefone", "telefone", this.validador, Validador.TELEFONE);
+			controle.adicionarTratadorDeAdicaoDeCampo("adicionarEnderecoEletronico", "enderecoEletronico", this.validador, Validador.EMAIL);
+			controle.adicionarTratadorDeInclusaoDeCampo("incluirCpf", "cpf", this.validador, Validador.CPF);
+			controle.adicionarTratadorDeInclusaoDeCampo("incluirCnpj", "cnpj", this.validador, Validador.CNPJ);
+			controle.adicionarTratadorDeInclusaoDeCampo("incluirInscricaoEstadual", "inscricaoEstadual", this.validador, Validador.IE);
+			controle.adicionarTratadorDeBotao("cadastrar", this.cadastrar, this);
+			this.validador.validar();
 		},
 
 		cadastrar: function () {
-			SisPro.instancia.iniciarAtualizacao();
-			var requisicao = Requeridor.instancia.fornecerRequisicaoDeSalvamento("/clientes");
-			// requisicao.tratarErro = this.finalizarCadastroComErro.vincularEscopo(this);
-			// requisicao.tratarSucesso = this.finalizarCadastroComSucesso.vincularEscopo(this);
-			requisicao.enviarPost(JSON.stringify({}), true);
-		},
-
-		finalizarCadastroComErro: function () {
-			//TODO
+			var visao = SisProVisao.instancia;
+			var modelo = SisPro.instancia;
+			modelo.iniciarAtualizacao();
+			if (this.validador.validar()) {
+				var requisicao = Requeridor.instancia.fornecerRequisicaoDeSalvamento("/clientes");
+				var dados = {};
+				modelo.adicionarCampoAosDados(dados, "nome");
+				modelo.adicionarCamposAosDados(dados, "telefone", "telefones");
+				modelo.adicionarCamposAosDados(dados, "enderecoEletronico", "enderecosEletronicos");
+				modelo.adicionarCampoAosDados(dados, "cpf");
+				modelo.adicionarCampoAosDados(dados, "cnpj");
+				modelo.adicionarCampoAosDados(dados, "inscricaoEstadual");
+				requisicao.tratarSucesso = this.finalizarCadastroComSucesso.vincularEscopo(this);
+				requisicao.enviarPost(JSON.stringify(dados), true);
+				console.log(dados);
+			} else {
+				//TODO
+				SisProVisao.instancia.mostrarMensagemDeDadosInvalidos();
+				SisPro.instancia.finalizarAtualizacao();
+			}
 		},
 
 		finalizarCadastroComSucesso: function () {
 			//TODO
+			SisProVisao.instancia.mostrarMensagemDeCadastroBemSucedido();
+			SisPro.instancia.finalizarAtualizacao();
 		}
 	});
 	Cadastro.instancia();
