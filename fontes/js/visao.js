@@ -41,7 +41,7 @@
 		},
 
 		mostrarMensagemDeDadosInvalidos: function () {
-			this.mostrarMensagemDeErro("Dados inválidos. Verifique se todos os campos estão preenchidos corretamente.");
+			this.mostrarMensagemDeErro("Dados inválidos. Verifique se todos os campos foram preenchidos corretamente.");
 		},
 
 		mostrarMensagemDeCadastroBemSucedido: function () {

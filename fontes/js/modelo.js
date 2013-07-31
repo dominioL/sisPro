@@ -63,71 +63,6 @@
 		finalizarAtualizacao: function () {
 			SisProVisao.instancia.finalizarAtualizacao();
 			SisProControle.instancia.desbloquearTodosBotoes();
-		},
-
-		adicionarPadraoDeValidacao: function (classeDoCampo, padraoDeValidacao) {
-			var campo = SisProVisao.instancia.selecionarCampo(classeDoCampo);
-			campo.setAttribute("pattern", padraoDeValidacao);
-		},
-
-		adicionarPadraoDeValidacaoDeTemplate: function (classeDoCampo, padraoDeValidacao) {
-			var campo = SisProVisao.instancia.selecionarCampoDeTemplate(classeDoCampo);
-			campo.setAttribute("pattern", padraoDeValidacao);
-		},
-
-		marcarCampoComoObrigatorio: function (classeDoCampo) {
-			var campo = SisProVisao.instancia.selecionarCampo(classeDoCampo);
-			campo.setAttribute("required", "required");
-		},
-
-		marcarCampoDeTemplateComoObrigatorio: function (classeDoCampo) {
-			var campo = SisProVisao.instancia.selecionarCampoDeTemplate(classeDoCampo);
-			campo.setAttribute("required", "required");
-		},
-
-		adicionarCampoAosDados: function (dados, classeDoCampo) {
-			var campo = SisProVisao.instancia.selecionarCampo(classeDoCampo);
-			if (!Linda.nulo(campo)) {
-				var valor = campo.value;
-				if (!valor.emBranco()) {
-					dados[classeDoCampo] = valor;
-				}
-			}
-		},
-
-		adicionarCamposAosDados: function (dados, classeDoCampo, nomeDoAtributo) {
-			dados[nomeDoAtributo] = [];
-			var listaComDados = dados[nomeDoAtributo];
-			var campos = SisProVisao.instancia.selecionarCampos(classeDoCampo);
-			campos.paraCada(function (campo) {
-				var valor = campo.value;
-				if (!valor.emBranco()) {
-					listaComDados.push(valor);
-				}
-			}, this);
-		},
-
-		incluirCampo: function (classeDoCampo, botao, validador, padrao) {
-			var campo = SisProVisao.instancia.incluirCampo(classeDoCampo);
-			SisProControle.instancia.bloquearBotao(botao);
-			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(campo, validador);
-			validador.adicionarCampo(campo, padrao);
-		},
-
-		adicionarCampo: function (classeDoCampo, validador, padrao) {
-			var campo = SisProVisao.instancia.adicionarCampo(classeDoCampo);
-			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(campo, validador);
-			validador.adicionarCampo(campo, padrao);
-		},
-
-		iniciarCampo: function (classeDoCampo, validador, padrao) {
-			var campo = SisProVisao.instancia.selecionarCampo(classeDoCampo);
-			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(campo, validador);
-			validador.adicionarCampoObrigatorio(campo, padrao);
-		},
-
-		validarFormulario: function (validador) {
-			validador.validar();
 		}
 	});
 	SisPro.instancia();
@@ -222,6 +157,152 @@
 	});
 	Requeridor.instancia();
 
+	var Cadastro = Classe.criar({
+		inicializar: function (uri) {
+			this.validador = new Validador();
+			this.formatador = new Formatador();
+			this.uri = uri;
+			this.campos = {
+				obrigatorios: {},
+				multiplos: {},
+				unicos: {}
+			};
+			SisProControle.instancia.adicionarTratadorDeCadastro(this);
+		},
+
+		iniciarCampoObrigatorio: function (campo) {
+			this.campos.obrigatorios[campo.nome] = campo;
+			this.ativarCampoObrigatorio(campo.nome);
+		},
+
+		iniciarCampoUnico: function (campo) {
+			this.campos.unicos[campo.nome] = campo;
+			SisProControle.instancia.adicionarTratadorDeInclusaoDeCampo(this, campo);
+		},
+
+		iniciarCampoMultiplo: function (campo) {
+			this.campos.multiplos[campo.nome] = campo;
+			SisProControle.instancia.adicionarTratadorDeAdicaoDeCampo(this, campo);
+		},
+
+		ativarCampoObrigatorio: function (nome) {
+			var campo = this.campos.obrigatorios[nome];
+			var elemento = campo.fornecerElemento();
+			var padrao = campo.padrao;
+			this.validador.adicionarCampoObrigatorio(elemento, padrao);
+			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(this, elemento);
+			if (campo.possuiFormato()) {
+				var formato = campo.formato;
+				this.formatador.adicionarCampo(elemento, formato);
+				SisProControle.instancia.adicionarTratadorDeDigitacaoEmCampo(this, elemento);
+			}
+			this.validador.validar();
+		},
+
+		ativarCampoUnico: function (nome) {
+			var campo = this.campos.unicos[nome];
+			var elemento = campo.incluirElemento();
+			var padrao = campo.padrao;
+			var mascara = campo.marcara;
+			var botao = campo.fornecerBotao();
+			this.validador.adicionarCampo(elemento, padrao);
+			SisProControle.instancia.bloquearBotao(botao);
+			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(this, elemento);
+			if (campo.possuiFormato()) {
+				var formato = campo.formato;
+				this.formatador.adicionarCampo(elemento, formato);
+				SisProControle.instancia.adicionarTratadorDeDigitacaoEmCampo(this, elemento);
+			}
+			this.validador.validar();
+		},
+
+		ativarCampoMultiplo: function (nome) {
+			var campo = this.campos.multiplos[nome];
+			var elemento = campo.adicionarElemento();
+			var padrao = campo.padrao;
+			var mascara = campo.marcara;
+			this.validador.adicionarCampo(elemento, padrao);
+			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(this, elemento);
+			if (campo.possuiFormato()) {
+				var formato = campo.formato;
+				this.formatador.adicionarCampo(elemento, formato);
+				SisProControle.instancia.adicionarTratadorDeDigitacaoEmCampo(this, elemento);
+			}
+			this.validador.validar();
+		},
+
+		validar: function () {
+			this.validador.validar();
+		},
+
+		formatar: function () {
+			this.formatador.formatar();
+		},
+
+		cadastrar: function () {
+			SisPro.instancia.iniciarAtualizacao();
+			this.dados = {};
+			if (this.validador.validar()) {
+				var requisicao = Requeridor.instancia.fornecerRequisicaoDeSalvamento(this.uri);
+				this.cadastrarCamposObrigatorios();
+				this.cadastrarCamposUnicos();
+				this.cadastrarCamposMultiplos();
+				requisicao.tratarSucesso = this.finalizarCadastroComSucesso.vincularEscopo(this);
+				requisicao.enviarPost(JSON.stringify(this.dados), true);
+			} else {
+				SisProVisao.instancia.mostrarMensagemDeDadosInvalidos();
+				SisPro.instancia.finalizarAtualizacao();
+			}
+		},
+
+		adicionarCampoAosDados: function (campo) {
+			var elemento = campo.fornecerElemento();
+			if (!Linda.nulo(elemento)) {
+				var valor = elemento.value;
+				if (!valor.emBranco()) {
+					this.dados[campo.nome] = valor;
+				}
+			}
+		},
+
+		adicionarCamposAosDados: function (campo) {
+			this.dados[campo.nomeDeAtributo] = [];
+			var listaComDados = this.dados[campo.nomeDeAtributo];
+			var elementos = campo.fornecerElementos();
+			elementos.paraCada(function (elemento) {
+				var valor = elemento.value;
+				if (!valor.emBranco()) {
+					listaComDados.push(valor);
+				}
+			}, this);
+		},
+
+		cadastrarCamposObrigatorios: function () {
+			this.campos.obrigatorios.paraCada(function (campo) {
+				this.adicionarCampoAosDados(campo);
+			}, this);
+		},
+
+		cadastrarCamposUnicos: function () {
+			this.campos.unicos.paraCada(function (campo) {
+				this.adicionarCampoAosDados(campo);
+			}, this);
+		},
+
+		cadastrarCamposMultiplos: function () {
+			this.campos.multiplos.paraCada(function (campo) {
+				this.adicionarCamposAosDados(campo);
+			}, this);
+		},
+
+		finalizarCadastroComSucesso: function () {
+			//TODO
+			SisProVisao.instancia.mostrarMensagemDeCadastroBemSucedido();
+			SisProControle.instancia.bloquearBotao(SisProVisao.instancia.selecionarBotao("cadastrar"));
+			SisPro.instancia.finalizarAtualizacao();
+		}
+	});
+
 	var Validador = Classe.criar({
 		inicializar: function () {
 			this.camposInvalidos = [];
@@ -249,37 +330,19 @@
 		},
 
 		adicionarCampo: function (campo, padrao) {
-			var validacao = {};
-			validacao.campo = campo;
-			validacao.padrao = padrao;
-			validacao.obrigatorio = false;
+			var validacao = {campo: campo, padrao: padrao, obrigatorio: false};
 			this.validacoes.push(validacao);
 		},
 
 		adicionarCampoObrigatorio: function (campo, padrao) {
-			var validacao = {};
-			validacao.campo = campo;
-			validacao.padrao = padrao;
-			validacao.obrigatorio = true;
+			var validacao = {campo: campo, padrao: padrao, obrigatorio: true};
 			this.validacoes.push(validacao);
-		},
-
-		adicionarCampos: function (campos, padrao) {
-			campos.paraCada(function (campo) {
-				this.adicionarCampo(campo, padrao);
-			}, this);
 		},
 
 		validarCampo: function (campo, padrao, obrigatorio) {
 			var valor = campo.value;
 			if (valor.emBranco()) {
-				this.camposEmBranco.push(campo);
-				if (obrigatorio) {
-					campo.setCustomValidity(Validador.CAMPO_EM_BRANCO);
-					return false;
-				}
-				campo.setCustomValidity(Validador.CORRETO);
-				return true;
+				return this.validarCampoEmBranco(campo, obrigatorio);
 			} else if (padrao.test(valor)) {
 				this.camposValidos.push(campo);
 				campo.setCustomValidity(Validador.CORRETO);
@@ -289,6 +352,97 @@
 				campo.setCustomValidity(Validador.CAMPO_INVALIDO);
 				return false;
 			}
+		},
+
+		validarCampoEmBranco: function (campo, obrigatorio) {
+			this.camposEmBranco.push(campo);
+			if (obrigatorio) {
+				campo.setCustomValidity(Validador.CAMPO_EM_BRANCO);
+				return false;
+			} else {
+				campo.setCustomValidity(Validador.CORRETO);
+				return true;
+			}
+		}
+	});
+
+	var Formatador = Classe.criar({
+		inicializar: function () {
+			this.formatacoes = [];
+		},
+
+		adicionarCampo: function (campo, formato) {
+			var formatacao = {campo: campo, formato: formato};
+			this.formatacoes.push(formatacao);
+		},
+
+		formatar: function () {
+			this.formatacoes.paraCada(function (formatacao) {
+				var valor = formatacao.campo.value;
+				var valorFormatado = valor.formatarNumero(formatacao.formato);
+				formatacao.campo.setAttribute("value", valorFormatado);
+				formatacao.campo.value = valorFormatado;
+				// TODO
+				console.log(valor);
+				console.log(valorFormatado);
+			}, this);
+		}
+	});
+
+	var Campo = Classe.criar({
+		inicializar: function (nome) {
+			this.nome = nome;
+			this.elemento = null;
+			this.elementos = [];
+		},
+
+		comPadrao: function (padrao) {
+			this.padrao = padrao;
+			return this;
+		},
+
+		comFormato: function (formato) {
+			this.formato = formato;
+			return this;
+		},
+
+		comBotao: function (botao) {
+			this.botao = botao;
+			return this;
+		},
+
+		comNomeDeAtributo: function (nomeDeAtributo) {
+			this.nomeDeAtributo = nomeDeAtributo;
+			return this;
+		},
+
+		possuiFormato: function () {
+			return !Linda.nuloOuIndefinido(this.formato);
+		},
+
+		adicionarElemento: function () {
+			this.elementos.push(SisProVisao.instancia.adicionarCampo(this.nome));
+			return this.elementos.ultimo;
+		},
+
+		incluirElemento: function () {
+			this.elemento = SisProVisao.instancia.incluirCampo(this.nome);
+			return this.elemento;
+		},
+
+		fornecerElemento: function () {
+			if (Linda.nuloOuIndefinido(this.elemento)) {
+				this.elemento = SisProVisao.instancia.selecionarCampo(this.nome);
+			}
+			return this.elemento
+		},
+
+		fornecerElementos: function () {
+			return this.elementos;
+		},
+
+		fornecerBotao: function () {
+			return SisProVisao.instancia.selecionarBotao(this.botao);
 		}
 	});
 
@@ -304,7 +458,8 @@
 		CORRETO: ""
 	});
 
+	global.Cadastro = Cadastro;
+	global.Campo = Campo;
 	global.SisPro = SisPro;
-	global.Requeridor = Requeridor;
 	global.Validador = Validador;
 }(this));

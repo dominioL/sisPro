@@ -5,53 +5,68 @@
 	"use strict";
 
 	var SisProControle = Classe.criarSingleton({
-		inicializar: function () {},
+		inicializar: function () {
+			this.botoesBloqueados = [];
+		},
 
 		bloquearTodosBotoes: function () {
 			var botoes = Linda.selecionarTodos("button");
 			for (var indice = 0, tamanho = botoes.length; indice < tamanho; indice++) {
-				this.bloquearBotao(botoes.item(indice));
+				botoes.item(indice).setAttribute("disabled", "disabled");
 			}
 		},
 
 		bloquearBotao: function (botao) {
+			this.botoesBloqueados.push(botao);
 			botao.setAttribute("disabled", "disabled");
 		},
 
 		desbloquearTodosBotoes: function () {
 			var botoes = Linda.selecionarTodos("button");
 			for (var indice = 0, tamanho = botoes.length; indice < tamanho; indice++) {
-				this.desbloquearBotao(botoes.item(indice));
+				botoes.item(indice).removeAttribute("disabled");
 			}
+			this.botoesBloqueados.paraCada(function (botao) {
+				botao.setAttribute("disabled", "disabled");
+			});
 		},
 
 		desbloquearBotao: function (botao) {
+			this.botoesBloqueados.removerElemento(botao);
 			botao.removeAttribute("disabled");
 		},
 
-		adicionarTratadorDeInclusaoDeCampo: function (classeDoBotao, classeDoCampo, validador, padraoDeValidacao) {
-			var botao = SisProVisao.instancia.selecionarBotao(classeDoBotao);
+		adicionarTratadorDeInclusaoDeCampo: function (entidade, campo) {
+			var botao = SisProVisao.instancia.selecionarBotao(campo.botao);
 			botao.tratadorDeClique(function () {
-				SisPro.instancia.incluirCampo(classeDoCampo, botao, validador, padraoDeValidacao);
+				entidade.ativarCampoUnico(campo.nome);
 			}.vincularEscopo(this));
 		},
 
-		adicionarTratadorDeAdicaoDeCampo: function (classeDoBotao, classeDoCampo, validador, padraoDeValidacao) {
-			var botao = SisProVisao.instancia.selecionarBotao(classeDoBotao);
+		adicionarTratadorDeAdicaoDeCampo: function (entidade, campo) {
+			var botao = SisProVisao.instancia.selecionarBotao(campo.botao);
 			botao.tratadorDeClique(function () {
-				SisPro.instancia.adicionarCampo(classeDoCampo, validador, padraoDeValidacao);
+				entidade.ativarCampoMultiplo(campo.nome);
 			}.vincularEscopo(this));
 		},
 
-		adicionarTratadorDeAlteracaoEmCampo: function (campo, validador) {
+		adicionarTratadorDeCadastro: function (entidade) {
+			var botao = SisProVisao.instancia.selecionarBotao("cadastrar");
+			botao.tratadorDeClique(function () {
+				entidade.cadastrar();
+			}.vincularEscopo(this));
+		},
+
+		adicionarTratadorDeAlteracaoEmCampo: function (entidade, campo) {
 			campo.tratadorDeAlteracao(function () {
-				SisPro.instancia.validarFormulario(validador);
+				entidade.validar();
 			}.vincularEscopo(this));
 		},
 
-		adicionarTratadorDeBotao: function (classeDoBotao, tratador, escopo) {
-			var botao = SisProVisao.instancia.selecionarBotao(classeDoBotao);
-			botao.tratadorDeClique(tratador.vincularEscopo(escopo));
+		adicionarTratadorDeDigitacaoEmCampo: function (entidade, campo) {
+			campo.tratadorDeCaractereDigitado(function () {
+				entidade.formatar();
+			}.vincularEscopo(this));
 		}
 	});
 

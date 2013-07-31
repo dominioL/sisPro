@@ -488,6 +488,23 @@
 			return padraoSemEspaco.test(this);
 		},
 
+		formatarNumero: function (formato) {
+			var formatado = formato;
+			var padrao = /[^0-9]/g;
+			var padraoDeSubstituicao = /#/;
+			var emBranco = " ";
+			var vazio = "";
+			var numeros = this.replace(padrao, vazio).split(vazio);
+			for (var indice = 0, tamanho = numeros.length; indice < tamanho; indice++) {
+				formatado = formatado.replace(padraoDeSubstituicao, numeros[indice]);
+			}
+			var proximaSubstituicao = formatado.search(padraoDeSubstituicao);
+			if (proximaSubstituicao !== -1) {
+				formatado = formatado.slice(0, proximaSubstituicao);
+			}
+			return formatado;
+		},
+
 		paraInteiro: function () {
 			return parseInt(this, 10);
 		},
@@ -723,6 +740,7 @@
 	});
 
 	var Tecla = Classe.criarEnumeracaoDeConstantes({
+		APAGAR: 8,
 		CIMA: 38,
 		BAIXO: 40,
 		ESQUERDA: 37,
@@ -1120,7 +1138,7 @@
 	var TratadorDeTeclado = Classe.criar({
 		estende: Tratador,
 
-		inicializar: function (tecla, elemento) {
+		inicializar: function (elemento, tecla) {
 			Tratador.prototipo.inicializar.chamarComEscopo(this, elemento);
 			this.tecla = tecla;
 		},
@@ -1135,12 +1153,26 @@
 			return this;
 		},
 
+		paraQualquerCaractere: function (tratador) {
+			this.adicionar(Evento.TECLA_SOLTA, this.adicionarTratadorDeTecladoParaQualquerCaractere(tratador));
+			return this;
+		},
+
+		adicionarTratadorDeTecladoParaQualquerCaractere: function (tratador) {
+			return function (evento) {
+				if (Tecla.APAGAR !== evento.keyCode) {
+					tratador();
+				}
+			}.vincularEscopo(this);
+		},
+
 		adicionarTratadorDeTeclado: function (tratador) {
 			return function (evento) {
 				if (this.tecla === evento.keyCode) {
 					tratador();
 				}
 			}.vincularEscopo(this);
+
 		}
 	});
 
@@ -1235,12 +1267,16 @@
 			return new TratadorDePagina(this).paraCarregamento(tratador);
 		},
 
-		tratadorDeTeclaPressionada: function (tecla, tratador) {
-			return new TratadorDeTeclado(tecla, this).paraTeclaPressionada(tratador);
+		tratadorDeTeclaPressionada: function (tratador, tecla) {
+			return new TratadorDeTeclado(this, tecla).paraTeclaPressionada(tratador);
 		},
 
-		tratadorDeTeclaSolta: function (tecla, tratador) {
-			return new TratadorDeTeclado(tecla, this).paraTeclaSolta(tratador);
+		tratadorDeTeclaSolta: function (tratador, tecla) {
+			return new TratadorDeTeclado(this, tecla).paraTeclaSolta(tratador);
+		},
+
+		tratadorDeCaractereDigitado: function (tratador) {
+			return new TratadorDeTeclado(this).paraQualquerCaractere(tratador);
 		},
 
 		tratadorDeAlteracao: function (tratador) {
