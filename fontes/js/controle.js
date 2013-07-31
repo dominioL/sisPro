@@ -1,5 +1,6 @@
 /*global Classe*/
 /*global Linda*/
+/*global SisProVisao*/
 
 (function (global) {
 	"use strict";

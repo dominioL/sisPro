@@ -14,7 +14,7 @@ nav.navegacaoPrincipal > ul > li > a {
 	background-color: #FFF;
 	color: #4183C4;
 	display: block;
-	padding: 10px 30px;
+	padding: 10px;
 }
 
 nav.navegacaoPrincipal > ul > li > a:hover {

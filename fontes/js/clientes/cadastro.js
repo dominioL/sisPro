@@ -1,8 +1,6 @@
 /*global Cadastro*/
+/*global Campo*/
 /*global Classe*/
-/*global Linda*/
-/*global Requeridor*/
-/*global SisPro*/
 /*global Validador*/
 
 (function () {

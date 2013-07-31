@@ -203,7 +203,6 @@
 			var campo = this.campos.unicos[nome];
 			var elemento = campo.incluirElemento();
 			var padrao = campo.padrao;
-			var mascara = campo.marcara;
 			var botao = campo.fornecerBotao();
 			this.validador.adicionarCampo(elemento, padrao);
 			SisProControle.instancia.bloquearBotao(botao);
@@ -220,7 +219,6 @@
 			var campo = this.campos.multiplos[nome];
 			var elemento = campo.adicionarElemento();
 			var padrao = campo.padrao;
-			var mascara = campo.marcara;
 			this.validador.adicionarCampo(elemento, padrao);
 			SisProControle.instancia.adicionarTratadorDeAlteracaoEmCampo(this, elemento);
 			if (campo.possuiFormato()) {
@@ -382,9 +380,6 @@
 				var valorFormatado = valor.formatarNumero(formatacao.formato);
 				formatacao.campo.setAttribute("value", valorFormatado);
 				formatacao.campo.value = valorFormatado;
-				// TODO
-				console.log(valor);
-				console.log(valorFormatado);
 			}, this);
 		}
 	});
@@ -434,7 +429,7 @@
 			if (Linda.nuloOuIndefinido(this.elemento)) {
 				this.elemento = SisProVisao.instancia.selecionarCampo(this.nome);
 			}
-			return this.elemento
+			return this.elemento;
 		},
 
 		fornecerElementos: function () {
