@@ -48,13 +48,22 @@
 			this.mostrarMensagemDeSucesso("Cadastro realizado com sucesso.");
 		},
 
+		mostrarMensagemDeBoasVindas: function () {
+			this.mostrarMensagemDeInformacao("Bem vindo ao Sistema Protege Redes & Telas de gerenciamento.");
+		},
+
 		mostrarMensagem: function (mensagem, classe) {
-			var caixaDeMensagem = Linda.selecionar("section.sistema > p.mensagem");
-			caixaDeMensagem.classList.remove("sucesso");
-			caixaDeMensagem.classList.remove("erro");
-			caixaDeMensagem.classList.remove("informacao");
-			caixaDeMensagem.classList.remove("aviso");
-			caixaDeMensagem.classList.add(classe);
+			var selecaoDeContainer = String.formatar("section.sistema > div.mensagem.%@", classe);
+			var selecaoDeContainers = "section.sistema > div.mensagem";
+			var selecaoDeCaixaDeMensagem = "p";
+			var containersDeMensagens = Linda.selecionarTodos(selecaoDeContainers);
+			var containerDeMensagem = Linda.selecionar(selecaoDeContainer);
+			var caixaDeMensagem = containerDeMensagem.selecionar(selecaoDeCaixaDeMensagem);
+			containersDeMensagens.paraCada(function (container) {
+				container.classList.remove("habilitado");
+			}, this);
+			containerDeMensagem.offsetWidth = caixaDeMensagem.offsetWidth;
+			containerDeMensagem.classList.add("habilitado");
 			caixaDeMensagem.textContent = mensagem;
 		},
 

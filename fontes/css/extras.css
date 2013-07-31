@@ -1,5 +1,25 @@
 @charset "utf-8";
 
+section.sistema > div.mensagem.habilitado {
+	-webkit-animation-name: mostrarMensagem;
+	-webkit-animation-duration: 0.8s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-delay: 0;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: normal;
+	-webkit-animation-play-state: running;
+}
+
+@-webkit-keyframes mostrarMensagem {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
 div.carregadorLinear {
 	height: 20px;
 	width: 90px;
@@ -27,11 +47,11 @@ div.linear {
 		opacity: 1;
 		height: 50%;
 	}
-	
+
 	50% {
 		height: 100%;
 	}
-	
+
 	100% {
 		opacity: 0.5;
 		height: 50%;
@@ -105,7 +125,7 @@ div.circular {
 	0% { 
 		opacity: 1;
 	}
-	
+
 	100% {
 		opacity: 0.2;
 	}

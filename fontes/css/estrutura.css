@@ -137,35 +137,35 @@ section.busca {
 
 section.sistema {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: nowrap;
-	align-items: center;
+	align-items: stretch;
 	justify-content: center;
-	align-content: flex-start;
+	/*align-content: flex-start;*/
 	display: -webkit-flex;
-	-webkit-flex-direction: row;
+	-webkit-flex-direction: column;
 	-webkit-flex-wrap: nowrap;
-	-webkit-align-items: center;
+	-webkit-align-items: stretch;
 	-webkit-justify-content: center;
-	-webkit-align-content: flex-start;
+	/*-webkit-align-content: flex-start;*/
 	display: -moz-flex;
-	-moz-flex-direction: row;
+	-moz-flex-direction: column;
 	-moz-flex-wrap: nowrap;
-	-moz-align-items: center;
+	-moz-align-items: stretch;
 	-moz-justify-content: center;
-	-moz-align-content: flex-start;
+	/*-moz-align-content: flex-start;*/
 	display: -o-flex;
-	-o-flex-direction: row;
+	-o-flex-direction: column;
 	-o-flex-wrap: nowrap;
-	-o-align-items: center;
+	-o-align-items: stretch;
 	-o-justify-content: center;
-	-o-align-content: flex-start;
+	/*-o-align-content: flex-start;*/
 	display: -ms-flex;
-	-ms-flex-direction: row;
+	-ms-flex-direction: column;
 	-ms-flex-wrap: nowrap;
-	-ms-align-items: center;
+	-ms-align-items: stretch;
 	-ms-justify-content: center;
-	-ms-align-content: flex-start;
+	/*-ms-align-content: flex-start;*/
 }
 
 div.meio {
@@ -201,7 +201,7 @@ div.meio {
 	-ms-align-content: flex-start;
 }
 
-div.meio > nav.navegacaoPrincial {
+div.meio > nav.navegacaoPrincipal {
 	flex-grow: 0;
 	flex-shrink: 1;
 	flex-basis: auto;

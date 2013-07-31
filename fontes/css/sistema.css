@@ -4,34 +4,55 @@ section.sistema {
 	padding: 20px;
 }
 
-section.sistema > p.mensagem {
-	border-radius: 0.5em;
-	border-color: transparent;
-	border-style: solid;
-	border-width: 1px;
-	padding: 5px 10px;
+section.sistema > div.mensagem {
+	background-image: linear-gradient(135deg,
+		rgba(255, 255, 255, 0.05) 25%,
+		rgba(255, 255, 255, 0) 25%,
+		rgba(255, 255, 255, 0) 50%,
+		rgba(255, 255, 255, 0.05) 50%,
+		rgba(255, 255, 255, 0.05) 75%,
+		rgba(255, 255, 255, 0) 75%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	background-repeat: repeat;
+	background-size: 40px 40px;
+	border: 1px solid;
+	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+	display: none;
+	padding: 10px;
 }
 
-section.sistema > p.mensagem.sucesso {
-	background-color: #EFE;
-	border-color: #7C7;
-	color: #7A7;
+section.sistema > div.mensagem.habilitado {
+	display: block;
 }
 
-section.sistema > p.mensagem.erro {
-	background-color: #FEE;
-	border-color: #C77;
-	color: #C77;
+section.sistema > div.mensagem > h1,
+section.sistema > div.mensagem > p {
+	color: #FFF;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 }
 
-section.sistema > p.mensagem.aviso {
-	background-color: #FFE;
-	border-color: #CC7;
-	color: #CC7;
+section.sistema > div.mensagem > h1 {
+	font-size: 1.2rem;
+	font-weight: bold;
 }
 
-section.sistema > p.mensagem.informacao {
-	background-color: #EEF;
-	border-color: #EA0;
-	color: #EA0;
+section.sistema > div.mensagem.informacao {
+	background-color: #4EA5CD;
+	border-color: #3B8EB5;
+}
+
+section.sistema > div.mensagem.erro {
+	background-color: #DE4343;
+	border-color: #C43D3D;
+}
+
+section.sistema > div.mensagem.aviso {
+	background-color: #EAAF51;
+	border-color: #D99A36;
+}
+
+section.sistema > div.mensagem.sucesso {
+	background-color: #61B832;
+	border-color: #55A12C;
 }
