@@ -16,6 +16,7 @@ binariosCss=${binarios}/css
 binariosHtml=${binarios}/html
 binariosJava=${binarios}/class
 binariosJs=${binarios}/js
+binariosJson=${binarios}/json
 bibliotecasCss=${bibliotecas}/css
 bibliotecasJava=${bibliotecas}/jar
 bibliotecasJs=${bibliotecas}/js
@@ -23,6 +24,7 @@ fontesCss=${fontes}/css
 fontesHtml=${fontes}/html
 fontesJava=${fontes}/java
 fontesJs=${fontes}/js
+fontesJson=${fontes}/json
 testesHtml=${testes}/html
 testesJava=${testes}/java
 testesJs=${testes}/js
@@ -43,6 +45,7 @@ criarEstrutura() {
 	mkdir -p ${binariosHtml};
 	mkdir -p ${binariosJava};
 	mkdir -p ${binariosJs};
+	mkdir -p ${binariosJson};
 	mkdir -p ${bibliotecasCss};
 	mkdir -p ${bibliotecasJava};
 	mkdir -p ${bibliotecasJs};
@@ -51,9 +54,11 @@ criarEstrutura() {
 	mkdir -p ${fontesHtml};
 	mkdir -p ${fontesJava};
 	mkdir -p ${fontesJs};
+	mkdir -p ${fontesJson};
 	mkdir -p ${testesHtml};
 	mkdir -p ${testesJava};
 	mkdir -p ${testesJs};
+	mkdir -p ${recursos};
 }
 
 adicionarBibliotecas() {
@@ -75,6 +80,7 @@ compilar() {
 	cp -rf ${bibliotecasJs}/* ${fontesJs}/* ${binariosJs};
 	cp -rf ${fontesHtml}/* ${testesHtml}/* ${binariosHtml};
 	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss};
+	cp -rf ${fontesJson}/* ${binariosJson};
 	cp -rf ${recursos}/* ${binarios};
 	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
 	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;

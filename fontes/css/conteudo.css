@@ -125,6 +125,92 @@ section.conteudo > nav > button:disabled:hover {
 	text-shadow: none;
 }
 
+section.conteudo > h1 {
+	color: #4183C4;
+	font-size: 1.5em;
+	/*font-weight: bold;*/
+}
+
+section.conteudo > ul.recursos > li.recurso {
+	padding: 20px ;
+}
+
+section.conteudo > ul.recursos > li.recurso:hover {
+	background-color: #F5F5F5;
+}
+
+section.conteudo > ul.recursos > li.recurso > h2 {
+	color: #666;
+	font-family: monospace;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api {
+	margin-top: 10px;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dt {
+	display: none;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dd {
+	color: #FFF;
+	border-radius: 0.3em;
+	font-size: 0.8rem;
+	margin-left: 10px;
+	padding: 0.4em;
+	text-shadow: 1px 1px 1px #777;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dd:empty {
+	display: none
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dd.metodo {
+	color: #333;
+	text-shadow: none;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dd.tipoDeMidia {
+	background-color: #8CC665;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dd.tipoDeMidiaAceita {
+	background-color: #4682B4;
+}
+
+section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	/*align-content: flex-start;*/
+	display: -webkit-flex;
+	-webkit-flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-webkit-align-items: center;
+	-webkit-justify-content: flex-start;
+	/*-webkit-align-content: flex-start;*/
+	display: -moz-flex;
+	-moz-flex-direction: row;
+	-moz-flex-wrap: nowrap;
+	-moz-align-items: center;
+	-moz-justify-content: flex-start;
+	/*-moz-align-content: flex-start;*/
+	display: -o-flex;
+	-o-flex-direction: row;
+	-o-flex-wrap: nowrap;
+	-o-align-items: center;
+	-o-justify-content: flex-start;
+	/*-o-align-content: flex-start;*/
+	display: -ms-flex;
+	-ms-flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	-ms-align-items: center;
+	-ms-justify-content: flex-start;
+	/*-ms-align-content: flex-start;*/
+}
+
 section.conteudo > nav.navegacaoSecundaria {
  	margin-bottom: 30px;
 	display: flex;

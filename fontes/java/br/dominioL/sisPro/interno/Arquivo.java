@@ -3,13 +3,11 @@ package br.dominioL.sisPro.interno;
 import java.io.File;
 
 public enum Arquivo {
-	CSS("", "css"),
-	LIMPO("limpo", "css"),
-	HTML("", "html"),
-	INICIO("inicio", "html"),
 	PRINCIPAL("principal", "html"),
+	CSS("", "css"),
+	HTML("", "html"),
 	JS("", "js"),
-	LINDA("linda", "js"),
+	JSON("", "json"),
 	JPG("", "jpg"),
 	PNG("", "png");
 

@@ -76,6 +76,13 @@
 			return requisicao;
 		},
 
+		fornecerRequisicaoDePedidoJson: function (uri) {
+			var requisicao = new RequisicaoJson(uri);
+			requisicao.fixarAtributoDeCabecalho(AtributoHttp.ACCEPT, TipoDeMidia.JSON.comoTexto());
+			this.adicionarTratadores(requisicao);
+			return requisicao;
+		},
+
 		fornecerRequisicaoDePagina: function (uri) {
 			var requisicao = new RequisicaoDocumento(uri);
 			requisicao.fixarAtributoDeCabecalho(AtributoHttp.ACCEPT, TipoDeMidia.HTML.comoTexto());
@@ -456,5 +463,6 @@
 	global.Cadastro = Cadastro;
 	global.Campo = Campo;
 	global.SisPro = SisPro;
+	global.Requeridor = Requeridor;
 	global.Validador = Validador;
 }(this));

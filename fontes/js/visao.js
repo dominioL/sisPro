@@ -67,37 +67,47 @@
 			caixaDeMensagem.textContent = mensagem;
 		},
 
-		selecionarBotao: function (classeDoBotao) {
-			var selecao = String.formatar("section.conteudo > nav > button.%@", classeDoBotao);
+		selecionarBotao: function (classe) {
+			var selecao = String.formatar("section.conteudo > nav > button.%@", classe);
 			return Linda.selecionar(selecao);
 		},
 
-		selecionarCampo: function (classeDoCampo) {
-			var selecao = String.formatar("section.conteudo > form > input.%@", classeDoCampo);
+		selecionarCampo: function (classe) {
+			var selecao = String.formatar("section.conteudo > form > input.%@", classe);
 			return Linda.selecionar(selecao);
 		},
 
-		selecionarCampos: function (classeDosCampos) {
-			var selecao = String.formatar("section.conteudo > form > input.%@", classeDosCampos);
+		selecionarCampos: function (classe) {
+			var selecao = String.formatar("section.conteudo > form > input.%@", classe);
 			return Linda.selecionarTodos(selecao);
 		},
 
-		selecionarCampoDeTemplate: function (classeDoCampo) {
-			var selecao = String.formatar("input.%@", classeDoCampo);
-			return this.selecionarTemplateDeFormulario(classeDoCampo).content.selecionar(selecao);
+		selecionarTemplateDeConteudo: function (classe) {
+			var selecao = String.formatar("section.conteudo template.%@", classe);
+			return Linda.selecionar(selecao);
 		},
 
-		selecionarTemplateDeFormulario: function (classeDoTemplate) {
-			var selecaoDoTemplate = String.formatar("section.conteudo > form > template.%@", classeDoTemplate);
-			return Linda.selecionar(selecaoDoTemplate);
+		selecionarTemplateDeFormulario: function (classe) {
+			var selecao = String.formatar("section.conteudo > form > template.%@", classe);
+			return Linda.selecionar(selecao);
+		},
+
+		selecionarCampoDeTemplate: function (classe) {
+			var selecao = String.formatar("input.%@", classe);
+			return this.selecionarTemplateDeFormulario(classe).content.selecionar(selecao);
+		},
+
+		selecionarLista: function (classe) {
+			var selecao = String.formatar("section.conteudo ul.%@", classe);
+			return Linda.selecionar(selecao);
 		},
 
 		selecionarFormulario: function () {
 			return Linda.selecionar("section.conteudo > form");
 		},
 
-		incluirCampo: function (classeDoCampo) {
-			var template = this.selecionarTemplateDeFormulario(classeDoCampo);
+		incluirCampo: function (classe) {
+			var template = this.selecionarTemplateDeFormulario(classe);
 			var formulario = this.selecionarFormulario();
 			var campo = template.content.cloneNode(true);
 			formulario.appendChild(campo);
@@ -105,12 +115,35 @@
 			return formulario.selecionar("input:last-of-type");
 		},
 
-		adicionarCampo: function (classeDoCampo) {
-			var template = this.selecionarTemplateDeFormulario(classeDoCampo);
+		adicionarCampo: function (classe) {
+			var template = this.selecionarTemplateDeFormulario(classe);
 			var formulario  = this.selecionarFormulario();
 			var campo = template.content.cloneNode(true);
 			formulario.appendChild(campo);
 			return formulario.selecionar("input:last-of-type");
+		},
+
+		adicionarRecurso: function (recursoJson) {
+			var recursos = this.selecionarLista("recursos");
+			var templateRecurso = recursos.selecionar("template.recurso");
+			var recurso = templateRecurso.content.cloneNode(true);
+			var uri = recurso.selecionar("h2.uri");
+			var apis = recurso.selecionar("ul.apis");
+			uri.textContent = recursoJson.uri;
+			recursoJson.apis.paraCada(function (apiJson) {
+				var templateApi = recurso.selecionar("template.api");
+				var api = templateApi.content.cloneNode(true);
+				var metodo = api.selecionar("dl.atributos > dd.metodo");
+				var tipoDeMidiaAceita = api.selecionar("dl.atributos > dd.tipoDeMidiaAceita");
+				var tipoDeMidia = api.selecionar("dl.atributos > dd.tipoDeMidia");
+				metodo.textContent = apiJson.metodo;
+				if (!Linda.nuloOuIndefinido(apiJson.tipoDeMidiaAceita)) {
+					tipoDeMidiaAceita.textContent = apiJson.tipoDeMidiaAceita;
+				}
+				tipoDeMidia.textContent = apiJson.tipoDeMidia;
+				apis.appendChild(api);
+			}, this);
+			recursos.appendChild(recurso);
 		}
 	});
 

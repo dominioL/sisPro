@@ -1,0 +1,81 @@
+[{
+	"uri": "/",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "text/plain"
+	}, {
+		"metodo": "GET",
+		"tipoDeMidia": "text/html"
+	}]
+}, {
+	"uri": "/inicio",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "text/html"
+	}]
+}, {
+	"uri": "/api",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "text/html"
+	}]
+}, {
+	"uri": "/clientes",
+	"apis": [{
+		"metodo": "POST",
+		"tipoDeMidia": "application/json",
+		"tipoDeMidiaAceita": "application/json"
+	}]
+}, {
+	"uri": "/clientes/cadastro",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "text/html"
+	}]
+}, {
+	"uri": "/cliente/{identificador}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "application/json"
+	}, {
+		"metodo": "PUT",
+		"tipoDeMidia": "application/json",
+		"tipoDeMidiaAceita": "application/json"
+	}]
+}, {
+	"uri": "/css/{nome}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "text/css"
+	}]
+}, {
+	"uri": "/html/{nome}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "text/html"
+	}]
+}, {
+	"uri": "/js/{nome}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "application/javascript"
+	}]
+}, {
+	"uri": "/json/{nome}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "application/json"
+	}]
+}, {
+	"uri": "/jpg/{nome}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "image/jpeg"
+	}]
+}, {
+	"uri": "/png/{nome}",
+	"apis": [{
+		"metodo": "GET",
+		"tipoDeMidia": "image/png"
+	}]
+}]
