@@ -128,7 +128,7 @@ section.conteudo > nav > button:disabled:hover {
 section.conteudo > h1 {
 	color: #4183C4;
 	font-size: 1.5em;
-	/*font-weight: bold;*/
+	margin-bottom: 20px;
 }
 
 section.conteudo > ul.recursos > li.recurso {
@@ -136,7 +136,7 @@ section.conteudo > ul.recursos > li.recurso {
 }
 
 section.conteudo > ul.recursos > li.recurso:hover {
-	background-color: #F5F5F5;
+	background-image: -webkit-radial-gradient(top left, ellipse farthest-side, #F5F5F5, #E5E5E5);
 }
 
 section.conteudo > ul.recursos > li.recurso > h2 {
@@ -158,7 +158,7 @@ section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > 
 	font-size: 0.8rem;
 	margin-left: 10px;
 	padding: 0.4em;
-	text-shadow: 1px 1px 1px #777;
+	text-shadow: 0 1px 1px #444;
 }
 
 section.conteudo > ul.recursos > li.recurso > ul.apis > li.api > dl.atributos > dd:empty {

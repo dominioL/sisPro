@@ -24,6 +24,13 @@ public final class RecursoCliente extends Recurso {
 		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.HTML, Arquivo.PRINCIPAL.fornecerArquivo());
 	}
 
+	@GET
+	@Produces(TiposDeMidia.JSON)
+	public Response obterJson(@PathParam("identificador") String identificador) {
+		// TODO
+		return null;
+	}
+
 	@PUT
 	@Produces(TiposDeMidia.JSON)
 	@Consumes(TiposDeMidia.JSON)

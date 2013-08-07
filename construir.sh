@@ -17,17 +17,22 @@ binariosHtml=${binarios}/html
 binariosJava=${binarios}/class
 binariosJs=${binarios}/js
 binariosJson=${binarios}/json
+
 bibliotecasCss=${bibliotecas}/css
 bibliotecasJava=${bibliotecas}/jar
 bibliotecasJs=${bibliotecas}/js
+
 fontesCss=${fontes}/css
 fontesHtml=${fontes}/html
 fontesJava=${fontes}/java
 fontesJs=${fontes}/js
 fontesJson=${fontes}/json
+
 testesHtml=${testes}/html
 testesJava=${testes}/java
 testesJs=${testes}/js
+
+contrucaoCompilacao=${construcao}/compilacao.txt
 
 arquivosFontesJava=$(find ${fontesJava} -name *.java)
 arquivosTestesJava=$(find ${testesJava} -name *.java)
@@ -82,8 +87,10 @@ compilar() {
 	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss};
 	cp -rf ${fontesJson}/* ${binariosJson};
 	cp -rf ${recursos}/* ${binarios};
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10;
+	touch ${contrucaoCompilacao}
+	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &> ${contrucaoCompilacao};
+	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &>> ${contrucaoCompilacao};
+	less ${contrucaoCompilacao}
 }
 
 construir() {

@@ -7,6 +7,7 @@ import br.dominioL.conexaoH.TiposDeMidia;
 import br.dominioL.sisPro.dados.couch.RepositorioDeClientes;
 import br.dominioL.sisPro.interno.Arquivo;
 import br.dominioL.sisPro.modelo.Cliente;
+import br.dominioL.sisPro.modelo.Criador;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -28,8 +29,11 @@ public final class RecursoClientes extends Recurso {
 	@Produces(TiposDeMidia.JSON)
 	@Consumes(TiposDeMidia.JSON)
 	public Response postarJson(String dados) {
-		RepositorioDeClientes repositorio = RepositorioDeClientes.fornecerInstancia();
 		Cliente cliente = new Cliente();
-		return postarEntidadeJson(repositorio, cliente, dados);
+		Criador<Cliente> criador = Criador.criar(cliente, RecursoCliente.class);
+		criador.fixarDados(dados);
+		criador.validar();
+		criador.salvar();
+		return criador.fornecerResposta();
 	}
 }

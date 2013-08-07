@@ -59,9 +59,24 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 	}
 
 	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ConstrutorDeUri construtorDeUri) {
+		// WebResource recurso = fornecerRecurso(construtorDeUri);
+		// return fornecerResposta(metodo, recurso);
+		return null;
+	}
+
+	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ObjetoJson entidade, ConstrutorDeUri construtorDeUri) {
+		WebResource recurso = fornecerRecurso(construtorDeUri);
+		recurso.entity(entidade.comoTextoJson(), TipoDeMidia.JSON.comoTextoSemCharset());
+		return fornecerResposta(metodo, recurso.entity(entidade.comoTextoJson(), TipoDeMidia.JSON.comoTextoSemCharset()));
+	}
+
+	private WebResource fornecerRecurso(ConstrutorDeUri construtorDeUri) {
 		String uri = construtorDeUri.construirAbsoluto();
 		Client cliente = Client.create();
-		WebResource recurso = cliente.resource(uri);
+		return cliente.resource(uri);
+	}
+
+	private RespostaCouch fornecerResposta(Metodo metodo, WebResource.Builder recurso) {
 		ClientResponse respostaHttp = recurso.method(metodo.comoTexto(), ClientResponse.class);
 		RespostaCouch resposta = RespostaCouch.criar().comCodigoDeEstado(respostaHttp.getStatus());
 		resposta.comEntidade(respostaHttp.getEntity(String.class));
@@ -71,21 +86,8 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 		return resposta;
 	}
 
-	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ObjetoJson entidade, ConstrutorDeUri construtorDeUri) {
-		String uri = construtorDeUri.construirAbsoluto();
-		Client cliente = Client.create();
-		WebResource recurso = cliente.resource(uri);
-		ClientResponse respostaHttp = recurso.entity(entidade.comoTextoJson(), TipoDeMidia.JSON.comoTextoSemCharset()).method(metodo.comoTexto(), ClientResponse.class);
-		RespostaCouch resposta = RespostaCouch.criar().comCodigoDeEstado(respostaHttp.getStatus());
-		resposta.comEntidade(respostaHttp.getEntity(String.class));
-		if (respostaHttp.getLocation() != null) {
-			resposta.comLocalizacao(respostaHttp.getLocation().toString());
-		}
-		return resposta;
-	}
-
 	protected ConstrutorDeUri fornecerConstrutorDeUriBase() {
-		ConstrutorDeUri construtor = ConstrutorDeUri.criarCom().endereco(ENDERECO).porta(PORTA).caminho(NOME);
+		ConstrutorDeUri construtor = ConstrutorDeUri.criar().endereco(ENDERECO).porta(PORTA).caminho(NOME);
 		return construtor;
 	}
 }

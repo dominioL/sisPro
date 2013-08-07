@@ -4,7 +4,7 @@ import br.dominioL.estruturados.json.ObjetoJson;
 
 import br.dominioL.sisPro.modelo.Entidade;
 
-public interface RepositorioCouch<T extends Entidade> {
+public interface RepositorioCouch<T extends Entidade<T>> {
 	public RespostaCouch inserir(T entidade);
 
 	public RespostaCouch remover(String identificador);

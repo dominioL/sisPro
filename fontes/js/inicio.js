@@ -10,7 +10,7 @@
 
 	var Inicio = Classe.criarSingleton({
 		inicializar: function () {
-			SisProVisao.instancia.mostrarMensagemDeBoasVindas();
+			SisProVisao.instancia.mostrarMensagemDeInformacao(Mensagens.BOAS_VINDAS);
 		}
 	});
 	Inicio.instancia();

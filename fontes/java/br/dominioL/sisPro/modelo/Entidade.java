@@ -3,7 +3,9 @@ package br.dominioL.sisPro.modelo;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 
-public abstract class Entidade implements RepresentavelComoJson, Validavel {
+import br.dominioL.sisPro.dados.couch.RepositorioCouch;
+
+public abstract class Entidade<T extends Entidade<T>> implements RepresentavelComoJson, Validavel {
 	protected ObjetoJson dados;
 
 	public Entidade() {
@@ -13,6 +15,8 @@ public abstract class Entidade implements RepresentavelComoJson, Validavel {
 	public Entidade(ObjetoJson dados) {
 		this.dados = dados;
 	}
+
+	public abstract RepositorioCouch<T> fornecerRepositorio();
 
 	@Override
 	public final ObjetoJson comoJson() {

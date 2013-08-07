@@ -2,7 +2,15 @@ package br.dominioL.sisPro.modelo;
 
 import br.dominioL.estruturados.json.ObjetoJson;
 
-public final class Cliente extends Entidade {
+import br.dominioL.sisPro.dados.couch.RepositorioCouch;
+import br.dominioL.sisPro.dados.couch.RepositorioDeClientes;
+
+public final class Cliente extends Entidade<Cliente> {
+	@Override
+	public RepositorioCouch<Cliente> fornecerRepositorio() {
+		return RepositorioDeClientes.fornecerInstancia();
+	}
+
 	@Override
 	public Boolean validar() {
 		Validador validador = new Validador();

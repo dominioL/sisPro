@@ -735,6 +735,7 @@
 		CARREGADO: "load",
 		CLIQUE: "click",
 		DUPLO_CLIQUE: "dbclick",
+		HISTORICO_ALTERADO: "popstate",
 		TECLA_PRESSIONADA: "keydown",
 		TECLA_SOLTA: "keyup"
 	});
@@ -912,6 +913,10 @@
 
 		comoTexto: function () {
 			return this.texto;
+		},
+
+		comoTextoFormatado: function () {
+			return String.formatar("%@ - %@", this.comoNumero(), this.comoTexto());
 		},
 
 		comoTextoIngles: function () {
@@ -1199,6 +1204,11 @@
 		paraCarregamento: function (tratador) {
 			this.adicionar(Evento.CARREGADO, tratador);
 			return this;
+		},
+
+		paraAlteracaoNoHistorico: function (tratador) {
+			this.adicionar(Evento.HISTORICO_ALTERADO, tratador);
+			return this;
 		}
 	});
 
@@ -1238,6 +1248,7 @@
 	Node.implementar = Function.prototype.implementar;
 	NodeList.implementar = Function.prototype.implementar;
 	HTMLCollection.implementar = Function.prototype.implementar;
+	HTMLButtonElement.implementar = Function.prototype.implementar;
 
 	Node.implementar({
 		limpar: function () {
@@ -1267,6 +1278,10 @@
 			return new TratadorDePagina(this).paraCarregamento(tratador);
 		},
 
+		tratadorDeAlteracaoNoHistorico: function (tratador) {
+			return new TratadorDePagina(this).paraAlteracaoNoHistorico(tratador);
+		},
+
 		tratadorDeTeclaPressionada: function (tratador, tecla) {
 			return new TratadorDeTeclado(this, tecla).paraTeclaPressionada(tratador);
 		},
@@ -1290,5 +1305,15 @@
 
 	HTMLCollection.implementar({
 		paraCada: Array.prototype.paraCada
+	});
+
+	HTMLButtonElement.implementar({
+		bloquear: function () {
+			this.setAttribute("disabled", "disabled");
+		},
+
+		desbloquear: function () {
+			this.removeAttribute("disabled");
+		}
 	});
 }(this));

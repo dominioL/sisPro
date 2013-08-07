@@ -219,7 +219,7 @@ div.meio > nav.navegacaoPrincipal {
 	-ms-flex-basis: auto;
 }
 
-div.meio > section.conteudo {
+div.meio > section.conteudos {
 	flex-grow: 2;
 	flex-shrink: 1;
 	flex-basis: 0;

@@ -3,9 +3,12 @@ package br.dominioL.sisPro.dados.couch;
 import br.dominioL.conexaoH.CodigoDeEstado;
 
 import br.dominioL.estruturados.json.Json;
+import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.estruturados.json.TextoJson;
 
 public final class RespostaCouch {
+	private static final IdentificadorJson IDENTIFICADOR = Json.criarIdentificador("id");
 	private CodigoDeEstado codigoDeEstado;
 	private ObjetoJson entidade;
 	private String localizacao;
@@ -41,5 +44,9 @@ public final class RespostaCouch {
 
 	public String fornecerLocalizacao() {
 		return localizacao;
+	}
+
+	public String fornecerIdentificador() {
+		return entidade.fornecer(IDENTIFICADOR).comoTexto();
 	}
 }

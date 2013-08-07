@@ -12,29 +12,29 @@
 
 		bloquearTodosBotoes: function () {
 			var botoes = Linda.selecionarTodos("button");
-			for (var indice = 0, tamanho = botoes.length; indice < tamanho; indice++) {
-				botoes.item(indice).setAttribute("disabled", "disabled");
-			}
+			botoes.paraCada(function (botao) {
+				botao.bloquear();
+			});
 		},
 
 		bloquearBotao: function (botao) {
 			this.botoesBloqueados.push(botao);
-			botao.setAttribute("disabled", "disabled");
+			botao.bloquear();
 		},
 
 		desbloquearTodosBotoes: function () {
 			var botoes = Linda.selecionarTodos("button");
-			for (var indice = 0, tamanho = botoes.length; indice < tamanho; indice++) {
-				botoes.item(indice).removeAttribute("disabled");
-			}
+			botoes.paraCada(function (botao) {
+				botao.desbloquear();
+			});
 			this.botoesBloqueados.paraCada(function (botao) {
-				botao.setAttribute("disabled", "disabled");
+				botao.bloquear();
 			});
 		},
 
 		desbloquearBotao: function (botao) {
 			this.botoesBloqueados.removerElemento(botao);
-			botao.removeAttribute("disabled");
+			botao.desbloquear();
 		},
 
 		adicionarTratadorDeInclusaoDeCampo: function (entidade, campo) {

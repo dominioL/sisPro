@@ -36,6 +36,9 @@
 	"uri": "/cliente/{identificador}",
 	"apis": [{
 		"metodo": "GET",
+		"tipoDeMidia": "text/html"
+	}, {
+		"metodo": "GET",
 		"tipoDeMidia": "application/json"
 	}, {
 		"metodo": "PUT",

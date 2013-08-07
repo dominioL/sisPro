@@ -13,19 +13,45 @@
 
 	var SisPro = Classe.criarSingleton({
 		inicializar: function () {
-			new TratadorDePagina().paraCarregamento(this.inicializarSistema.vincularEscopo(this));
+			// TODO
+			var tratador = new TratadorDePagina();
+			tratador.paraCarregamento(this.inicializarSistema.vincularEscopo(this))
+			tratador.paraAlteracaoNoHistorico(this.carregarConteudo.vincularEscopo(this));
+			this.reescritor = new Reescritor();
+			this.reescritor.comReescrita("/clientes/cadastro", "/cadastroDeCliente");
+			this.reescritor.comReescrita("/cliente/!alfa+", "/cliente");
+			this.reescritor.comReescrita("/cliente/!alfa+/endereco/!alfa+", "/endereco");
+			this.reescritor.comReescrita("/cliente/!alfa+/endereco/!alfa+/orcamento/!alfa+", "/orcamento");
 		},
 
 		inicializarSistema: function () {
 			SisProVisao.instancia();
 			SisProControle.instancia();
-			this.carregarConteudo();
+			// this.carregarConteudo();
 		},
 
 		carregarConteudo: function () {
+			this.limparConteudo();
 			var localizacao = Linda.localizacao;
-			var pagina = String.concatenar("/html", localizacao.pathname, localizacao.search);
+			var caminho = localizacao.pathname;
+			var busca = localizacao.search;
+			caminho = this.reescritor.reescrever(caminho);
+			var pagina = String.concatenar("/html", caminho, busca);
 			this.carregarPagina(pagina);
+		},
+
+		carregarConteudoDinamicamente: function (uri) {
+			var historico = Linda.historico;
+			historico.pushState(null, Linda.documento.title, uri);
+			this.carregarConteudo();
+		},
+
+		adicionarConteudo: function (pagina) {
+			this.carregarPagina(pagina);
+		},
+
+		limparConteudo: function () {
+			SisProVisao.instancia.limparConteudo();
 		},
 
 		carregarPagina: function (uriDaPagina) {
@@ -36,6 +62,7 @@
 		},
 
 		carregarScripts: function (pagina) {
+			// TODO
 			var scripts = pagina.firstChild.selecionarTodos("script");
 			var cabecalho = Linda.selecionar("head");
 			for (var indice = 0, tamanho = scripts.length; indice < tamanho; indice++) {
@@ -65,7 +92,6 @@
 			SisProControle.instancia.desbloquearTodosBotoes();
 		}
 	});
-	SisPro.instancia();
 
 	var Requeridor = Classe.criarSingleton({
 		fornecerRequisicaoDeSalvamento: function (uri) {
@@ -105,60 +131,57 @@
 		},
 
 		tratarInicio: function () {
+			// TODO
 			//carregado, total, estampaDeTempo
 		},
 
 		tratarProgresso: function () {
+			// TODO
 			//carregado, total, estampaDeTempo
 		},
 
 		tratarTermino: function () {
+			// TODO
 			//carregado, total, estampaDeTempo
 		},
 
 		tratarErro: function () {
-			var mensagem = "Erro: problema interno.";
-			SisProVisao.instancia.mostrarMensagemDeErro(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeErro(Mensagens.ERRO);
 			SisPro.instancia.finalizarAtualizacao();
 		},
 
 		tratarAborto: function () {
-			var mensagem = "Erro: operação abortada.";
-			SisProVisao.instancia.mostrarMensagemDeAviso(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeAviso(Mensagens.OPERACAO_ABORTADA);
 			SisPro.instancia.finalizarAtualizacao();
 		},
 
 		tratarEstouroDeTempo: function () {
-			var mensagem = "Erro: tempo limite atingido.";
-			SisProVisao.instancia.mostrarMensagemDeAviso(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeAviso(Mensagens.ESTOURO_DE_TEMPO);
 			SisPro.instancia.finalizarAtualizacao();
 		},
 
 		tratarResposta: function () {
+			// TODO
 			//resposta, codigoDeEstado, carregado, total, estampaDeTempo
 		},
 
 		tratarRedirecionamento: function (resposta, codigoDeEstado) {
-			var mensagem = String.formatar("%@ - %@.", codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
-			SisProVisao.instancia.mostrarMensagemDeInformacao(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeInformacao(codigoDeEstado.comoTextoFormatado());
 			SisPro.instancia.finalizarAtualizacao();
 		},
 
 		tratarSucesso: function (resposta, codigoDeEstado) {
-			var mensagem = String.formatar("%@ - %@.", codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
-			SisProVisao.instancia.mostrarMensagemDeSucesso(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeSucesso(codigoDeEstado.comoTextoFormatado());
 			SisPro.instancia.finalizarAtualizacao();
 		},
 
 		tratarErroDoCliente: function (resposta, codigoDeEstado) {
-			var mensagem = String.formatar("%@ - %@.", codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
-			SisProVisao.instancia.mostrarMensagemDeErro(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeErro(codigoDeEstado.comoTextoFormatado());
 			SisPro.instancia.finalizarAtualizacao();
 		},
 
 		tratarErroDoServidor: function (resposta, codigoDeEstado) {
-			var mensagem = String.formatar("%@ - %@.", codigoDeEstado.comoNumero(), codigoDeEstado.comoTexto());
-			SisProVisao.instancia.mostrarMensagemDeAviso(mensagem);
+			SisProVisao.instancia.mostrarMensagemDeAviso(codigoDeEstado.comoTextoFormatado());
 			SisPro.instancia.finalizarAtualizacao();
 		}
 	});
@@ -255,7 +278,7 @@
 				requisicao.tratarSucesso = this.finalizarCadastroComSucesso.vincularEscopo(this);
 				requisicao.enviarPost(JSON.stringify(this.dados), true);
 			} else {
-				SisProVisao.instancia.mostrarMensagemDeDadosInvalidos();
+				SisProVisao.instancia.mostrarMensagemDeErro(Mensagens.DADOS_INVALIDOS);
 				SisPro.instancia.finalizarAtualizacao();
 			}
 		},
@@ -263,7 +286,7 @@
 		adicionarCampoAosDados: function (campo) {
 			var elemento = campo.fornecerElemento();
 			if (!Linda.nulo(elemento)) {
-				var valor = elemento.value;
+				var valor = SisProVisao.instancia.obterValor(elemento);
 				if (!valor.emBranco()) {
 					this.dados[campo.nome] = valor;
 				}
@@ -275,7 +298,7 @@
 			var listaComDados = this.dados[campo.nomeDeAtributo];
 			var elementos = campo.fornecerElementos();
 			elementos.paraCada(function (elemento) {
-				var valor = elemento.value;
+				var valor = SisProVisao.instancia.obterValor(elemento);
 				if (!valor.emBranco()) {
 					listaComDados.push(valor);
 				}
@@ -302,9 +325,10 @@
 
 		finalizarCadastroComSucesso: function () {
 			//TODO
-			SisProVisao.instancia.mostrarMensagemDeCadastroBemSucedido();
+			SisProVisao.instancia.mostrarMensagemDeSucesso(Mensagens.CADASTRO_BEM_SUCEDIDO);
 			SisProControle.instancia.bloquearBotao(SisProVisao.instancia.selecionarBotao("cadastrar"));
 			SisPro.instancia.finalizarAtualizacao();
+			SisPro.instancia.carregarConteudoDinamicamente("/cliente/lucas");
 		}
 	});
 
@@ -347,26 +371,18 @@
 		validarCampo: function (campo, padrao, obrigatorio) {
 			var valor = campo.value;
 			if (valor.emBranco()) {
-				return this.validarCampoEmBranco(campo, obrigatorio);
+				this.camposEmBranco.push(campo);
+				var validacao = obrigatorio ? Validador.CAMPO_EM_BRANCO : Validador.CORRETO;
+				SisProVisao.instancia.fixarValidacaoEmCampo(campo, validacao);
+				return !obrigatorio;
 			} else if (padrao.test(valor)) {
 				this.camposValidos.push(campo);
-				campo.setCustomValidity(Validador.CORRETO);
+				SisProVisao.instancia.fixarValidacaoEmCampo(campo, Validador.CORRETO);
 				return true;
 			} else {
 				this.camposInvalidos.push(campo);
-				campo.setCustomValidity(Validador.CAMPO_INVALIDO);
+				SisProVisao.instancia.fixarValidacaoEmCampo(campo, Validador.CAMPO_INVALIDO);
 				return false;
-			}
-		},
-
-		validarCampoEmBranco: function (campo, obrigatorio) {
-			this.camposEmBranco.push(campo);
-			if (obrigatorio) {
-				campo.setCustomValidity(Validador.CAMPO_EM_BRANCO);
-				return false;
-			} else {
-				campo.setCustomValidity(Validador.CORRETO);
-				return true;
 			}
 		}
 	});
@@ -383,11 +399,35 @@
 
 		formatar: function () {
 			this.formatacoes.paraCada(function (formatacao) {
-				var valor = formatacao.campo.value;
+				var campo = formatacao.campo;
+				var valor = SisProVisao.instancia.obterValor(campo);
 				var valorFormatado = valor.formatarNumero(formatacao.formato);
-				formatacao.campo.setAttribute("value", valorFormatado);
-				formatacao.campo.value = valorFormatado;
+				SisProVisao.instancia.fixarValor(campo, valorFormatado);
 			}, this);
+		}
+	});
+
+	var Reescritor = Classe.criar({
+		inicializar: function () {
+			this.reescritas = [];
+		},
+
+		comReescrita: function (padrao, reescrita) {
+			padrao = padrao.replace(/!alfa/g, "[0-9a-zA-Z]");
+			padrao = padrao.replace(/!texto/g, "[a-zA-Z]");
+			padrao = padrao.replace(/!numero/g, "[0-9]");
+			this.reescritas.push([padrao, reescrita]);
+		},
+
+		reescrever: function (caminho) {
+			var novoCaminho = caminho;
+			this.reescritas.paraCada(function (reescrita) {
+				var combina = caminho.match(reescrita.primeiro);
+				if (!Linda.nulo(combina) && combina.quantidadeIgual(1) && combina.primeiro === caminho) {
+					novoCaminho = reescrita.ultimo;
+				}
+			}, this);
+			return novoCaminho;
 		}
 	});
 
@@ -460,6 +500,7 @@
 		CORRETO: ""
 	});
 
+	SisPro.instancia();
 	global.Cadastro = Cadastro;
 	global.Campo = Campo;
 	global.SisPro = SisPro;

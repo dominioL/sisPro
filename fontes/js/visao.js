@@ -16,12 +16,18 @@
 		},
 
 		carregarConteudo: function (conteudo) {
-			var secaoConteudo = Linda.selecionar("section.conteudo");
-			var templateConteudo = Linda.selecionar("section.conteudo > template.conteudo");
-			var sombraConteudo = secaoConteudo.webkitCreateShadowRoot();
+			var secaoConteudos = Linda.selecionar("section.conteudos");
+			var templateConteudo = secaoConteudos.selecionar("template.conteudo");
+			var secaoConteudo = templateConteudo.content.selecionar("section.conteudo");
 			secaoConteudo.innerHTML = conteudo.body.innerHTML;
-			sombraConteudo.appendChild(templateConteudo.content.cloneNode(true));
-			templateConteudo.remove();
+			secaoConteudos.appendChild(templateConteudo.content.cloneNode(true));
+		},
+
+		limparConteudo: function () {
+			var secoesConteudo = Linda.selecionarTodos("section.conteudo");
+			secoesConteudo.paraCada(function (secaoConteudo) {
+				secaoConteudo.remove();
+			}, this);
 		},
 
 		mostrarMensagemDeSucesso: function (mensagem) {
@@ -38,18 +44,6 @@
 
 		mostrarMensagemDeAviso: function (mensagem) {
 			this.mostrarMensagem(mensagem, "aviso");
-		},
-
-		mostrarMensagemDeDadosInvalidos: function () {
-			this.mostrarMensagemDeErro("Dados inválidos. Verifique se todos os campos foram preenchidos corretamente.");
-		},
-
-		mostrarMensagemDeCadastroBemSucedido: function () {
-			this.mostrarMensagemDeSucesso("Cadastro realizado com sucesso.");
-		},
-
-		mostrarMensagemDeBoasVindas: function () {
-			this.mostrarMensagemDeInformacao("Bem vindo ao Sistema Protege Redes & Telas de gerenciamento.");
 		},
 
 		mostrarMensagem: function (mensagem, classe) {
@@ -144,8 +138,31 @@
 				apis.appendChild(api);
 			}, this);
 			recursos.appendChild(recurso);
+		},
+
+		obterValor: function (elemento) {
+			return elemento.value;
+		},
+
+		fixarValor: function (elemento, valor) {
+			elemento.setAttribute("value", valor);
+			elemento.value = valor;
+		},
+
+		fixarValidacaoEmCampo: function (campo, validacao) {
+			campo.setCustomValidity(validacao);
 		}
 	});
 
+	var Mensagens = Classe.criarEnumeracaoDeConstantes({
+		DADOS_INVALIDOS: "Dados inválidos. Verifique se todos os campos foram preenchidos corretamente.",
+		CADASTRO_BEM_SUCEDIDO: "Cadastro realizado com sucesso.",
+		BOAS_VINDAS: "Bem vindo ao Sistema Protege Redes & Telas de gerenciamento.",
+		ESTOURO_DE_TEMPO: "Tempo limite atingido.",
+		OPERACAO_ABORTADA: "Operação abortada.",
+		ERRO: "Problema interno."
+	});
+
+	global.Mensagens = Mensagens;
 	global.SisProVisao = SisProVisao;
 }(this));
