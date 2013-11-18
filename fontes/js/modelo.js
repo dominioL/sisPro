@@ -18,6 +18,7 @@
 			tratador.paraCarregamento(this.inicializarSistema.vincularEscopo(this))
 			tratador.paraAlteracaoNoHistorico(this.carregarConteudo.vincularEscopo(this));
 			this.reescritor = new Reescritor();
+			this.reescritor.comBase("/html");
 			this.reescritor.comReescrita("/clientes/cadastro", "/cadastroDeCliente");
 			this.reescritor.comReescrita("/cliente/!alfa+", "/cliente");
 			this.reescritor.comReescrita("/cliente/!alfa+/endereco/!alfa+", "/endereco");
@@ -35,8 +36,7 @@
 			var localizacao = Linda.localizacao;
 			var caminho = localizacao.pathname;
 			var busca = localizacao.search;
-			caminho = this.reescritor.reescrever(caminho);
-			var pagina = String.concatenar("/html", caminho, busca);
+			var pagina = this.reescritor.reescrever(caminho, busca);
 			this.carregarPagina(pagina);
 		},
 
@@ -410,6 +410,11 @@
 	var Reescritor = Classe.criar({
 		inicializar: function () {
 			this.reescritas = [];
+			this.uriBase = "";
+		},
+
+		comUriBase: function (uriBase) {
+			this.uriBase = uriBase;
 		},
 
 		comReescrita: function (padrao, reescrita) {
@@ -419,15 +424,16 @@
 			this.reescritas.push([padrao, reescrita]);
 		},
 
-		reescrever: function (caminho) {
+		reescrever: function (caminho, parametros) {
 			var novoCaminho = caminho;
+			parametros = (Linda.instanciaDe(parametros, String) ? parametros : "";
 			this.reescritas.paraCada(function (reescrita) {
 				var combina = caminho.match(reescrita.primeiro);
 				if (!Linda.nulo(combina) && combina.quantidadeIgual(1) && combina.primeiro === caminho) {
 					novoCaminho = reescrita.ultimo;
 				}
 			}, this);
-			return novoCaminho;
+			return String.concatenar(this.uriBase, novoCaminho, parametros);
 		}
 	});
 
