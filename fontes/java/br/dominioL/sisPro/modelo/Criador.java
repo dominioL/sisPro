@@ -20,8 +20,9 @@ public final class Criador<T extends Entidade<T>> {
 	private static final String ERRO_DADOS = "Dados inválidos.";
 	private static final String ERRO_JSON = "Objeto Json inválido.";
 	private static final String ERRO_BANCO = "Erro no banco de dados.";
-	private static final IdentificadorJson MENSAGEM = Json.criarIdentificador("mensagemDeErro");
-	private static final IdentificadorJson ERRO = Json.criarIdentificador("erro");
+	private static final IdentificadorJson IDENTIFICADOR_MENSAGEM = Json.criarIdentificador("mensagemDeErro");
+	private static final IdentificadorJson IDENTIFICADOR_ERRO = Json.criarIdentificador("erro");
+
 	private T entidade;
 	private Class<?> classeDoRecurso;
 	private Response resposta;
@@ -55,13 +56,16 @@ public final class Criador<T extends Entidade<T>> {
 
 	public void salvar() {
 		if (!possuiErro()) {
-			RespostaCouch respostaDoBanco = entidade.fornecerRepositorio().inserir(entidade);
-			if (!respostaDoBanco.fornecerCodigoDeEstado().sucesso()) {
-				resposta = fornecerRespostaDeErroDoServidor(respostaDoBanco.fornecerEntidade(), ERRO_BANCO);
+			RepositorioCouch<T> repositorio = entidade.fornecerRepositorio();
+			RespostaCouch respostaDoBanco = repositorio.inserir(entidade);
+			ObjetoJson entidadeDaResposta = respostaDoBanco.fornecerEntidade();
+			CodigoDeEstado codigoDeEstadoDaResposta = respostaDoBanco.fornecerCodigoDeEstado();
+			if (!codigoDeEstadoDaResposta.sucesso()) {
+				resposta = fornecerRespostaDeErroDoServidor(entidadeDaResposta, ERRO_BANCO);
 			} else {
 				String identificador = respostaDoBanco.fornecerIdentificador();
 				ConstrutorDeUri localizacao = ConstrutorDeUri.criar(classeDoRecurso).substituirParametro(identificador);
-				resposta = fornecerRespostaDeSucesso(respostaDoBanco.fornecerEntidade(), localizacao);
+				resposta = fornecerRespostaDeSucesso(entidadeDaResposta, localizacao);
 			}
 		}
 	}
@@ -80,14 +84,14 @@ public final class Criador<T extends Entidade<T>> {
 
 	private Response fornecerRespostaDeErroDoCliente(String mensagemDeErro) {
 		ObjetoJson respostaJson = Json.criarObjeto();
-		respostaJson.inserir(MENSAGEM, Json.criarTexto(mensagemDeErro));
+		respostaJson.inserir(IDENTIFICADOR_MENSAGEM, Json.criarTexto(mensagemDeErro));
 		return CodigoDeEstado.HTTP_400.fornecerResposta(TipoDeMidia.JSON, respostaJson.comoTextoJson());
 	}
 
 	private Response fornecerRespostaDeErroDoServidor(ObjetoJson erro, String mensagemDeErro) {
 		ObjetoJson respostaJson = Json.criarObjeto();
-		respostaJson.inserir(MENSAGEM, Json.criarTexto(mensagemDeErro));
-		respostaJson.inserir(ERRO, erro);
+		respostaJson.inserir(IDENTIFICADOR_MENSAGEM, Json.criarTexto(mensagemDeErro));
+		respostaJson.inserir(IDENTIFICADOR_ERRO, erro);
 		return CodigoDeEstado.HTTP_500.fornecerResposta(TipoDeMidia.JSON, respostaJson.comoTextoJson());
 	}
 }

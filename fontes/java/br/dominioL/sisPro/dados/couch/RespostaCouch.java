@@ -8,7 +8,7 @@ import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.TextoJson;
 
 public final class RespostaCouch {
-	private static final IdentificadorJson IDENTIFICADOR = Json.criarIdentificador("id");
+	private static final IdentificadorJson IDENTIFICADOR = Json.criarIdentificador("identificador");
 	private CodigoDeEstado codigoDeEstado;
 	private ObjetoJson entidade;
 	private String localizacao;

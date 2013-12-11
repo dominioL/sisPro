@@ -13,7 +13,7 @@ public final class Cliente extends Entidade<Cliente> {
 
 	@Override
 	public Boolean validar() {
-		return new Validador(comoJson())
+		return new Validador(this)
 			.validarCampoObrigatorio("nome", Validador.NOME)
 			.validarListaDeCamposObrigatorio("telefones", Validador.TELEFONE)
 			.validarListaDeCamposObrigatorio("enderecosEletronicos", Validador.EMAIL)
