@@ -10,13 +10,13 @@ construcao=construcao
 documentacao=documentacao
 fontes=fontes
 recursos=recursos
-testes=testes
 
 binariosCss=${binarios}/css
 binariosHtml=${binarios}/html
 binariosJava=${binarios}/class
 binariosJs=${binarios}/js
 binariosJson=${binarios}/json
+binariosSh=${binarios}/sh
 
 bibliotecasCss=${bibliotecas}/css
 bibliotecasJava=${bibliotecas}/jar
@@ -27,16 +27,12 @@ fontesHtml=${fontes}/html
 fontesJava=${fontes}/java
 fontesJs=${fontes}/js
 fontesJson=${fontes}/json
-
-testesHtml=${testes}/html
-testesJava=${testes}/java
-testesJs=${testes}/js
+fontesSh=${fontes}/sh
 
 contrucaoCompilacao=${construcao}/compilacao.txt
-
 arquivosFontesJava=$(find ${fontesJava} -name *.java)
-arquivosTestesJava=$(find ${testesJava} -name *.java)
-classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${testesJava}::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:[.]java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
+arquivosTestesJava=$(find ${fontesJava} -name *Teste*.java)
+classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${fontesJava}::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:[.]java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
 
 limpar() {
 	echo ":limpar";
@@ -51,6 +47,7 @@ criarEstrutura() {
 	mkdir -p ${binariosJava};
 	mkdir -p ${binariosJs};
 	mkdir -p ${binariosJson};
+	mkdir -p ${binariosSh};
 	mkdir -p ${bibliotecasCss};
 	mkdir -p ${bibliotecasJava};
 	mkdir -p ${bibliotecasJs};
@@ -60,9 +57,7 @@ criarEstrutura() {
 	mkdir -p ${fontesJava};
 	mkdir -p ${fontesJs};
 	mkdir -p ${fontesJson};
-	mkdir -p ${testesHtml};
-	mkdir -p ${testesJava};
-	mkdir -p ${testesJs};
+	mkdir -p ${fontesSh};
 	mkdir -p ${recursos};
 }
 
@@ -78,31 +73,42 @@ adicionarBibliotecas() {
 }
 
 compilar() {
-	limpar;
-	criarEstrutura;
-	adicionarBibliotecas;
-	echo ":compilar";
-	cp -rf ${bibliotecasJs}/* ${fontesJs}/* ${binariosJs};
-	cp -rf ${fontesHtml}/* ${testesHtml}/* ${binariosHtml};
-	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss};
-	cp -rf ${fontesJson}/* ${binariosJson};
-	cp -rf ${recursos}/* ${binarios};
+	limpar
+	criarEstrutura
+	adicionarBibliotecas
+	echo ":compilar"
+	cp -rf ${bibliotecasJs}/* ${fontesJs}/* ${binariosJs}
+	cp -rf ${fontesHtml}/* ${binariosHtml}
+	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss}
+	cp -rf ${fontesJson}/* ${binariosJson}
+	cp -rf ${fontesSh}/* ${binariosSh}
+	cp -rf ${recursos}/* ${binarios}
 	touch ${contrucaoCompilacao}
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &> ${contrucaoCompilacao};
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${testesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosTestesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &>> ${contrucaoCompilacao};
+	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &> ${contrucaoCompilacao}
 	less ${contrucaoCompilacao}
 }
 
 construir() {
-	compilar;
-	echo ":construir";
+	compilar
+	echo ":construir"
 }
 
 testar() {
-	construir;
-	echo ":testar";
-	# java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava};
-	chromium-browser ${binariosHtml}/testeDeCodigo.html --allow-file-access-from-files;
+	echo ":testar"
+	java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava}
+	chromium-browser ${binariosHtml}/testes/testeDeCodigo.html --allow-file-access-from-files;
+}
+
+testarJava() {
+	construir
+	echo ":testarJava"
+	java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava}
+}
+
+testarWeb() {
+	construir
+	echo ":testarWeb"
+	chromium-browser ${binariosHtml}/testes/testeDeCodigo.html --allow-file-access-from-files
 }
 
 depurar() {
