@@ -75,7 +75,7 @@ public final class Criador<T extends Entidade<T>> {
 	}
 
 	private Response fornecerRespostaDeSucesso(ObjetoJson sucesso, ConstrutorDeUri localizacao) {
-		return CodigoDeEstado.HTTP_200.fornecerResposta(TipoDeMidia.JSON, sucesso.comoTextoJson(), localizacao.construirRelativo());
+		return CodigoDeEstado.HTTP_201.fornecerResposta(TipoDeMidia.JSON, sucesso.comoTextoJson(), localizacao.construirRelativo());
 	}
 
 	private Response fornecerRespostaDeErroDoCliente(String mensagemDeErro) {

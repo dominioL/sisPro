@@ -13,13 +13,14 @@ public final class Cliente extends Entidade<Cliente> {
 
 	@Override
 	public Boolean validar() {
-		Validador validador = new Validador();
-		validador.validarCampoObrigatorio(dados, "nome", Validador.NOME);
-		validador.validarListaDeCamposObrigatorio(dados, "telefones", Validador.TELEFONE);
-		validador.validarListaDeCamposObrigatorio(dados, "enderecosEletronicos", Validador.EMAIL);
-		validador.validarCampo(dados, "cpf", Validador.CPF);
-		validador.validarCampo(dados, "cnpj", Validador.CNPJ);
-		validador.validarCampo(dados, "inscricaoEstadual", Validador.IE);
-		return validador.validar();
+		return new Validador(comoJson())
+			.validarCampoObrigatorio("nome", Validador.NOME)
+			.validarListaDeCamposObrigatorio("telefones", Validador.TELEFONE)
+			.validarListaDeCamposObrigatorio("enderecosEletronicos", Validador.EMAIL)
+			.validarCampo("cpf", Validador.CPF)
+			.validarCampo("cnpj", Validador.CNPJ)
+			.validarCampo("inscricaoEstadual", Validador.IE)
+			.naoPermitirOutrosCampos()
+			.validar();
 	}
 }

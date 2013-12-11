@@ -34,7 +34,7 @@ public final class RecursoCliente extends Recurso {
 	@PUT
 	@Produces(TiposDeMidia.JSON)
 	@Consumes(TiposDeMidia.JSON)
-	public Response postarJson(@PathParam("identificador") String identificador, String dados) {
+	public Response colocarJson(@PathParam("identificador") String identificador, String dados) {
 		// RepositorioDeClientes repositorio = RepositorioDeClientes.fornecerInstancia();
 		// Cliente cliente = new Cliente();
 		// return postarEntidadeJson(repositorio, cliente, dados);

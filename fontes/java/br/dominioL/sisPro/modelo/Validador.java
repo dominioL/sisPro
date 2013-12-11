@@ -1,10 +1,13 @@
 package br.dominioL.sisPro.modelo;
 
+import br.dominioL.estruturados.colecao.lista.ListaEncadeada;
 import br.dominioL.estruturados.excecoes.ExcecaoJsonDeTipo;
+import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ListaJson;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.ValorJson;
+import br.dominioL.estruturados.mapa.Par;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,41 +21,63 @@ public final class Validador {
 	public static final String IE = "^(\\p{Digit}{1,16}([./-]\\p{Digit}{1,16})?){1,8}$";
 
 	private Boolean valido;
+	private ObjetoJson dados;
+	private ListaEncadeada<IdentificadorJson> camposValidados;
 
-	public Validador() {
+	public Validador(ObjetoJson dados) {
+		this.dados = dados;
 		valido = true;
+		camposValidados = ListaEncadeada.criar();
 	}
 
-	public void validarListaDeCampos(ObjetoJson dados, String nomeDoCampo, String validacao) {
+	public Validador validarListaDeCampos(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
+		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson != null) {
 			validarListaDeCamposPadrao(valorJson, nomeDoCampo, validacao);
 		}
+		return this;
 	}
 
-	public void validarListaDeCamposObrigatorio(ObjetoJson dados, String nomeDoCampo, String validacao) {
+	public Validador validarListaDeCamposObrigatorio(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
+		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson == null) {
 			invalidarCampo(nomeDoCampo);
 		} else {
 			validarListaDeCamposPadrao(valorJson, nomeDoCampo, validacao);
 		}
+		return this;
 	}
 
-	public void validarCampo(ObjetoJson dados, String nomeDoCampo, String validacao) {
+	public Validador validarCampo(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
+		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson != null) {
 			validarCampoPadrao(valorJson, nomeDoCampo, validacao);
 		}
+		return this;
 	}
 
-	public void validarCampoObrigatorio(ObjetoJson dados, String nomeDoCampo, String validacao) {
+	public Validador validarCampoObrigatorio(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
+		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson == null) {
 			invalidarCampo(nomeDoCampo);
 		} else {
 			validarCampoPadrao(valorJson, nomeDoCampo, validacao);
 		}
+		return this;
+	}
+
+	public Validador naoPermitirOutrosCampos() {
+		for (Par<IdentificadorJson, ValorJson> chaveValor : dados) {
+			IdentificadorJson chave = chaveValor.fornecerChave();
+			if (!camposValidados.contem(chave)) {
+				invalidarCampo(chave.comoTexto());
+			}
+		}
+		return this;
 	}
 
 	public Boolean validar() {
