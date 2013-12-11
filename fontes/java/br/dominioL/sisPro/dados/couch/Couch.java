@@ -28,7 +28,7 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 	}
 
 	@Override
-	public RespostaCouch adicionar(RequisicaoCouch requisicao) {
+	public RespostaCouch inserir(RequisicaoCouch requisicao) {
 		return fornecerRespostaDeRequisicao(Metodo.POST, requisicao.fornecerDocumento(), requisicao.fornecerConstrutorDeUri());
 	}
 
@@ -43,7 +43,7 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 	}
 
 	@Override
-	public RespostaCouch buscar(RequisicaoCouch requisicao) {
+	public RespostaCouch obter(RequisicaoCouch requisicao) {
 		return fornecerRespostaDeRequisicao(Metodo.GET, requisicao.fornecerConstrutorDeUri());
 	}
 
@@ -59,15 +59,17 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 	}
 
 	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ConstrutorDeUri construtorDeUri) {
-		// WebResource recurso = fornecerRecurso(construtorDeUri);
-		// return fornecerResposta(metodo, recurso);
-		return null;
+		WebResource recurso = fornecerRecurso(construtorDeUri);
+		WebResource.Builder recursoConstruido = recurso.getRequestBuilder();
+		return fornecerResposta(metodo, recursoConstruido);
 	}
 
 	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ObjetoJson entidade, ConstrutorDeUri construtorDeUri) {
 		WebResource recurso = fornecerRecurso(construtorDeUri);
-		recurso.entity(entidade.comoTextoJson(), TipoDeMidia.JSON.comoTextoSemCharset());
-		return fornecerResposta(metodo, recurso.entity(entidade.comoTextoJson(), TipoDeMidia.JSON.comoTextoSemCharset()));
+		String entidadeTextual = entidade.comoTextoJson();
+		String tipoDeMidiaTextual = TipoDeMidia.JSON.comoTextoSemCharset();
+		WebResource.Builder recursoConstruido = recurso.entity(entidadeTextual, tipoDeMidiaTextual);
+		return fornecerResposta(metodo, recursoConstruido);
 	}
 
 	private WebResource fornecerRecurso(ConstrutorDeUri construtorDeUri) {
@@ -78,8 +80,9 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 
 	private RespostaCouch fornecerResposta(Metodo metodo, WebResource.Builder recurso) {
 		ClientResponse respostaHttp = recurso.method(metodo.comoTexto(), ClientResponse.class);
-		RespostaCouch resposta = RespostaCouch.criar().comCodigoDeEstado(respostaHttp.getStatus());
-		resposta.comEntidade(respostaHttp.getEntity(String.class));
+		RespostaCouch resposta = RespostaCouch.criar()
+			.comCodigoDeEstado(respostaHttp.getStatus())
+			.comEntidade(respostaHttp.getEntity(String.class));
 		if (respostaHttp.getLocation() != null) {
 			resposta.comLocalizacao(respostaHttp.getLocation().toString());
 		}

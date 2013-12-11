@@ -49,4 +49,8 @@ public final class RespostaCouch {
 	public String fornecerIdentificador() {
 		return entidade.fornecer(IDENTIFICADOR).comoTexto();
 	}
+
+	public Boolean possuiEntidade() {
+		return (entidade != null);
+	}
 }

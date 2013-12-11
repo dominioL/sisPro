@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.WebResource;
 
 public final class RequisicaoCouch {
 	private static final String DESIGN = "_design";
+	private static final String VIEW = "_view";
 	private ObjetoJson documento;
 	private ConstrutorDeUri construtorDeUri;
 
@@ -33,7 +34,7 @@ public final class RequisicaoCouch {
 	}
 
 	public RequisicaoCouch daVisao(String visao) {
-		construtorDeUri.caminho(visao);
+		construtorDeUri.caminho(VIEW).caminho(visao);
 		return this;
 	}
 
