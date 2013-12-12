@@ -1,15 +1,10 @@
 package br.dominioL.sisPro.dados.couch;
 
-import br.dominioL.conexaoH.Atributo;
 import br.dominioL.conexaoH.ConstrutorDeUri;
 import br.dominioL.conexaoH.Metodo;
 import br.dominioL.conexaoH.TipoDeMidia;
-
 import br.dominioL.estruturados.json.ObjetoJson;
-
 import br.dominioL.sisPro.dados.BancoDeDados;
-import br.dominioL.sisPro.dados.couch.RequisicaoCouch;
-import br.dominioL.sisPro.dados.couch.RespostaCouch;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -55,7 +50,7 @@ public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch>
 
 	private void criarBanco() {
 		RequisicaoCouch requisicao = RequisicaoCouch.criar();
-		RespostaCouch resposta = colocar(requisicao);
+		colocar(requisicao);
 	}
 
 	private RespostaCouch fornecerRespostaDeRequisicao(Metodo metodo, ConstrutorDeUri construtorDeUri) {

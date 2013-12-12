@@ -89,5 +89,9 @@ public abstract class RepositorioCouch<T extends Entidade<T>> {
 
 	public abstract TextoJson fornecerTipo();
 
+//	public abstract Mapeador fornecerMapeadorParaCouch();
+//
+//	public abstract Mapeador fornecerMapeadorParaEntidade();
+
 	public abstract void popular();
 }

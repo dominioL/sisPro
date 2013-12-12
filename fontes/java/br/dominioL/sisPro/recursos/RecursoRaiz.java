@@ -1,16 +1,14 @@
 package br.dominioL.sisPro.recursos;
 
-import br.dominioL.conexaoH.CodigoDeEstado;
-import br.dominioL.conexaoH.TipoDeMidia;
-import br.dominioL.conexaoH.TiposDeMidia;
-
-import br.dominioL.sisPro.interno.Arquivo;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+
+import br.dominioL.conexaoH.CodigoDeEstado;
+import br.dominioL.conexaoH.TipoDeMidia;
+import br.dominioL.conexaoH.TiposDeMidia;
 
 @Path("/")
 public final class RecursoRaiz extends Recurso {

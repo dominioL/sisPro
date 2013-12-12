@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.testes;
+package br.dominioL.sisPro.testes.modelo;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
@@ -8,7 +8,6 @@ import br.dominioL.sisPro.modelo.Validador;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public final class TesteValidador {
 	private ObjetoJson pessoa;

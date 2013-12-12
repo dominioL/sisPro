@@ -1,7 +1,5 @@
 package br.dominioL.sisPro.modelo;
 
-import br.dominioL.estruturados.json.ObjetoJson;
-
 import br.dominioL.sisPro.dados.couch.RepositorioCouch;
 import br.dominioL.sisPro.dados.couch.RepositorioDeClientes;
 

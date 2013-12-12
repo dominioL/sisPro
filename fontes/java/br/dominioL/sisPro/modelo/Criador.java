@@ -1,20 +1,16 @@
 package br.dominioL.sisPro.modelo;
 
-import br.dominioL.conexaoH.Atributo;
+import javax.ws.rs.core.Response;
+
 import br.dominioL.conexaoH.CodigoDeEstado;
 import br.dominioL.conexaoH.ConstrutorDeUri;
 import br.dominioL.conexaoH.TipoDeMidia;
-
 import br.dominioL.estruturados.excecoes.ExcecaoJsonDeAnalise;
-import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.IdentificadorJson;
+import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
-
-import br.dominioL.sisPro.dados.couch.RespostaCouch;
 import br.dominioL.sisPro.dados.couch.RepositorioCouch;
-import br.dominioL.sisPro.modelo.Entidade;
-
-import javax.ws.rs.core.Response;
+import br.dominioL.sisPro.dados.couch.RespostaCouch;
 
 public final class Criador<T extends Entidade<T>> {
 	private static final String ERRO_DADOS = "Dados inválidos.";
