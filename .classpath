@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="fontes/java"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/conexaoH.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/estruturados.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/hamcrest.jar" sourcepath="bibliotecas/jar/hamcrestSources.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jerseyServer.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/junit.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/antlr.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/commonsCodec.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/commonsLang.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/commonsLogging.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/httpClient.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/httpCore.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/httpMime.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/tagSoup.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/groovy.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/groovyJson.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/groovyXml.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/restAssured.jar" sourcepath="bibliotecas/jar/restAssuredSources.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/asm.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr311.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jerseyClient.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jerseyCommon.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jerseyContainerServlet.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jerseyContainerServletCore.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/grizzly.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/cglib.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/guava.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/hk2.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/hk2Locator.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/hk2Utils.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr222.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr250.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr303.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr315.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr317.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jsr330.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/osgiCore.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/osgiResourceLocator.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/jar/jerseyContainerGrizzly2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="binarios/class"/>
+</classpath>
