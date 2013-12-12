@@ -1,15 +1,19 @@
 package br.dominioL.sisPro.testes.recursos;
 
 import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.startsWith;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import br.dominioL.conexaoH.Atributo;
 import br.dominioL.conexaoH.CodigoDeEstado;
 import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.sisPro.SisPro;
 
 public class TesteClientes {
 	private ObjetoJson cliente;
@@ -19,7 +23,7 @@ public class TesteClientes {
 		cliente = Json.criarObjeto();
 		cliente.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
 		cliente.inserir(Json.criarIdentificador("telefones"), Json.criarLista());
-		cliente.inserir(Json.criarIdentificador("enderecoesEletronicos"), Json.criarLista());
+		cliente.inserir(Json.criarIdentificador("enderecosEletronicos"), Json.criarLista());
 	}
 
 	@Test
@@ -29,12 +33,11 @@ public class TesteClientes {
 			.contentType(TipoDeMidia.JSON.comoTexto())
 			.content(cliente.comoTextoJson())
 		.when()
-			.post("/clientes")
+			.post(SisPro.uri().caminho("/clientes").construirRelativo())
 		.then()
-			.statusCode(CodigoDeEstado.HTTP_200.comoNumero())
-			.contentType(TipoDeMidia.JSON.comoTexto())
-			.assertThat()
-				.content(hasKey("identificador"))
-				.content(hasKey("revisao"));
+			.statusCode(CodigoDeEstado.HTTP_201.comoNumero())
+			.header(Atributo.LOCATION.comoTexto(), startsWith(SisPro.uri().caminho("/cliente/").construirAbsoluto()))
+			.contentType(startsWith(TipoDeMidia.JSON.comoTextoSemCharset()))
+			.content("", allOf(hasKey("identificador"), hasKey("revisao")));
 	}
 }

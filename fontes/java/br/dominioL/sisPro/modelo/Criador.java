@@ -9,6 +9,7 @@ import br.dominioL.estruturados.excecoes.ExcecaoJsonDeAnalise;
 import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.sisPro.SisPro;
 import br.dominioL.sisPro.dados.couch.RepositorioCouch;
 import br.dominioL.sisPro.dados.couch.RespostaCouch;
 
@@ -60,7 +61,9 @@ public final class Criador<T extends Entidade<T>> {
 				resposta = fornecerRespostaDeErroDoServidor(entidadeDaResposta, ERRO_BANCO);
 			} else {
 				String identificador = respostaDoBanco.fornecerIdentificador();
-				ConstrutorDeUri localizacao = ConstrutorDeUri.criar(classeDoRecurso).substituirParametro(identificador);
+				ConstrutorDeUri localizacao = SisPro.fornecerInstancia().fornecerConstrutorDeUri()
+					.caminho(classeDoRecurso)
+					.substituirParametro(identificador);
 				resposta = fornecerRespostaDeSucesso(entidadeDaResposta, localizacao);
 			}
 		}
@@ -75,7 +78,7 @@ public final class Criador<T extends Entidade<T>> {
 	}
 
 	private Response fornecerRespostaDeSucesso(ObjetoJson sucesso, ConstrutorDeUri localizacao) {
-		return CodigoDeEstado.HTTP_201.fornecerResposta(TipoDeMidia.JSON, sucesso.comoTextoJson(), localizacao.construirRelativo());
+		return CodigoDeEstado.HTTP_201.fornecerResposta(TipoDeMidia.JSON, sucesso.comoTextoJson(), localizacao.construirAbsoluto());
 	}
 
 	private Response fornecerRespostaDeErroDoCliente(String mensagemDeErro) {

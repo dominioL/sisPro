@@ -12,7 +12,7 @@ public final class RequisicaoCouch {
 
 	private RequisicaoCouch() {
 		documento = Json.criarObjeto();
-		construtorDeUri = Couch.fornecerInstancia().fornecerConstrutorDeUriBase();
+		construtorDeUri = Couch.fornecerInstancia().fornecerConstrutorDeUri();
 	}
 
 	public static RequisicaoCouch criar() {
