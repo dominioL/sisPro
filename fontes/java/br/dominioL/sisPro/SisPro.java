@@ -21,7 +21,7 @@ public final class SisPro extends ResourceConfig {
 	private static final Integer PORTA = 7000;
 	private static final String CAMINHO = "/";
 	private static final String PACOTE_DOS_RECURSOS = "br.dominioL.sisPro.recursos";
-	
+
 	private SisPro() {
 		packages(PACOTE_DOS_RECURSOS);
 		registerClasses(RecursoExcecaoWeb.class, RecursoExcecaoJava.class);
@@ -34,7 +34,7 @@ public final class SisPro extends ResourceConfig {
 	public ConstrutorDeUri fornecerConstrutorDeUri() {
 		return uri();
 	}
-	
+
 	public static ConstrutorDeUri uri() {
 		return ConstrutorDeUri.criar()
 			.protocolo(PROTOCOLO)

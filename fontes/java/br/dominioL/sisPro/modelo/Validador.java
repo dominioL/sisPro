@@ -24,16 +24,18 @@ public final class Validador {
 	private ObjetoJson dados;
 	private ListaEncadeada<IdentificadorJson> camposValidados;
 
-	public Validador(Entidade<?> entidade) {
-		this.dados = entidade.comoJson();
+	private Validador(ObjetoJson dados) {
+		this.dados = dados;
 		valido = true;
 		camposValidados = ListaEncadeada.criar();
 	}
 
-	public Validador(ObjetoJson dados) {
-		this.dados = dados;
-		valido = true;
-		camposValidados = ListaEncadeada.criar();
+	public static Validador criar(ObjetoJson dados) {
+		return new Validador(dados);
+	}
+	
+	public static Validador criar(Entidade<?> entidade) {
+		return new Validador(entidade.comoJson());
 	}
 
 	public Validador validarListaDeCampos(String nomeDoCampo, String validacao) {

@@ -20,14 +20,14 @@ public final class TesteValidador {
 	@Test
 	public void validarCampoComCampo() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
-		Validador validador = new Validador(pessoa)
+		Validador validador = Validador.criar(pessoa)
 			.validarCampo("nome", Validador.NOME);
 		Assert.assertTrue(validador.validar());
 	}
 
 	@Test
 	public void validarCampoSemCampo() {
-		Validador validador = new Validador(pessoa)
+		Validador validador = Validador.criar(pessoa)
 			.validarCampo("nome", Validador.NOME);
 		Assert.assertTrue(validador.validar());
 	}
@@ -35,14 +35,14 @@ public final class TesteValidador {
 	@Test
 	public void validarCampoObrigatorioComCampo() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
-		Validador validador = new Validador(pessoa)
+		Validador validador = Validador.criar(pessoa)
 			.validarCampoObrigatorio("nome", Validador.NOME);
 		Assert.assertTrue(validador.validar());
 	}
 
 	@Test
 	public void validarCampoObrigatorioSemCampo() {
-		Validador validador = new Validador(pessoa)
+		Validador validador = Validador.criar(pessoa)
 			.validarCampoObrigatorio("nome", Validador.NOME);
 		Assert.assertFalse(validador.validar());
 	}
@@ -50,7 +50,7 @@ public final class TesteValidador {
 	@Test
 	public void naoPermitirOutrosCamposSemOutrosCampos() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
-		Validador validador = new Validador(pessoa)
+		Validador validador = Validador.criar(pessoa)
 			.validarCampoObrigatorio("nome", Validador.NOME)
 			.naoPermitirOutrosCampos();
 		Assert.assertTrue(validador.validar());
@@ -60,7 +60,7 @@ public final class TesteValidador {
 	public void naoPermitirOutrosCamposComOutrosCampos() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
 		pessoa.inserir(Json.criarIdentificador("outroCampo"), Json.criarTexto("qualquer"));
-		Validador validador = new Validador(pessoa)
+		Validador validador = Validador.criar(pessoa)
 			.validarCampoObrigatorio("nome", Validador.NOME)
 			.naoPermitirOutrosCampos();
 		Assert.assertFalse(validador.validar());
