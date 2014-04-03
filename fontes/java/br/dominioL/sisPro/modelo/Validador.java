@@ -33,7 +33,7 @@ public final class Validador {
 	public static Validador criar(ObjetoJson dados) {
 		return new Validador(dados);
 	}
-	
+
 	public static Validador criar(Entidade<?> entidade) {
 		return new Validador(entidade.comoJson());
 	}
