@@ -16,9 +16,6 @@ txt=txt
 construcao=construcao
 
 contrucaoCompilacao=${construcao}/compilacao.txt
-arquivosJava=$(find ${java} -name *.java)
-arquivosTestesJava=$(find ${java} -name *Teste*.java)
-classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${java}/::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:\.java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
 
 limpar() {
 	echo ":limpar"
@@ -70,6 +67,7 @@ compilar() {
 	adicionarBibliotecas
 	echo ":compilar"
 	touch ${contrucaoCompilacao}
+	arquivosJava=$(find ${java} -name *.java)
 	javac -classpath ${jar}/*:${class} -sourcepath ${java} -d ${class} -Werror -deprecation -g ${arquivosJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &> ${contrucaoCompilacao}
 	less ${contrucaoCompilacao}
 }
@@ -82,6 +80,8 @@ construir() {
 testar() {
 	construir
 	echo ":testar"
+	arquivosTestesJava=$(find ${java} -name *Teste*.java)
+	classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${java}/::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:\.java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
 	java -classpath ${jar}/*:${class} org.junit.runner.JUnitCore ${classesTestesJava}
 	chromium-browser ${html}/testes/testeDeCodigo.html --allow-file-access-from-files
 }
@@ -89,6 +89,8 @@ testar() {
 testarJava() {
 	construir
 	echo ":testarJava"
+	arquivosTestesJava=$(find ${java} -name *Teste*.java)
+	classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${java}/::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:\.java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
 	java -classpath ${class}:${jar}/* org.junit.runner.JUnitCore ${classesTestesJava}
 }
 
