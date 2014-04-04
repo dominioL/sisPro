@@ -36,8 +36,10 @@ criarEstrutura() {
 	mkdir -p ${construcao}
 }
 
-adicionarBibliotecas() {
-	echo ":adicionarBibliotecas"
+atualizarBibliotecas() {
+	limpar
+	criarEstrutura
+	echo ":atualizarBibliotecas"
 	cp -f ~/projetos/estilos/construcao/limpo.css ${css}
 	cp -f ~/projetos/verificaJs/construcao/verifica.css ${css}
 	cp -f ~/projetos/estruturados/construcao/estruturados.jar ${jar}
@@ -48,6 +50,8 @@ adicionarBibliotecas() {
 }
 
 jarjar() {
+	limpar
+	criarEstrutura
 	echo ":jarjar"
 	# java -jar ${jar}/jarjar.jar find class ${jar}/groovy.jar ${jar}/asm4.jar
 	# java -jar ${jar}/jarjar.jar find jar ${jar}/groovy.jar ${jar}/asm4.jar
@@ -64,7 +68,6 @@ jarjar() {
 compilar() {
 	limpar
 	criarEstrutura
-	adicionarBibliotecas
 	echo ":compilar"
 	touch ${contrucaoCompilacao}
 	arquivosJava=$(find ${java} -name *.java)
