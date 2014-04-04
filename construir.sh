@@ -4,86 +4,64 @@ projeto=SisPro
 pacoteDoProjeto=sisPro
 pacoteGeral=br.dominioL
 
-bibliotecas=bibliotecas
-binarios=binarios
+class=class
+css=css
+html=html
+jar=jar
+java=java
+js=js
+json=json
+sh=sh
+txt=txt
 construcao=construcao
-documentacao=documentacao
-fontes=fontes
-recursos=recursos
-
-binariosCss=${binarios}/css
-binariosHtml=${binarios}/html
-binariosJava=${binarios}/class
-binariosJs=${binarios}/js
-binariosJson=${binarios}/json
-binariosSh=${binarios}/sh
-
-bibliotecasCss=${bibliotecas}/css
-bibliotecasJava=${bibliotecas}/jar
-bibliotecasJs=${bibliotecas}/js
-
-fontesCss=${fontes}/css
-fontesHtml=${fontes}/html
-fontesJava=${fontes}/java
-fontesJs=${fontes}/js
-fontesJson=${fontes}/json
-fontesSh=${fontes}/sh
 
 contrucaoCompilacao=${construcao}/compilacao.txt
-arquivosFontesJava=$(find ${fontesJava} -name *.java)
-arquivosTestesJava=$(find ${fontesJava} -name *Teste*.java)
-classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${fontesJava}::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:[.]java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
+arquivosJava=$(find ${java} -name *.java)
+arquivosTestesJava=$(find ${java} -name *Teste*.java)
+classesTestesJava=$(echo ${arquivosTestesJava} | sed -e s:${java}/::g -e s:^/::g -e "s:\s/: :g" -e s:/:.:g -e s:\.java::g -e s:[a-Z.]*figuracao[a-Z.]*::g)
 
 limpar() {
 	echo ":limpar"
-	rm -rf ${binarios}
 	rm -rf ${construcao}
 }
 
 criarEstrutura() {
 	echo ":criarEstrutura"
-	mkdir -p ${binariosCss}
-	mkdir -p ${binariosHtml}
-	mkdir -p ${binariosJava}
-	mkdir -p ${binariosJs}
-	mkdir -p ${binariosJson}
-	mkdir -p ${binariosSh}
-	mkdir -p ${bibliotecasCss}
-	mkdir -p ${bibliotecasJava}
-	mkdir -p ${bibliotecasJs}
+	mkdir -p ${class}
+	mkdir -p ${css}
+	mkdir -p ${html}
+	mkdir -p ${jar}
+	mkdir -p ${java}
+	mkdir -p ${js}
+	mkdir -p ${json}
+	mkdir -p ${sh}
+	mkdir -p ${txt}
 	mkdir -p ${construcao}
-	mkdir -p ${fontesCss}
-	mkdir -p ${fontesHtml}
-	mkdir -p ${fontesJava}
-	mkdir -p ${fontesJs}
-	mkdir -p ${fontesJson}
-	mkdir -p ${fontesSh}
-	mkdir -p ${recursos}
 }
 
 adicionarBibliotecas() {
 	echo ":adicionarBibliotecas"
-	cp -f ~/projetos/estilos/construcao/limpo.css ${bibliotecasCss}
-	cp -f ~/projetos/verificaJs/construcao/verifica.css ${bibliotecasCss}
-	cp -f ~/projetos/estruturados/construcao/estruturados.jar ${bibliotecasJava}
-	cp -f ~/projetos/conexaoH/construcao/conexaoH.jar ${bibliotecasJava}
-	cp -f ~/projetos/lindaJs/construcao/linda.js ${bibliotecasJs}
-	cp -f ~/projetos/verificaJs/construcao/verifica.js ${bibliotecasJs}
-	cp -f ~/projetos/verificaJs/construcao/jsHint.js ${bibliotecasJs}
+	cp -f ~/projetos/estilos/construcao/limpo.css ${css}
+	cp -f ~/projetos/verificaJs/construcao/verifica.css ${css}
+	cp -f ~/projetos/estruturados/construcao/estruturados.jar ${jar}
+	cp -f ~/projetos/conexaoH/construcao/conexaoH.jar ${jar}
+	cp -f ~/projetos/lindaJs/construcao/linda.js ${js}
+	cp -f ~/projetos/verificaJs/construcao/verifica.js ${js}
+	cp -f ~/projetos/verificaJs/construcao/jsHint.js ${js}
 }
 
 jarjar() {
 	echo ":jarjar"
-	# java -jar ${bibliotecasJava}/jarjar.jar find class ${bibliotecasJava}/groovy.jar ${bibliotecasJava}/asm4.jar
-	# java -jar ${bibliotecasJava}/jarjar.jar find jar ${bibliotecasJava}/groovy.jar ${bibliotecasJava}/asm4.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/asm4.jar ${bibliotecasJava}/asm4.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/asm4Analysis.jar ${bibliotecasJava}/asm4Analysis.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/asm4Commons.jar ${bibliotecasJava}/asm4Commons.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/asm4Tree.jar ${bibliotecasJava}/asm4Tree.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/asm4Util.jar ${bibliotecasJava}/asm4Util.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/groovy.jar ${bibliotecasJava}/groovy.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/groovyJson.jar ${bibliotecasJava}/groovyJson.jar
-	java -jar ${bibliotecasJava}/jarjar.jar process ${recursos}/txt/jarjar.txt ${recursos}/jar/groovyXml.jar ${bibliotecasJava}/groovyXml.jar
+	# java -jar ${jar}/jarjar.jar find class ${jar}/groovy.jar ${jar}/asm4.jar
+	# java -jar ${jar}/jarjar.jar find jar ${jar}/groovy.jar ${jar}/asm4.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/asm4.jar ${jar}/asm4.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/asm4Analysis.jar ${jar}/asm4Analysis.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/asm4Commons.jar ${jar}/asm4Commons.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/asm4Tree.jar ${jar}/asm4Tree.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/asm4Util.jar ${jar}/asm4Util.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/groovy.jar ${jar}/groovy.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/groovyJson.jar ${jar}/groovyJson.jar
+	java -jar ${jar}/jarjar.jar process ${txt}/jarjar.txt ${jar}/dependencias/groovyXml.jar ${jar}/groovyXml.jar
 }
 
 compilar() {
@@ -91,14 +69,8 @@ compilar() {
 	criarEstrutura
 	adicionarBibliotecas
 	echo ":compilar"
-	cp -rf ${bibliotecasJs}/* ${fontesJs}/* ${binariosJs}
-	cp -rf ${fontesHtml}/* ${binariosHtml}
-	cp -rf ${bibliotecasCss}/* ${fontesCss}/* ${binariosCss}
-	cp -rf ${fontesJson}/* ${binariosJson}
-	cp -rf ${fontesSh}/* ${binariosSh}
-	cp -rf ${recursos}/* ${binarios}
 	touch ${contrucaoCompilacao}
-	javac -classpath ${bibliotecasJava}/*:${binariosJava} -sourcepath ${fontesJava} -d ${binariosJava} -Werror -deprecation -g ${arquivosFontesJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &> ${contrucaoCompilacao}
+	javac -classpath ${jar}/*:${class} -sourcepath ${java} -d ${class} -Werror -deprecation -g ${arquivosJava} -Xlint -Xmaxerrs 10 -Xmaxwarns 10 &> ${contrucaoCompilacao}
 	less ${contrucaoCompilacao}
 }
 
@@ -108,36 +80,28 @@ construir() {
 }
 
 testar() {
+	construir
 	echo ":testar"
-	java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava}
-	chromium-browser ${binariosHtml}/testes/testeDeCodigo.html --allow-file-access-from-files
+	java -classpath ${jar}/*:${class} org.junit.runner.JUnitCore ${classesTestesJava}
+	chromium-browser ${html}/testes/testeDeCodigo.html --allow-file-access-from-files
 }
 
 testarJava() {
 	construir
 	echo ":testarJava"
-	java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto} &
-	java -classpath ${bibliotecasJava}/*:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava}
+	java -classpath ${class}:${jar}/* org.junit.runner.JUnitCore ${classesTestesJava}
 }
 
 testarWeb() {
 	construir
 	echo ":testarWeb"
-	chromium-browser ${binariosHtml}/testes/testeDeCodigo.html --allow-file-access-from-files
-}
-
-depurar() {
-	construir
-	echo ":depurar"
-	jdb -classpath ${bibliotecasJava}:${binariosJava} org.junit.runner.JUnitCore ${classesTestesJava}
+	chromium-browser ${html}/testes/testeDeCodigo.html --allow-file-access-from-files
 }
 
 executar() {
 	construir
 	echo ":executar"
-	# touch ${construcao}/execucao.txt
-	# java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto} 2> ${construcao}/execucao.txt
-	java -classpath ${bibliotecasJava}/*:${binariosJava} ${pacoteGeral}.${pacoteDoProjeto}.${projeto}
+	java -classpath ${jar}/*:${class} ${pacoteGeral}.${pacoteDoProjeto}.${projeto}
 }
 
 echo :${pacoteDoProjeto}
