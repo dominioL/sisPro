@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.interno;
+package br.dominioL.sisPro.dominio.interno;
 
 import java.io.File;
 

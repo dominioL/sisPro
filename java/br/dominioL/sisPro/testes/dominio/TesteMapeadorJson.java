@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.testes.modelo;
+package br.dominioL.sisPro.testes.dominio;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
-import br.dominioL.sisPro.modelo.MapeadorObjetoJson;
+import br.dominioL.sisPro.dominio.mapeadores.MapeadorObjetoJson;
 
 public class TesteMapeadorJson {
 	private ObjetoJson vazio;

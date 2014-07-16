@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.modelo;
+package br.dominioL.sisPro.dominio.entidades.interfaces;
 
 import br.dominioL.estruturados.json.ObjetoJson;
 

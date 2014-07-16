@@ -1,12 +1,14 @@
-package br.dominioL.sisPro.dados.couch;
+package br.dominioL.sisPro.dados.couch.repositorios;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.TextoJson;
 import br.dominioL.estruturados.json.ValorJson;
-
-import br.dominioL.sisPro.modelo.Entidade;
+import br.dominioL.sisPro.dados.couch.Couch;
+import br.dominioL.sisPro.dados.couch.RequisicaoCouch;
+import br.dominioL.sisPro.dados.couch.RespostaCouch;
+import br.dominioL.sisPro.dominio.entidades.Entidade;
 
 public abstract class RepositorioCouch<T extends Entidade<T>> {
 	private static final IdentificadorJson IDENTIFICADOR_TIPO = Json.criarIdentificador("tipo");

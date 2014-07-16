@@ -1,10 +1,10 @@
-package br.dominioL.sisPro.recursos;
+package br.dominioL.sisPro.recursos.arquivos;
 
 import br.dominioL.conexaoH.CodigoDeEstado;
 import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.conexaoH.TiposDeMidia;
-
-import br.dominioL.sisPro.interno.Arquivo;
+import br.dominioL.sisPro.dominio.interno.Arquivo;
+import br.dominioL.sisPro.recursos.Recurso;
 import br.dominioL.sisPro.recursos.abstratos.RecursoArquivo;
 
 import java.io.File;

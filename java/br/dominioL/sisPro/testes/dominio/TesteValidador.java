@@ -1,9 +1,8 @@
-package br.dominioL.sisPro.testes.modelo;
+package br.dominioL.sisPro.testes.dominio;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
-
-import br.dominioL.sisPro.modelo.Validador;
+import br.dominioL.sisPro.dominio.Validador;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,14 +20,14 @@ public final class TesteValidador {
 	public void validarCampoComCampo() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
 		Validador validador = Validador.criar(pessoa)
-			.validarCampo("nome", Validador.NOME);
+			.comCampo("nome", Validador.NOME);
 		Assert.assertTrue(validador.validar());
 	}
 
 	@Test
 	public void validarCampoSemCampo() {
 		Validador validador = Validador.criar(pessoa)
-			.validarCampo("nome", Validador.NOME);
+			.comCampo("nome", Validador.NOME);
 		Assert.assertTrue(validador.validar());
 	}
 
@@ -36,14 +35,14 @@ public final class TesteValidador {
 	public void validarCampoObrigatorioComCampo() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
 		Validador validador = Validador.criar(pessoa)
-			.validarCampoObrigatorio("nome", Validador.NOME);
+			.comCampoObrigatorio("nome", Validador.NOME);
 		Assert.assertTrue(validador.validar());
 	}
 
 	@Test
 	public void validarCampoObrigatorioSemCampo() {
 		Validador validador = Validador.criar(pessoa)
-			.validarCampoObrigatorio("nome", Validador.NOME);
+			.comCampoObrigatorio("nome", Validador.NOME);
 		Assert.assertFalse(validador.validar());
 	}
 
@@ -51,7 +50,7 @@ public final class TesteValidador {
 	public void naoPermitirOutrosCamposSemOutrosCampos() {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
 		Validador validador = Validador.criar(pessoa)
-			.validarCampoObrigatorio("nome", Validador.NOME)
+			.comCampoObrigatorio("nome", Validador.NOME)
 			.naoPermitirOutrosCampos();
 		Assert.assertTrue(validador.validar());
 	}
@@ -61,7 +60,7 @@ public final class TesteValidador {
 		pessoa.inserir(Json.criarIdentificador("nome"), Json.criarTexto("Lucas Pereira"));
 		pessoa.inserir(Json.criarIdentificador("outroCampo"), Json.criarTexto("qualquer"));
 		Validador validador = Validador.criar(pessoa)
-			.validarCampoObrigatorio("nome", Validador.NOME)
+			.comCampoObrigatorio("nome", Validador.NOME)
 			.naoPermitirOutrosCampos();
 		Assert.assertFalse(validador.validar());
 	}

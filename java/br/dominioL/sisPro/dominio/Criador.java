@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.modelo;
+package br.dominioL.sisPro.dominio;
 
 import javax.ws.rs.core.Response;
 
@@ -10,8 +10,9 @@ import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.sisPro.SisPro;
-import br.dominioL.sisPro.dados.couch.RepositorioCouch;
 import br.dominioL.sisPro.dados.couch.RespostaCouch;
+import br.dominioL.sisPro.dados.couch.repositorios.RepositorioCouch;
+import br.dominioL.sisPro.dominio.entidades.Entidade;
 
 public final class Criador<T extends Entidade<T>> {
 	private static final String ERRO_DADOS = "Dados inválidos.";

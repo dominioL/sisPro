@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.modelo;
+package br.dominioL.sisPro.dominio;
 
 import br.dominioL.estruturados.colecao.lista.ListaEncadeada;
 import br.dominioL.estruturados.excecoes.ExcecaoJsonDeTipo;
@@ -8,6 +8,7 @@ import br.dominioL.estruturados.json.ListaJson;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.estruturados.mapa.Par;
+import br.dominioL.sisPro.dominio.entidades.Entidade;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,7 +48,7 @@ public final class Validador {
 		return this;
 	}
 
-	public Validador validarListaDeCamposObrigatorio(String nomeDoCampo, String validacao) {
+	public Validador comListaDeCamposObrigatorio(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
 		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson == null) {
@@ -58,7 +59,7 @@ public final class Validador {
 		return this;
 	}
 
-	public Validador validarCampo(String nomeDoCampo, String validacao) {
+	public Validador comCampo(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
 		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson != null) {
@@ -67,7 +68,7 @@ public final class Validador {
 		return this;
 	}
 
-	public Validador validarCampoObrigatorio(String nomeDoCampo, String validacao) {
+	public Validador comCampoObrigatorio(String nomeDoCampo, String validacao) {
 		ValorJson valorJson = dados.fornecer(nomeDoCampo);
 		camposValidados.inserirNoFim(Json.criarIdentificador(nomeDoCampo));
 		if (valorJson == null) {

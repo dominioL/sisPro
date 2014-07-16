@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.modelo;
+package br.dominioL.sisPro.dominio.mapeadores;
 
 public interface Mapeador<T> {
 	public T mapear(T mapeado);

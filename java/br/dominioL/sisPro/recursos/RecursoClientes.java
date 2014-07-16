@@ -10,9 +10,9 @@ import javax.ws.rs.core.Response;
 import br.dominioL.conexaoH.CodigoDeEstado;
 import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.conexaoH.TiposDeMidia;
-import br.dominioL.sisPro.interno.Arquivo;
-import br.dominioL.sisPro.modelo.Cliente;
-import br.dominioL.sisPro.modelo.Criador;
+import br.dominioL.sisPro.dominio.Criador;
+import br.dominioL.sisPro.dominio.entidades.Cliente;
+import br.dominioL.sisPro.dominio.interno.Arquivo;
 
 @Path("/clientes")
 public final class RecursoClientes extends Recurso {

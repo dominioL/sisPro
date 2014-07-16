@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.modelo;
+package br.dominioL.sisPro.dominio.mapeadores;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;

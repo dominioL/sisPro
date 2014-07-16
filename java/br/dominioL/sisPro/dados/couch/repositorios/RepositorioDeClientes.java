@@ -1,9 +1,8 @@
-package br.dominioL.sisPro.dados.couch;
+package br.dominioL.sisPro.dados.couch.repositorios;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.TextoJson;
-
-import br.dominioL.sisPro.modelo.Cliente;
+import br.dominioL.sisPro.dominio.entidades.Cliente;
 
 public final class RepositorioDeClientes extends RepositorioCouch<Cliente> {
 	private static RepositorioDeClientes INSTANCIA;

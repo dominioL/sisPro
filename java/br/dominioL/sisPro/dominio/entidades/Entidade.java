@@ -1,7 +1,10 @@
-package br.dominioL.sisPro.modelo;
+package br.dominioL.sisPro.dominio.entidades;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.sisPro.dominio.entidades.interfaces.MapeavelParaOCouch;
+import br.dominioL.sisPro.dominio.entidades.interfaces.RepresentavelComoJson;
+import br.dominioL.sisPro.dominio.entidades.interfaces.Validavel;
 
 public abstract class Entidade<T extends Entidade<T>> implements MapeavelParaOCouch<T>, RepresentavelComoJson, Validavel {
 	protected ObjetoJson dados;

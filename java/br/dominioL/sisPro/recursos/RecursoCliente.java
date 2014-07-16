@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import br.dominioL.conexaoH.CodigoDeEstado;
 import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.conexaoH.TiposDeMidia;
-import br.dominioL.sisPro.interno.Arquivo;
+import br.dominioL.sisPro.dominio.interno.Arquivo;
 
 @Path("/cliente/{identificador}")
 public final class RecursoCliente extends Recurso {

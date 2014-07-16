@@ -8,6 +8,7 @@ import br.dominioL.conexaoH.ConstrutorDeUri;
 import br.dominioL.conexaoH.Metodo;
 import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.sisPro.dados.BancoDeDados;
+import br.dominioL.sisPro.dados.couch.repositorios.RepositorioDeClientes;
 
 public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch> {
 	private static Couch INSTANCIA;
