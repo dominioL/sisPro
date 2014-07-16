@@ -1227,9 +1227,6 @@
 		},
 
 		extrair: function (suplementoDom) {
-			if (!Linda.instanciaDe(suplementoDom, contexto.Notificavel)) {
-				return suplementoDom;
-			}
 			return suplementoDom.elementoDom;
 		},
 
@@ -1250,13 +1247,13 @@
 
 	var ListaDom = Classe.criar({
 		inicializar: function (elementosDom) {
-			this.elementosDom = elementosDom;
 			this.elementoDom = elementosDom;
 		},
 
 		paraCada: function (tratador, escopo) {
-			for (var indice = 0; indice < this.elementosDom.length; indice++) {
-				tratador.chamarComEscopo(escopo, Dom.encapsular(Dom.extrair(this).item(indice), indice));
+			var tamanho = Dom.extrair(this).length;
+			for (var indice = 0; indice < tamanho; indice++) {
+				tratador.chamarComEscopo(escopo, Dom.encapsular(Dom.extrair(this).item(indice)), indice);
 			}
 		}
 	});
@@ -1375,6 +1372,7 @@
 	var Dom = contexto.Dom;
 	var Classe = contexto.Classe;
 	var Tecla = contexto.Tecla;
+	var Linda = contexto.Linda;
 
 	var Notificavel = Classe.criar({
 		inicializar: function (elementoDom) {
@@ -1953,7 +1951,7 @@
 		},
 
 		aceitaQualquer: function () {
-			this.aceita(TipoDeReposta.QUALQUER, TipoDeMidia.QUALQUER.comoTexto(), this.decodificarResposta);
+			this.aceita(TipoDeResposta.QUALQUER, TipoDeMidia.QUALQUER.comoTexto(), this.decodificarResposta);
 			return this;
 		},
 
@@ -2209,7 +2207,7 @@
 		privadoFornecerDescritorDePropriedade: Linda.propriedadesDeAtributos,
 		definirPropriedade: Linda.propriedadesDeAtributos,
 		definirPropriedades: Linda.propriedadesDeAtributos,
-		// removerPropriedade: Linda.propriedadesDeAtributos,
+		removerPropriedade: Linda.propriedadesDeAtributosGravaveisConfiguraveis,
 		privadoDefinirPropriedade: Linda.propriedadesDeAtributos,
 		fundir: Linda.propriedadesDeAtributos,
 		observar: Linda.propriedadesDeAtributos,
@@ -2238,7 +2236,9 @@
 		embaralhar: Linda.propriedadesDeAtributos,
 		fornecerIndice: Linda.propriedadesDeAtributos,
 		fundir: Linda.propriedadesDeAtributos,
+		juntarEmTexto: Linda.propriedadesDeAtributos,
 		limpar: Linda.propriedadesDeAtributos,
+		ordenar: Linda.propriedadesDeAtributos,
 		paraCada: Linda.propriedadesDeAtributos,
 		quantidadeMenorQue: Linda.propriedadesDeAtributos,
 		quantidadeMenorIgualQue: Linda.propriedadesDeAtributos,
@@ -2259,8 +2259,10 @@
 		combinar: Linda.propriedadesDeAtributos,
 		emBranco: Linda.propriedadesDeAtributos,
 		formatarNumero: Linda.propriedadesDeAtributos,
-		paraInteiro: Linda.propriedadesDeAtributos,
+		paraCaixaAlta: Linda.propriedadesDeAtributos,
+		paraCaixaBaixa: Linda.propriedadesDeAtributos,
 		paraFlutuante: Linda.propriedadesDeAtributos,
+		paraInteiro: Linda.propriedadesDeAtributos,
 		separar: Linda.propriedadesDeAtributos,
 		substituir: Linda.propriedadesDeAtributos,
 		substituirTodos: Linda.propriedadesDeAtributos

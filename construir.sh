@@ -4,7 +4,6 @@ projeto=SisPro
 pacoteDoProjeto=sisPro
 pacoteGeral=br.dominioL
 
-class=class
 css=css
 html=html
 jar=jar
@@ -15,6 +14,7 @@ sh=sh
 txt=txt
 construcao=construcao
 
+class=${construcao}/class
 contrucaoCompilacao=${construcao}/compilacao.txt
 
 limpar() {
@@ -23,8 +23,8 @@ limpar() {
 }
 
 criarEstrutura() {
+	limpar
 	echo ":criarEstrutura"
-	mkdir -p ${class}
 	mkdir -p ${css}
 	mkdir -p ${html}
 	mkdir -p ${jar}
@@ -34,10 +34,11 @@ criarEstrutura() {
 	mkdir -p ${sh}
 	mkdir -p ${txt}
 	mkdir -p ${construcao}
+
+	mkdir -p ${class}
 }
 
 atualizarBibliotecas() {
-	limpar
 	criarEstrutura
 	echo ":atualizarBibliotecas"
 	cp -f ~/projetos/estilos/construcao/limpo.css ${css}
@@ -50,8 +51,7 @@ atualizarBibliotecas() {
 }
 
 jarjar() {
-	limpar
-	criarEstrutura
+	atualizarBibliotecas
 	echo ":jarjar"
 	# java -jar ${jar}/jarjar.jar find class ${jar}/groovy.jar ${jar}/asm4.jar
 	# java -jar ${jar}/jarjar.jar find jar ${jar}/groovy.jar ${jar}/asm4.jar
@@ -66,8 +66,7 @@ jarjar() {
 }
 
 compilar() {
-	limpar
-	criarEstrutura
+	atualizarBibliotecas
 	echo ":compilar"
 	touch ${contrucaoCompilacao}
 	arquivosJava=$(find ${java} -name *.java)
