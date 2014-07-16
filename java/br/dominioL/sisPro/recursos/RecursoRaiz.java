@@ -6,9 +6,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-import br.dominioL.conexaoH.CodigoDeEstado;
-import br.dominioL.conexaoH.TipoDeMidia;
-import br.dominioL.conexaoH.TiposDeMidia;
+import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
+import br.dominioL.sisPro.dominio.http.TipoDeMidia;
+import br.dominioL.sisPro.dominio.http.TiposDeMidia;
 
 @Path("/")
 public final class RecursoRaiz extends Recurso {

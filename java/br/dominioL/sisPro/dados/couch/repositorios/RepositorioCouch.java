@@ -1,7 +1,7 @@
 package br.dominioL.sisPro.dados.couch.repositorios;
 
-import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.IdentificadorJson;
+import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.TextoJson;
 import br.dominioL.estruturados.json.ValorJson;

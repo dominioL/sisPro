@@ -7,11 +7,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import br.dominioL.conexaoH.CodigoDeEstado;
-import br.dominioL.conexaoH.TipoDeMidia;
-import br.dominioL.conexaoH.TiposDeMidia;
 import br.dominioL.sisPro.dominio.Criador;
 import br.dominioL.sisPro.dominio.entidades.Cliente;
+import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
+import br.dominioL.sisPro.dominio.http.TipoDeMidia;
+import br.dominioL.sisPro.dominio.http.TiposDeMidia;
 import br.dominioL.sisPro.dominio.interno.Arquivo;
 
 @Path("/clientes")

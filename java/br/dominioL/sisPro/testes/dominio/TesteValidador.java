@@ -1,12 +1,12 @@
 package br.dominioL.sisPro.testes.dominio;
 
-import br.dominioL.estruturados.json.Json;
-import br.dominioL.estruturados.json.ObjetoJson;
-import br.dominioL.sisPro.dominio.Validador;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import br.dominioL.estruturados.json.Json;
+import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.sisPro.dominio.Validador;
 
 public final class TesteValidador {
 	private ObjetoJson pessoa;

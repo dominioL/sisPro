@@ -8,12 +8,12 @@ import static org.hamcrest.Matchers.startsWith;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.dominioL.conexaoH.Atributo;
-import br.dominioL.conexaoH.CodigoDeEstado;
-import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.sisPro.SisPro;
+import br.dominioL.sisPro.dominio.http.Atributo;
+import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
+import br.dominioL.sisPro.dominio.http.TipoDeMidia;
 
 public class TesteClientes {
 	private ObjetoJson cliente;

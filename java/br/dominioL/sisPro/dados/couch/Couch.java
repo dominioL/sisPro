@@ -4,11 +4,11 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
-import br.dominioL.conexaoH.ConstrutorDeUri;
-import br.dominioL.conexaoH.Metodo;
-import br.dominioL.conexaoH.TipoDeMidia;
 import br.dominioL.sisPro.dados.BancoDeDados;
 import br.dominioL.sisPro.dados.couch.repositorios.RepositorioDeClientes;
+import br.dominioL.sisPro.dominio.http.ConstrutorDeUri;
+import br.dominioL.sisPro.dominio.http.Metodo;
+import br.dominioL.sisPro.dominio.http.TipoDeMidia;
 
 public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch> {
 	private static Couch INSTANCIA;

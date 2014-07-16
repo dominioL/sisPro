@@ -44,7 +44,6 @@ atualizarBibliotecas() {
 	cp -f ~/projetos/estilos/construcao/limpo.css ${css}
 	cp -f ~/projetos/verificaJs/construcao/verifica.css ${css}
 	cp -f ~/projetos/estruturados/construcao/estruturados.jar ${jar}
-	cp -f ~/projetos/conexaoH/construcao/conexaoH.jar ${jar}
 	cp -f ~/projetos/lindaJs/construcao/linda.js ${js}
 	cp -f ~/projetos/verificaJs/construcao/verifica.js ${js}
 	cp -f ~/projetos/verificaJs/construcao/jsHint.js ${js}

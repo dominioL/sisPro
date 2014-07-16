@@ -1,5 +1,8 @@
 package br.dominioL.sisPro.dominio;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import br.dominioL.estruturados.colecao.lista.ListaEncadeada;
 import br.dominioL.estruturados.excecoes.ExcecaoJsonDeTipo;
 import br.dominioL.estruturados.json.IdentificadorJson;
@@ -9,9 +12,6 @@ import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.estruturados.mapa.Par;
 import br.dominioL.sisPro.dominio.entidades.Entidade;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class Validador {
 	public static final String NOME = "^(\\p{L}{1,32}( \\p{L}{1,32})?){1,8}$";

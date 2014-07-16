@@ -1,8 +1,8 @@
 package br.dominioL.sisPro.dados.couch;
 
-import br.dominioL.conexaoH.ConstrutorDeUri;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.sisPro.dominio.http.ConstrutorDeUri;
 
 public final class RequisicaoCouch {
 	private static final String DESIGN = "_design";
