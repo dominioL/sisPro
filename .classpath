@@ -45,5 +45,5 @@
 	<classpathentry kind="lib" path="jar/groovyXml.jar"/>
 	<classpathentry kind="lib" path="jar/jUnit.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="output" path="class"/>
+	<classpathentry kind="output" path="construcao/class"/>
 </classpath>
