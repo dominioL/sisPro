@@ -41,7 +41,7 @@ criarEstrutura() {
 atualizarBibliotecas() {
 	criarEstrutura
 	echo ":atualizarBibliotecas"
-	cp -f ~/projetos/estilos/construcao/limpo.css ${css}
+	#cp -f ~/projetos/estilos/construcao/limpo.css ${css}
 	cp -f ~/projetos/verificaJs/construcao/verifica.css ${css}
 	cp -f ~/projetos/estruturados/construcao/estruturados.jar ${jar}
 	cp -f ~/projetos/lindaJs/construcao/linda.js ${js}
