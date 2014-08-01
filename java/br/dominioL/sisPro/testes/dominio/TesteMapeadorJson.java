@@ -101,8 +101,8 @@ public class TesteMapeadorJson {
 	}
 
 	@Test
-	public void renomearCampoMapeadoExistente() {
-		mapeador.comCampo("id").renomearCampo("id", "identificador");
+	public void renomearCampoMapeadoExistenteIgnorandoNaoMapeados() {
+		mapeador.comCampo("id").renomearCampo("id", "identificador").ignorarCamposNaoMapeados();
 		assertThat(mapeador.mapear(comId), is(equalTo(comIdentificador)));
 	}
 
@@ -118,11 +118,6 @@ public class TesteMapeadorJson {
 		assertThat(mapeador.mapear(comId), is(equalTo(comIdentificador)));
 	}
 
-	@Test(expected = ExcecaoDeMapeamentoComCampoInexistente.class)
-	public void renomearCampoMapeadoInexistente() {
-		mapeador.comCampo("id").renomearCampo("id", "identificador").mapear(vazio);
-	}
-
 	@Test
 	public void renomearCampoOpcionalMapeadoExistente() {
 		mapeador.comCampoOpcional("id").renomearCampo("id", "identificador");
@@ -135,34 +130,9 @@ public class TesteMapeadorJson {
 		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
 	}
 
-	@Test(expected = ExcecaoDeRenomeacaoDeCampoNaoMapeado.class)
-	public void renomearCampoNaoMapeadoExistente() {
-		mapeador.renomearCampo("id", "identificador").mapear(comId);
-	}
-
-	@Test(expected = ExcecaoDeRenomeacaoDeCampoNaoMapeado.class)
-	public void renomearCampoNaoMapeadoInexistente() {
-		mapeador.renomearCampo("id", "identificador").mapear(vazio);
-	}
-
-	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
-	public void renomearCampoMapeadoExistenteParaCampoMapeadoExistente() {
-		mapeador.comCampo("id").comCampo("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
-	}
-
-	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
-	public void renomearCampoMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
-		mapeador.comCampo("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
-	}
-
-	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
-	public void renomearCampoMapeadoExistenteParaCampoOpcionalMapeadoInexistente() {
-		mapeador.comCampo("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comId);
-	}
-
 	@Test
-	public void renomearCampoMapeadoExistenteParaCampoNaoMapeadoExistente() {
-		mapeador.comCampo("id").renomearCampo("id", "identificador");
+	public void renomearCampoMapeadoExistenteParaCampoNaoMapeadoExistenteIgnorandoNaoMapeados() {
+		mapeador.comCampo("id").renomearCampo("id", "identificador").ignorarCamposNaoMapeados();
 		assertThat(mapeador.mapear(comIdComIdentificador), is(equalTo(comIdentificador)));
 	}
 
@@ -177,14 +147,67 @@ public class TesteMapeadorJson {
 		mapeador.comCampo("id").renomearCampo("id", "identificador").impedirCamposNaoMapeados();
 		assertThat(mapeador.mapear(comIdComIdentificador), is(equalTo(comIdentificador)));
 	}
+	
+	@Test
+	public void renomearOpcionalCampoMapeadoExistenteParaCampoNaoMapeadoExistenteIgnorandoNaoMapeados() {
+		mapeador.comCampoOpcional("id").renomearCampo("id", "identificador").ignorarCamposNaoMapeados();
+		assertThat(mapeador.mapear(comIdComIdentificador), is(equalTo(comIdentificador)));
+	}
 
-	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaRenomeadoComMesmoNome.class)
-	public void renomearCampoParaCampoJaRenomeadoComMesmoNome() {
-		mapeador.comCampo("id").comCampo("identificador").renomearCampo("id", "chave").renomearCampo("identificador", "chave").mapear(comIdComIdentificador);
+	@Test
+	public void renomearCampoOpcionalMapeadoExistenteParaCampoNaoMapeadoExistenteIncluindoNaoMapeados() {
+		mapeador.comCampoOpcional("id").renomearCampo("id", "identificador").incluirCamposNaoMapeados();
+		assertThat(mapeador.mapear(comIdComIdentificador), is(equalTo(comIdentificador)));
+	}
+
+	@Test
+	public void renomearampoOpcionalCMapeadoExistenteParaCampoNaoMapeadoExistenteImpedindoNaoMapeados() {
+		mapeador.comCampoOpcional("id").renomearCampo("id", "identificador").impedirCamposNaoMapeados();
+		assertThat(mapeador.mapear(comIdComIdentificador), is(equalTo(comIdentificador)));
+	}
+
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoNaoMapeado.class)
+	public void renomearCampoNaoMapeadoExistente() {
+		mapeador.renomearCampo("id", "identificador").mapear(comId);
+	}
+
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoNaoMapeado.class)
+	public void renomearCampoNaoMapeadoInexistente() {
+		mapeador.renomearCampo("id", "identificador").mapear(vazio);
 	}
 
 	@Test(expected = ExcecaoDeRenomeacaoDeCampoNaoMapeado.class)
 	public void renomearCampoRenomeadoNaoMapeado() {
 		mapeador.comCampo("id").renomearCampo("id", "identificador").renomearCampo("identificador", "chave").mapear(comId);
+	}
+
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
+	public void renomearCampoMapeadoExistenteParaCampoMapeadoExistente() {
+		mapeador.comCampo("id").comCampo("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
+	}
+	
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
+	public void renomearCampoOpcionalMapeadoExistenteParaCampoMapeadoExistente() {
+		mapeador.comCampoOpcional("id").comCampo("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
+	}
+
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
+	public void renomearCampoMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
+		mapeador.comCampo("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
+	}
+	
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
+	public void renomearCampoOpcionalMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
+		mapeador.comCampoOpcional("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
+	}
+
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaMapeado.class)
+	public void renomearCampoMapeadoExistenteParaCampoOpcionalMapeadoInexistente() {
+		mapeador.comCampo("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comId);
+	}
+
+	@Test(expected = ExcecaoDeRenomeacaoDeCampoParaCampoJaRenomeadoComMesmoNome.class)
+	public void renomearCampoParaCampoJaRenomeadoComMesmoNome() {
+		mapeador.comCampo("id").comCampo("identificador").renomearCampo("id", "chave").renomearCampo("identificador", "chave").mapear(comIdComIdentificador);
 	}
 }

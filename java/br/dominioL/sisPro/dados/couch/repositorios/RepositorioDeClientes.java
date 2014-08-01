@@ -19,26 +19,6 @@ public final class RepositorioDeClientes extends RepositorioCouch<Cliente> {
 		return Json.criarTexto(TIPO);
 	}
 
-//	public Mapeador fornecerMapeadorDeDocumentoParaEntidade() {
-//		return Mapeador.criar()
-//			.renomearCampoPara("id", "identificador")
-//			.renomearCampoPara("rev", "revisao")
-//			.someneteComOsCampos("nome", "identificador", "revisao")
-//			.comTodosOsCamposMenos("ok")
-//			.adicioanarCampo("uri", "/clientes")
-//			.mapear(documento);
-//	}
-//
-//	public MapeadorDeEntidadeParaDocumento fornecerMapeadorDeEntidadeParaDocumento() {
-//		return Mapeador.criar()
-//			.renomearCampoPara("identificador", "id")
-//			.renomearCampoPara("revisao", "rev")
-//			.someneteComOsCampos("nome", "identificador", "revisao")
-//			.comTodosOsCamposMenos("ok")
-//			.adicioanarCampo("tipo", "cliente")
-//			.mapear(documento);
-//	}
-
 	@Override
 	public void popular() {}
 }

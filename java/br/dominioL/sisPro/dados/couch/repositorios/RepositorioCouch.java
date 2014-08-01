@@ -20,8 +20,7 @@ public abstract class RepositorioCouch<T extends Entidade<T>> {
 	public final RespostaCouch inserir(T entidade) {
 		ObjetoJson documento = entidade.comoJson();
 		adicionarTipoDoCouch(documento);
-		RequisicaoCouch requisicao = RequisicaoCouch.criar()
-			.comDocumento(documento);
+		RequisicaoCouch requisicao = RequisicaoCouch.criar().comDocumento(documento);
 		RespostaCouch resposta = Couch.fornecerInstancia().inserir(requisicao);
 		return ajustarResposta(resposta);
 	}
@@ -29,23 +28,19 @@ public abstract class RepositorioCouch<T extends Entidade<T>> {
 	public final RespostaCouch colocar(T entidade) {
 		ObjetoJson documento = entidade.comoJson();
 		ValorJson identificador = adicionarAtributosDoCouch(documento);
-		RequisicaoCouch requisicao = RequisicaoCouch.criar()
-			.comDocumento(documento)
-			.comIdentificador(identificador.comoTexto());
+		RequisicaoCouch requisicao = RequisicaoCouch.criar().comDocumento(documento).comIdentificador(identificador.comoTexto());
 		RespostaCouch resposta = Couch.fornecerInstancia().colocar(requisicao);
 		return ajustarResposta(resposta);
 	}
 
 	public final RespostaCouch obter(String identificador) {
-		RequisicaoCouch requisicao = RequisicaoCouch.criar()
-			.comIdentificador(identificador);
+		RequisicaoCouch requisicao = RequisicaoCouch.criar().comIdentificador(identificador);
 		RespostaCouch resposta = Couch.fornecerInstancia().obter(requisicao);
 		return ajustarResposta(resposta);
 	}
 
 	public final RespostaCouch remover(String identificador) {
-		RequisicaoCouch requisicao = RequisicaoCouch.criar()
-			.comIdentificador(identificador);
+		RequisicaoCouch requisicao = RequisicaoCouch.criar().comIdentificador(identificador);
 		RespostaCouch resposta = Couch.fornecerInstancia().remover(requisicao);
 		return ajustarResposta(resposta);
 	}
@@ -90,10 +85,6 @@ public abstract class RepositorioCouch<T extends Entidade<T>> {
 	}
 
 	public abstract TextoJson fornecerTipo();
-
-//	public abstract Mapeador fornecerMapeadorParaCouch();
-//
-//	public abstract Mapeador fornecerMapeadorParaEntidade();
 
 	public abstract void popular();
 }
