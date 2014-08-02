@@ -12,12 +12,15 @@ import org.junit.Test;
 import br.dominioL.estruturados.json.ConstrutorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
+import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoNaoMapeado;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoJaManipuladoComMesmoNome;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoMapeado;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeMapeamentoComCampoImpedido;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeMapeamentoComCampoInexistente;
+import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado;
 import br.dominioL.sisPro.mapeadores.json.objeto.MapeadorObjetoJson;
+import br.dominioL.sisPro.mapeadores.json.transformacao.TransformadorJson;
 
 public class TesteMapeadorJson {
 	private ObjetoJson vazio;
@@ -33,6 +36,8 @@ public class TesteMapeadorJson {
 	private ObjetoJson comSegundaRevComRevisao;
 	private ObjetoJson comSegundaRevComSegundaRevisao;
 	private ObjetoJson comRev;
+	private ObjetoJson comUri;
+	private ObjetoJson comIdentificadorComUri;
 
 	@Before
 	public void cirarFiguracao() {
@@ -48,6 +53,8 @@ public class TesteMapeadorJson {
 		comSegundaRevComRevisao = ConstrutorJson.deObjeto().inserir("rev", 2).inserir("revisao", 1).construir();
 		comSegundaRevComSegundaRevisao = ConstrutorJson.deObjeto().inserir("rev", 2).inserir("revisao", 2).construir();
 		comRev = ConstrutorJson.deObjeto().inserir("rev", 1).construir();
+		comUri = ConstrutorJson.deObjeto().inserir("uri", "/cliente/1").construir();
+		comIdentificadorComUri = ConstrutorJson.deObjeto().inserir("identificador", 1).inserir("uri", "/cliente/1").construir();
 		mapeador = MapeadorObjetoJson.criar();
 	}
 
@@ -422,7 +429,7 @@ public class TesteMapeadorJson {
 		mapeador.comCampoOpcional("revisao").renomearCampo("revisao", "rev").adicionarCampo("rev", Json.criarNumero(1));
 		assertThat(mapeador.mapear(vazio), is(equalTo(comRev)));
 	}
-	
+
 	@Test
 	public void adicionarCampoOpcionalMapeadoExistenteClonado() {
 		mapeador.comCampoOpcional("revisao").clonarCampo("revisao", "rev").adicionarCampo("revisao", Json.criarNumero(1));
@@ -445,5 +452,114 @@ public class TesteMapeadorJson {
 	public void adicionarCampoComMesmoNomeDeCampoOpcionalMapeadoInexistenteClonado() {
 		mapeador.comCampoOpcional("revisao").clonarCampo("revisao", "rev").adicionarCampo("rev", Json.criarNumero(1));
 		assertThat(mapeador.mapear(vazio), is(equalTo(comRev)));
+	}
+
+	@Test
+	public void transformarCampoMapeadoExistente() {
+		mapeador.comCampo("revisao").transformarCampo("revisao", new TransformadorJson() {
+			@Override
+			public ValorJson transformar(ValorJson valor) {
+				return Json.criarNumero(2);
+			}
+		});
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comSegundaRevisao)));
+	}
+
+	@Test
+	public void transformarCampoMapeadoExistentePorValor() {
+		mapeador.comCampo("revisao").transformarCampo("revisao", Json.criarNumero(2));
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comSegundaRevisao)));
+	}
+
+	@Test
+	public void transformarCampoOpcionalMapeadoInexistente() {
+		mapeador.comCampoOpcional("revisao").transformarCampo("revisao", new TransformadorJson() {
+			@Override
+			public ValorJson transformar(ValorJson valor) {
+				return Json.criarNumero(2);
+			}
+		});
+		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
+	}
+
+	@Test
+	public void transformarCampoOpcionalMapeadoInexistentePorValor() {
+		mapeador.comCampoOpcional("revisao").transformarCampo("revisao", Json.criarNumero(2));
+		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
+	}
+
+	@Test(expected = ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado.class)
+	public void transformarCampoNaoMapeadoExistenteIgnorandoCamposNaoMapeados() {
+		mapeador.transformarCampo("revisao", new TransformadorJson() {
+			@Override
+			public ValorJson transformar(ValorJson valor) {
+				return Json.criarNumero(2);
+			}
+		}).ignorarCamposNaoMapeados().mapear(vazio);
+	}
+
+	@Test(expected = ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado.class)
+	public void transformarCampoNaoMapeadoExistenteIgnorandoCamposNaoMapeadosPorValor() {
+		mapeador.transformarCampo("revisao", Json.criarNumero(2)).ignorarCamposNaoMapeados().mapear(comRevisao);
+	}
+
+	@Test(expected = ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado.class)
+	public void transformarCampoNaoMapeadoExistenteIncluindoCamposNaoMapeados() {
+		mapeador.transformarCampo("revisao", new TransformadorJson() {
+			@Override
+			public ValorJson transformar(ValorJson valor) {
+				return Json.criarNumero(2);
+			}
+		}).incluirCamposNaoMapeados().mapear(comRevisao);
+	}
+
+	@Test(expected = ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado.class)
+	public void transformarCampoNaoMapeadoExistenteIncluindoCamposNaoMapeadosPorValor() {
+		mapeador.transformarCampo("revisao", Json.criarNumero(2)).incluirCamposNaoMapeados().mapear(comRevisao);
+	}
+
+	@Test(expected = ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado.class)
+	public void transformarCampoNaoMapeadoExistenteImpedindoCamposNaoMapeados() {
+		mapeador.transformarCampo("revisao", new TransformadorJson() {
+			@Override
+			public ValorJson transformar(ValorJson valor) {
+				return Json.criarNumero(2);
+			}
+		}).impedirCamposNaoMapeados().mapear(vazio);
+	}
+
+	@Test(expected = ExcecaoDeTransformacaoDeCampoNaoMapeadoOuNaoManipulado.class)
+	public void transformarCampoNaoMapeadoExistenteImpedindoCamposNaoMapeadosPorValor() {
+		mapeador.transformarCampo("revisao", Json.criarNumero(2)).impedirCamposNaoMapeados().mapear(comRevisao);
+	}
+
+	@Test
+	public void transformarCampoRenomeadoExistente() {
+		mapeador.comCampo("identificador").renomearCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comUri)));
+	}
+
+	@Test
+	public void transformarCampoRenomeadoInexistente() {
+		mapeador.comCampoOpcional("identificador").renomearCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
+		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
+	}
+	
+	@Test
+	public void transformarCampoClonadoExistente() {
+		mapeador.comCampo("identificador").clonarCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificadorComUri)));
+	}
+
+	@Test
+	public void transformarCampoClonadoInexistente() {
+		mapeador.comCampoOpcional("identificador").clonarCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
+		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
+	}
+	
+	@Test
+	public void transformarCampoAdicionado() {
+		mapeador.comCampo("identificador").adicionarCampo("uri", Json.criarTexto("/cliente/2")).transformarCampo("uri", Json.criarTexto("/cliente/1"));
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificadorComUri)));
 	}
 }

@@ -1,4 +1,4 @@
-package br.dominioL.sisPro.mapeadores.json.objeto;
+package br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento;
 
 import br.dominioL.estruturados.elemento.Booleano;
 import br.dominioL.estruturados.elemento.Texto;
@@ -6,7 +6,6 @@ import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.estruturados.mapa.Mapa;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoMapeado;
-import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoAbstrata;
 
 public class RegraDeMapeamentoDeAdicao extends RegraDeMapeamentoAbstrata {
 	private String nome;
