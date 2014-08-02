@@ -8,13 +8,13 @@ import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.estruturados.mapa.Mapa;
 import br.dominioL.estruturados.mapa.MapaLista;
-import br.dominioL.sisPro.mapeadores.json.Mapeador;
-import br.dominioL.sisPro.mapeadores.json.MapeadorAdicionarCampos;
-import br.dominioL.sisPro.mapeadores.json.MapeadorCamposNaoMapeados;
-import br.dominioL.sisPro.mapeadores.json.MapeadorClonarCampos;
-import br.dominioL.sisPro.mapeadores.json.MapeadorRenomearCampos;
-import br.dominioL.sisPro.mapeadores.json.MapeadorTransformarCampos;
-import br.dominioL.sisPro.mapeadores.json.TransformadorDeMapeamento;
+import br.dominioL.sisPro.mapeadores.json.MapeadorJson;
+import br.dominioL.sisPro.mapeadores.json.MapeadorJsonAdicionarCampos;
+import br.dominioL.sisPro.mapeadores.json.MapeadorJsonCamposNaoMapeados;
+import br.dominioL.sisPro.mapeadores.json.MapeadorJsonClonarCampos;
+import br.dominioL.sisPro.mapeadores.json.MapeadorJsonRenomearCampos;
+import br.dominioL.sisPro.mapeadores.json.MapeadorJsonTransformarCampos;
+import br.dominioL.sisPro.mapeadores.json.TransformadorDeMapeamentoJson;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamento;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeClonagem;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeInclusao;
@@ -25,7 +25,7 @@ import br.dominioL.sisPro.mapeadores.json.objeto.tratadoresDeNaoMapeamento.Trata
 import br.dominioL.sisPro.mapeadores.json.objeto.tratadoresDeNaoMapeamento.TratadorDeNaoMapeadosQueImpede;
 import br.dominioL.sisPro.mapeadores.json.objeto.tratadoresDeNaoMapeamento.TratadorDeNaoMapeadosQueInclui;
 
-public final class MapeadorObjetoJson implements Mapeador<ObjetoJson> {
+public final class MapeadorObjetoJson implements MapeadorJson<ObjetoJson> {
 	public static MapeadorObjetoJson criar() {
 		return new MapeadorObjetoJson();
 	}
@@ -41,81 +41,81 @@ public final class MapeadorObjetoJson implements Mapeador<ObjetoJson> {
 	}
 
 	@Override
-	public Mapeador<ObjetoJson> comCampo(String nome) {
+	public MapeadorJson<ObjetoJson> comCampo(String nome) {
 		campos.inserir(Texto.comValor(nome), Booleano.falso());
 		regras.inserirNoFim(new RegraDeMapeamentoDeInclusao(nome));
 		return this;
 	}
 
 	@Override
-	public Mapeador<ObjetoJson> comCampoOpcional(String nome) {
+	public MapeadorJson<ObjetoJson> comCampoOpcional(String nome) {
 		campos.inserir(Texto.comValor(nome), Booleano.verdadeiro());
 		regras.inserirNoFim(new RegraDeMapeamentoDeInclusaoOpcional(nome));
 		return this;
 	}
 
 	@Override
-	public Mapeador<ObjetoJson> comCampoColecao(String nome, Mapeador<ObjetoJson> mapeador) {
+	public MapeadorJson<ObjetoJson> comCampoColecao(String nome, MapeadorJson<ObjetoJson> mapeador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Mapeador<ObjetoJson> comCampoColecaoOpcional(String nome, Mapeador<ObjetoJson> mapeador) {
+	public MapeadorJson<ObjetoJson> comCampoColecaoOpcional(String nome, MapeadorJson<ObjetoJson> mapeador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Mapeador<ObjetoJson> comCampoElemento(String nome, Mapeador<ObjetoJson> mapeador) {
+	public MapeadorJson<ObjetoJson> comCampoElemento(String nome, MapeadorJson<ObjetoJson> mapeador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Mapeador<ObjetoJson> comCampoElementoOpcional(String nome, Mapeador<ObjetoJson> mapeador) {
+	public MapeadorJson<ObjetoJson> comCampoElementoOpcional(String nome, MapeadorJson<ObjetoJson> mapeador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MapeadorRenomearCampos<ObjetoJson> renomearCampo(String nome, String novoNome) {
+	public MapeadorJsonRenomearCampos<ObjetoJson> renomearCampo(String nome, String novoNome) {
 		regras.inserirNoFim(new RegraDeMapeamentoDeRenomeacao(nome, novoNome, campos));
 		return this;
 	}
 
 	@Override
-	public MapeadorClonarCampos<ObjetoJson> clonarCampo(String nome, String nomeDoClone) {
+	public MapeadorJsonClonarCampos<ObjetoJson> clonarCampo(String nome, String nomeDoClone) {
 		regras.inserirNoFim(new RegraDeMapeamentoDeClonagem(nome, nomeDoClone, campos));
 		return this;
 	}
 
 	@Override
-	public MapeadorAdicionarCampos<ObjetoJson> adicionarCampo(String nome, ValorJson valor) {
+	public MapeadorJsonAdicionarCampos<ObjetoJson> adicionarCampo(String nome, ValorJson valor) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MapeadorTransformarCampos<ObjetoJson> transformarCampo(String nome, TransformadorDeMapeamento<ObjetoJson> transformador) {
+	public MapeadorJsonTransformarCampos<ObjetoJson> transformarCampo(String nome, TransformadorDeMapeamentoJson<ObjetoJson> transformador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MapeadorCamposNaoMapeados<ObjetoJson> ignorarCamposNaoMapeados() {
+	public MapeadorJsonCamposNaoMapeados<ObjetoJson> ignorarCamposNaoMapeados() {
 		this.tratadorDeNaoMapeados = new TratadorDeNaoMapeadosQueIgnora();
 		return this;
 	}
 
 	@Override
-	public MapeadorCamposNaoMapeados<ObjetoJson> incluirCamposNaoMapeados() {
+	public MapeadorJsonCamposNaoMapeados<ObjetoJson> incluirCamposNaoMapeados() {
 		this.tratadorDeNaoMapeados = new TratadorDeNaoMapeadosQueInclui(campos);
 		return this;
 	}
 
 	@Override
-	public MapeadorCamposNaoMapeados<ObjetoJson> impedirCamposNaoMapeados() {
+	public MapeadorJsonCamposNaoMapeados<ObjetoJson> impedirCamposNaoMapeados() {
 		this.tratadorDeNaoMapeados = new TratadorDeNaoMapeadosQueImpede(campos);
 		return this;
 	}

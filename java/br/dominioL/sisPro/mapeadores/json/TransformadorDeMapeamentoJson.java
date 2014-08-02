@@ -1,5 +1,5 @@
 package br.dominioL.sisPro.mapeadores.json;
 
-public interface TransformadorDeMapeamento<T> {
+public interface TransformadorDeMapeamentoJson<T> {
 	public T transformar(T valor);
 }
