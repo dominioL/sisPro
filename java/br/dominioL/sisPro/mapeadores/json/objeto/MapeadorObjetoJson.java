@@ -42,14 +42,14 @@ public final class MapeadorObjetoJson implements MapeadorJson<ObjetoJson> {
 
 	@Override
 	public MapeadorJson<ObjetoJson> comCampo(String nome) {
-		campos.inserir(Texto.comValor(nome), Booleano.falso());
+		campos.inserir(Texto.criar(nome), Booleano.criarFalso());
 		regras.inserirNoFim(new RegraDeMapeamentoDeInclusao(nome));
 		return this;
 	}
 
 	@Override
 	public MapeadorJson<ObjetoJson> comCampoOpcional(String nome) {
-		campos.inserir(Texto.comValor(nome), Booleano.verdadeiro());
+		campos.inserir(Texto.criar(nome), Booleano.criarVerdadeiro());
 		regras.inserirNoFim(new RegraDeMapeamentoDeInclusaoOpcional(nome));
 		return this;
 	}
@@ -92,8 +92,8 @@ public final class MapeadorObjetoJson implements MapeadorJson<ObjetoJson> {
 
 	@Override
 	public MapeadorJsonAdicionarCampos<ObjetoJson> adicionarCampo(String nome, ValorJson valor) {
-		// TODO Auto-generated method stub
-		return null;
+		regras.inserirNoFim(new RegraDeMapeamentoDeAdicao(nome, valor, campos));
+		return this;
 	}
 
 	@Override

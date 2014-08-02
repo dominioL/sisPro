@@ -20,6 +20,6 @@ public abstract class TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMape
 	}
 
 	protected Boolean campoNaoFoiMapeado(Par<IdentificadorJson, ValorJson> par) {
-		return !camposMapeados.contem(Texto.comValor(par.fornecerChave().comoTexto()));
+		return !camposMapeados.contem(Texto.criar(par.fornecerChave().comoTexto()));
 	}
 }

@@ -5,7 +5,7 @@ import br.dominioL.estruturados.elemento.Texto;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.estruturados.mapa.Mapa;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoNaoMapeado;
-import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado;
+import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoMapeado;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoJaManipuladoComMesmoNome;
 
 public abstract class RegraDeMapeamentoDeManipulacao extends RegraDeMapeamentoAbstrata {
@@ -21,11 +21,11 @@ public abstract class RegraDeMapeamentoDeManipulacao extends RegraDeMapeamentoAb
 
 	@Override
 	public final void aplicar(ObjetoJson origem, ObjetoJson mapeado) {
-		if (!camposMapeados.contem(Texto.comValor(nomeDoCampo))) {
+		if (!camposMapeados.contem(Texto.criar(nomeDoCampo))) {
 			throw new ExcecaoDeManipulacaoDeCampoNaoMapeado();
 		}
-		if (camposMapeados.contem(Texto.comValor(nomeDoNovoCampo))) {
-			throw new ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado();
+		if (camposMapeados.contem(Texto.criar(nomeDoNovoCampo))) {
+			throw new ExcecaoDeManipulacaoDeCampoParaCampoMapeado();
 		}
 		if (mapeado.contem(nomeDoNovoCampo)) {
 			throw new ExcecaoDeManipulacaoDeCampoParaCampoJaManipuladoComMesmoNome();

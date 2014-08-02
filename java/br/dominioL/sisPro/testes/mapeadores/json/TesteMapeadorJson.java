@@ -14,7 +14,7 @@ import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoNaoMapeado;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoJaManipuladoComMesmoNome;
-import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado;
+import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoMapeado;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeMapeamentoComCampoImpedido;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeMapeamentoComCampoInexistente;
 import br.dominioL.sisPro.mapeadores.json.objeto.MapeadorObjetoJson;
@@ -27,6 +27,12 @@ public class TesteMapeadorJson {
 	private ObjetoJson comIdentificadorComRevisao;
 	private ObjetoJson comIdComIdentificador;
 	private ObjetoJson comIdentificadorComSegundaRevisao;
+	private ObjetoJson comRevisao;
+	private ObjetoJson comSegundaRevisao;
+	private ObjetoJson comRevComSegundaRevisao;
+	private ObjetoJson comSegundaRevComRevisao;
+	private ObjetoJson comSegundaRevComSegundaRevisao;
+	private ObjetoJson comRev;
 
 	@Before
 	public void cirarFiguracao() {
@@ -36,6 +42,12 @@ public class TesteMapeadorJson {
 		comIdentificadorComRevisao = ConstrutorJson.deObjeto().inserir("identificador", 1).inserir("revisao", 1).construir();
 		comIdentificadorComSegundaRevisao = ConstrutorJson.deObjeto().inserir("identificador", 1).inserir("revisao", 2).construir();
 		comIdComIdentificador = ConstrutorJson.deObjeto().inserir("id", 1).inserir("identificador", 2).construir();
+		comRevisao = ConstrutorJson.deObjeto().inserir("revisao", 1).construir();
+		comSegundaRevisao = ConstrutorJson.deObjeto().inserir("revisao", 2).construir();
+		comRevComSegundaRevisao = ConstrutorJson.deObjeto().inserir("rev", 1).inserir("revisao", 2).construir();
+		comSegundaRevComRevisao = ConstrutorJson.deObjeto().inserir("rev", 2).inserir("revisao", 1).construir();
+		comSegundaRevComSegundaRevisao = ConstrutorJson.deObjeto().inserir("rev", 2).inserir("revisao", 2).construir();
+		comRev = ConstrutorJson.deObjeto().inserir("rev", 1).construir();
 		mapeador = MapeadorObjetoJson.criar();
 	}
 
@@ -183,27 +195,27 @@ public class TesteMapeadorJson {
 		mapeador.comCampo("id").renomearCampo("id", "identificador").renomearCampo("identificador", "chave").mapear(comId);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void renomearCampoMapeadoExistenteParaCampoMapeadoExistente() {
 		mapeador.comCampo("id").comCampo("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void renomearCampoOpcionalMapeadoExistenteParaCampoMapeadoExistente() {
 		mapeador.comCampoOpcional("id").comCampo("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void renomearCampoMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
 		mapeador.comCampo("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void renomearCampoOpcionalMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
 		mapeador.comCampoOpcional("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void renomearCampoMapeadoExistenteParaCampoOpcionalMapeadoInexistente() {
 		mapeador.comCampo("id").comCampoOpcional("identificador").renomearCampo("id", "identificador").mapear(comId);
 	}
@@ -299,27 +311,27 @@ public class TesteMapeadorJson {
 		mapeador.comCampo("id").clonarCampo("id", "identificador").clonarCampo("identificador", "chave").mapear(comId);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void clonarCampoMapeadoExistenteParaCampoMapeadoExistente() {
 		mapeador.comCampo("id").comCampo("identificador").clonarCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void clonarCampoOpcionalMapeadoExistenteParaCampoMapeadoExistente() {
 		mapeador.comCampoOpcional("id").comCampo("identificador").clonarCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void clonarCampoMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
 		mapeador.comCampo("id").comCampoOpcional("identificador").clonarCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void clonarCampoOpcionalMapeadoExistenteParaCampoOpcionalMapeadoExistente() {
 		mapeador.comCampoOpcional("id").comCampoOpcional("identificador").clonarCampo("id", "identificador").mapear(comIdComIdentificador);
 	}
 
-	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaMapeado.class)
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
 	public void clonarCampoMapeadoExistenteParaCampoOpcionalMapeadoInexistente() {
 		mapeador.comCampo("id").comCampoOpcional("identificador").clonarCampo("id", "identificador").mapear(comId);
 	}
@@ -332,5 +344,106 @@ public class TesteMapeadorJson {
 	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoJaManipuladoComMesmoNome.class)
 	public void clonarCampoParaCampoJaClonadoComMesmoNome() {
 		mapeador.comCampo("id").comCampo("identificador").clonarCampo("id", "chave").clonarCampo("identificador", "chave").mapear(comIdComIdentificador);
+	}
+
+	@Test
+	public void adicionarCampoNaoMapeadoInexistenteIgnorandoCamposNaoMepeados() {
+		mapeador.comCampo("identificador").adicionarCampo("revisao", Json.criarNumero(1)).ignorarCamposNaoMapeados();
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificadorComRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoNaoMapeadoInexistenteImpedindoCamposNaoMepeados() {
+		mapeador.comCampo("identificador").adicionarCampo("revisao", Json.criarNumero(1)).impedirCamposNaoMapeados();
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificadorComRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoNaoMapeadoInexistenteIncluindoCamposNaoMepeados() {
+		mapeador.comCampo("identificador").adicionarCampo("revisao", Json.criarNumero(1)).incluirCamposNaoMapeados();
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificadorComRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoNaoMapeadoExistenteIgnorandoCamposNaoMapeados() {
+		mapeador.adicionarCampo("revisao", Json.criarNumero(2)).ignorarCamposNaoMapeados();
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comSegundaRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoNaoMapeadoExistenteImpedindoCamposNaoMapeados() {
+		mapeador.adicionarCampo("revisao", Json.criarNumero(2)).impedirCamposNaoMapeados();
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comSegundaRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoNaoMapeadoExistenteIncluindoCamposNaoMapeados() {
+		mapeador.adicionarCampo("revisao", Json.criarNumero(2)).incluirCamposNaoMapeados();
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comSegundaRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoOpcionalMapeadoExistente() {
+		mapeador.comCampoOpcional("revisao").adicionarCampo("revisao", Json.criarNumero(2));
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoOpcionalMapeadoInexistente() {
+		mapeador.comCampoOpcional("revisao").adicionarCampo("revisao", Json.criarNumero(1));
+		assertThat(mapeador.mapear(vazio), is(equalTo(comRevisao)));
+	}
+
+	@Test(expected = ExcecaoDeManipulacaoDeCampoParaCampoMapeado.class)
+	public void adicionarCampoMapeadoExistente() {
+		mapeador.comCampo("revisao").adicionarCampo("revisao", Json.criarNumero(2)).mapear(comRevisao);
+	}
+
+	@Test
+	public void adicionarCampoOpcionalMapeadoExistenteRenomeado() {
+		mapeador.comCampoOpcional("revisao").renomearCampo("revisao", "rev").adicionarCampo("revisao", Json.criarNumero(1));
+		assertThat(mapeador.mapear(comRevComSegundaRevisao), is(equalTo(comSegundaRevComRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoOpcionalMapeadoInexistenteRenomeado() {
+		mapeador.comCampoOpcional("revisao").renomearCampo("revisao", "rev").adicionarCampo("revisao", Json.criarNumero(1));
+		assertThat(mapeador.mapear(vazio), is(equalTo(comRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoComMesmoNomeDeCampoOpcionalMapeadoExistenteRenomeado() {
+		mapeador.comCampoOpcional("revisao").renomearCampo("revisao", "rev").adicionarCampo("rev", Json.criarNumero(2));
+		assertThat(mapeador.mapear(comRevisao), is(equalTo(comRev)));
+	}
+
+	@Test
+	public void adicionarCampoComMesmoNomeDeCampoOpcionalMapeadoInexistenteRenomeado() {
+		mapeador.comCampoOpcional("revisao").renomearCampo("revisao", "rev").adicionarCampo("rev", Json.criarNumero(1));
+		assertThat(mapeador.mapear(vazio), is(equalTo(comRev)));
+	}
+	
+	@Test
+	public void adicionarCampoOpcionalMapeadoExistenteClonado() {
+		mapeador.comCampoOpcional("revisao").clonarCampo("revisao", "rev").adicionarCampo("revisao", Json.criarNumero(1));
+		assertThat(mapeador.mapear(comRevComSegundaRevisao), is(equalTo(comSegundaRevComSegundaRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoOpcionalMapeadoInexistenteClonado() {
+		mapeador.comCampoOpcional("revisao").clonarCampo("revisao", "rev").adicionarCampo("revisao", Json.criarNumero(1));
+		assertThat(mapeador.mapear(vazio), is(equalTo(comRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoComMesmoNomeDeCampoOpcionalMapeadoExistenteClonado() {
+		mapeador.comCampoOpcional("revisao").clonarCampo("revisao", "rev").adicionarCampo("rev", Json.criarNumero(1));
+		assertThat(mapeador.mapear(comSegundaRevisao), is(equalTo(comSegundaRevComSegundaRevisao)));
+	}
+
+	@Test
+	public void adicionarCampoComMesmoNomeDeCampoOpcionalMapeadoInexistenteClonado() {
+		mapeador.comCampoOpcional("revisao").clonarCampo("revisao", "rev").adicionarCampo("rev", Json.criarNumero(1));
+		assertThat(mapeador.mapear(vazio), is(equalTo(comRev)));
 	}
 }
