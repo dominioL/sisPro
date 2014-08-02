@@ -2,7 +2,7 @@ package br.dominioL.sisPro.mapeadores.json.objeto.tratadoresDeNaoMapeamento;
 
 import br.dominioL.estruturados.json.ObjetoJson;
 
-public class TratadorDeNaoMapeadosQueIgnora extends TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMapeados {
+public final class TratadorDeNaoMapeadosQueIgnora extends TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMapeados {
 	public TratadorDeNaoMapeadosQueIgnora() {
 		super(null);
 	}

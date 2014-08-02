@@ -9,7 +9,7 @@ import br.dominioL.estruturados.mapa.Mapa;
 import br.dominioL.estruturados.mapa.Par;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeMapeamentoComCampoImpedido;
 
-public class TratadorDeNaoMapeadosQueImpede extends TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMapeados {
+public final class TratadorDeNaoMapeadosQueImpede extends TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMapeados {
 	public TratadorDeNaoMapeadosQueImpede(Mapa<Texto, Booleano> camposMapeados) {
 		super(camposMapeados);
 	}

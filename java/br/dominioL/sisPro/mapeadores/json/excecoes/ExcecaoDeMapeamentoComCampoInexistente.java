@@ -1,6 +1,6 @@
 package br.dominioL.sisPro.mapeadores.json.excecoes;
 
-public class ExcecaoDeMapeamentoComCampoInexistente extends RuntimeException {
+public final class ExcecaoDeMapeamentoComCampoInexistente extends RuntimeException {
 	private static final long serialVersionUID = -867881985775075440L;
 	
 	public ExcecaoDeMapeamentoComCampoInexistente() {

@@ -7,7 +7,7 @@ import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.estruturados.mapa.Mapa;
 import br.dominioL.sisPro.mapeadores.json.excecoes.ExcecaoDeManipulacaoDeCampoParaCampoMapeado;
 
-public class RegraDeMapeamentoDeAdicao extends RegraDeMapeamentoAbstrata {
+public final class RegraDeMapeamentoDeAdicao extends RegraDeMapeamentoAbstrata {
 	private String nome;
 	private ValorJson valor;
 	private Mapa<Texto, Booleano> camposMapeados;

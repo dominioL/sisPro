@@ -1,6 +1,6 @@
 package br.dominioL.sisPro.mapeadores.json.excecoes;
 
-public class ExcecaoDeManipulacaoDeCampoNaoMapeado extends RuntimeException {
+public final class ExcecaoDeManipulacaoDeCampoNaoMapeado extends RuntimeException {
 	private static final long serialVersionUID = -7062629849328351929L;
 
 	public ExcecaoDeManipulacaoDeCampoNaoMapeado() {

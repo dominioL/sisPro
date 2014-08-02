@@ -15,11 +15,11 @@ public abstract class TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMape
 		this.camposMapeados = camposMapeados;
 	}
 
-	protected Boolean campoNaoEstaMapeado(ObjetoJson mapeado, Par<IdentificadorJson, ValorJson> par) {
+	protected final Boolean campoNaoEstaMapeado(ObjetoJson mapeado, Par<IdentificadorJson, ValorJson> par) {
 		return !mapeado.contem(par.fornecerChave().comoTexto());
 	}
 
-	protected Boolean campoNaoFoiMapeado(Par<IdentificadorJson, ValorJson> par) {
+	protected final Boolean campoNaoFoiMapeado(Par<IdentificadorJson, ValorJson> par) {
 		return !camposMapeados.contem(Texto.criar(par.fornecerChave().comoTexto()));
 	}
 }

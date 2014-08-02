@@ -8,7 +8,7 @@ import br.dominioL.estruturados.json.ValorJson;
 import br.dominioL.estruturados.mapa.Mapa;
 import br.dominioL.estruturados.mapa.Par;
 
-public class TratadorDeNaoMapeadosQueInclui extends TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMapeados {
+public final class TratadorDeNaoMapeadosQueInclui extends TratadorDeNaoMapeadosAbstrato implements TratadorDeNaoMapeados {
 	public TratadorDeNaoMapeadosQueInclui(Mapa<Texto, Booleano> camposMapeados) {
 		super(camposMapeados);
 	}
