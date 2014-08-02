@@ -16,6 +16,7 @@ import br.dominioL.sisPro.mapeadores.json.MapeadorRenomearCampos;
 import br.dominioL.sisPro.mapeadores.json.MapeadorTransformarCampos;
 import br.dominioL.sisPro.mapeadores.json.TransformadorDeMapeamento;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamento;
+import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeClonagem;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeInclusao;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeInclusaoOpcional;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeRenomeacao;
@@ -84,9 +85,9 @@ public final class MapeadorObjetoJson implements Mapeador<ObjetoJson> {
 	}
 
 	@Override
-	public MapeadorClonarCampos<ObjetoJson> clonarCampo(String nome, String novoNome) {
-		// TODO Auto-generated method stub
-		return null;
+	public MapeadorClonarCampos<ObjetoJson> clonarCampo(String nome, String nomeDoClone) {
+		regras.inserirNoFim(new RegraDeMapeamentoDeClonagem(nome, nomeDoClone, campos));
+		return this;
 	}
 
 	@Override
