@@ -119,11 +119,9 @@ public final class Validador {
 
 	private void invalidarCampo(String valor, String nomeDoCampo) {
 		valido = false;
-		System.out.println(String.format("Campo %s inválido: %s", nomeDoCampo, valor));
 	}
 
 	private void invalidarCampo(String nomeDoCampo) {
 		valido = false;
-		System.out.println(String.format("Campo %s inválido.", nomeDoCampo));
 	}
 }

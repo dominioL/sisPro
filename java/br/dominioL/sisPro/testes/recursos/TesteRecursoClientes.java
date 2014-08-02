@@ -15,7 +15,7 @@ import br.dominioL.sisPro.http.Atributo;
 import br.dominioL.sisPro.http.CodigoDeEstado;
 import br.dominioL.sisPro.http.TipoDeMidia;
 
-public class TesteClientes {
+public class TesteRecursoClientes {
 	private ObjetoJson cliente;
 
 	@Before
