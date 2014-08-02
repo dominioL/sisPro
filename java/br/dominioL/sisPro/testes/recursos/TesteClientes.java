@@ -11,9 +11,9 @@ import org.junit.Test;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.sisPro.SisPro;
-import br.dominioL.sisPro.dominio.http.Atributo;
-import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
-import br.dominioL.sisPro.dominio.http.TipoDeMidia;
+import br.dominioL.sisPro.http.Atributo;
+import br.dominioL.sisPro.http.CodigoDeEstado;
+import br.dominioL.sisPro.http.TipoDeMidia;
 
 public class TesteClientes {
 	private ObjetoJson cliente;

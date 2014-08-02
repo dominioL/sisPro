@@ -8,12 +8,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
-import br.dominioL.sisPro.dominio.http.TipoDeMidia;
-import br.dominioL.sisPro.dominio.http.TiposDeMidia;
-import br.dominioL.sisPro.dominio.interno.Arquivo;
+import br.dominioL.sisPro.http.CodigoDeEstado;
+import br.dominioL.sisPro.http.TipoDeMidia;
+import br.dominioL.sisPro.http.TiposDeMidia;
 import br.dominioL.sisPro.recursos.Recurso;
-import br.dominioL.sisPro.recursos.abstratos.RecursoArquivo;
 
 @Path("/css/{nome: .+}")
 public final class RecursoCss extends Recurso {

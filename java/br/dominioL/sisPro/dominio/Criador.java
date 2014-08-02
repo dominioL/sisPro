@@ -7,12 +7,11 @@ import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
 import br.dominioL.sisPro.SisPro;
+import br.dominioL.sisPro.dados.couch.RepositorioCouch;
 import br.dominioL.sisPro.dados.couch.RespostaCouch;
-import br.dominioL.sisPro.dados.couch.repositorios.RepositorioCouch;
-import br.dominioL.sisPro.dominio.entidades.Entidade;
-import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
-import br.dominioL.sisPro.dominio.http.ConstrutorDeUri;
-import br.dominioL.sisPro.dominio.http.TipoDeMidia;
+import br.dominioL.sisPro.http.CodigoDeEstado;
+import br.dominioL.sisPro.http.ConstrutorDeUri;
+import br.dominioL.sisPro.http.TipoDeMidia;
 
 public final class Criador<T extends Entidade<T>> {
 	private static final String ERRO_DADOS = "Dados inválidos.";

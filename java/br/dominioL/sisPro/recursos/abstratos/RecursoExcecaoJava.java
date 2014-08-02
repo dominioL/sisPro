@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
+import br.dominioL.sisPro.http.CodigoDeEstado;
 
 @Provider
 public final class RecursoExcecaoJava implements ExceptionMapper<Exception> {

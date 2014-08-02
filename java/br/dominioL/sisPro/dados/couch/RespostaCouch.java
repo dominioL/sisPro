@@ -3,7 +3,7 @@ package br.dominioL.sisPro.dados.couch;
 import br.dominioL.estruturados.json.IdentificadorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
-import br.dominioL.sisPro.dominio.http.CodigoDeEstado;
+import br.dominioL.sisPro.http.CodigoDeEstado;
 
 public final class RespostaCouch {
 	private static final IdentificadorJson IDENTIFICADOR = Json.criarIdentificador("identificador");

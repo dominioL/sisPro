@@ -10,7 +10,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import br.dominioL.sisPro.dados.couch.Couch;
-import br.dominioL.sisPro.dominio.http.ConstrutorDeUri;
+import br.dominioL.sisPro.http.ConstrutorDeUri;
 import br.dominioL.sisPro.recursos.abstratos.RecursoExcecaoJava;
 import br.dominioL.sisPro.recursos.abstratos.RecursoExcecaoWeb;
 

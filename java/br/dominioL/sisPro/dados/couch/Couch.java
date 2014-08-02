@@ -5,10 +5,10 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
 import br.dominioL.sisPro.dados.BancoDeDados;
-import br.dominioL.sisPro.dados.couch.repositorios.RepositorioDeClientes;
-import br.dominioL.sisPro.dominio.http.ConstrutorDeUri;
-import br.dominioL.sisPro.dominio.http.Metodo;
-import br.dominioL.sisPro.dominio.http.TipoDeMidia;
+import br.dominioL.sisPro.http.ConstrutorDeUri;
+import br.dominioL.sisPro.http.Metodo;
+import br.dominioL.sisPro.http.TipoDeMidia;
+import br.dominioL.sisPro.recursos.clientes.RepositorioDeClientes;
 
 public final class Couch implements BancoDeDados<RespostaCouch, RequisicaoCouch> {
 	private static Couch INSTANCIA;

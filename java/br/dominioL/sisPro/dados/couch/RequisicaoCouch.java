@@ -2,11 +2,12 @@ package br.dominioL.sisPro.dados.couch;
 
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
-import br.dominioL.sisPro.dominio.http.ConstrutorDeUri;
+import br.dominioL.sisPro.http.ConstrutorDeUri;
 
 public final class RequisicaoCouch {
 	private static final String DESIGN = "_design";
 	private static final String VIEW = "_view";
+
 	private ObjetoJson documento;
 	private ConstrutorDeUri construtorDeUri;
 
