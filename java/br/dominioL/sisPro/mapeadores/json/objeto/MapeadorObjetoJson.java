@@ -18,6 +18,7 @@ import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapea
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeAdicao;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeClonagem;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeInclusao;
+import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeInclusaoComMapeador;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeInclusaoOpcional;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeRenomeacao;
 import br.dominioL.sisPro.mapeadores.json.objeto.regrasDeMapeamento.RegraDeMapeamentoDeTransformacao;
@@ -60,26 +61,28 @@ public final class MapeadorObjetoJson implements MapeadorJson<ObjetoJson> {
 	}
 
 	@Override
-	public MapeadorJson<ObjetoJson> comCampoColecao(String nome, MapeadorJson<ObjetoJson> mapeador) {
+	public MapeadorJson<ObjetoJson> comCampoColecao(String nome, MapeadorJsonCamposNaoMapeados<ObjetoJson> mapeador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MapeadorJson<ObjetoJson> comCampoColecaoOpcional(String nome, MapeadorJson<ObjetoJson> mapeador) {
+	public MapeadorJson<ObjetoJson> comCampoColecaoOpcional(String nome, MapeadorJsonCamposNaoMapeados<ObjetoJson> mapeador) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MapeadorJson<ObjetoJson> comCampoElemento(String nome, MapeadorJson<ObjetoJson> mapeador) {
-		// TODO Auto-generated method stub
-		return null;
+	public MapeadorJson<ObjetoJson> comCampo(String nome, MapeadorJsonCamposNaoMapeados<ObjetoJson> mapeador) {
+		campos.inserir(Texto.criar(nome), Booleano.criarFalso());
+		regras.inserirNoFim(new RegraDeMapeamentoDeInclusaoComMapeador(nome, mapeador, new RegraDeMapeamentoDeInclusao(nome)));
+		return this;
 	}
 
 	@Override
-	public MapeadorJson<ObjetoJson> comCampoElementoOpcional(String nome, MapeadorJson<ObjetoJson> mapeador) {
-		// TODO Auto-generated method stub
+	public MapeadorJson<ObjetoJson> comCampoOpcional(String nome, MapeadorJsonCamposNaoMapeados<ObjetoJson> mapeador) {
+		campos.inserir(Texto.criar(nome), Booleano.criarVerdadeiro());
+		regras.inserirNoFim(new RegraDeMapeamentoDeInclusaoComMapeador(nome, mapeador, new RegraDeMapeamentoDeInclusaoOpcional(nome)));
 		return null;
 	}
 

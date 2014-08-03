@@ -9,6 +9,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.dominioL.estruturados.excecoes.ExcecaoJsonDeTipo;
 import br.dominioL.estruturados.json.ConstrutorJson;
 import br.dominioL.estruturados.json.Json;
 import br.dominioL.estruturados.json.ObjetoJson;
@@ -38,6 +39,10 @@ public class TesteMapeadorJson {
 	private ObjetoJson comRev;
 	private ObjetoJson comUri;
 	private ObjetoJson comIdentificadorComUri;
+	private ObjetoJson comCliente;
+	private ObjetoJson comIdentificadorComClienteCotendoNomeCidadeContendoNomeEstado;
+	private ObjetoJson comIdentificadorComClienteCotendoNomeRevisaoCidadeContendoNomeEstado;
+	private ObjetoJson comClienteNumero;
 
 	@Before
 	public void cirarFiguracao() {
@@ -55,6 +60,29 @@ public class TesteMapeadorJson {
 		comRev = ConstrutorJson.deObjeto().inserir("rev", 1).construir();
 		comUri = ConstrutorJson.deObjeto().inserir("uri", "/cliente/1").construir();
 		comIdentificadorComUri = ConstrutorJson.deObjeto().inserir("identificador", 1).inserir("uri", "/cliente/1").construir();
+		comCliente = ConstrutorJson.deObjeto().inserir("cliente", ConstrutorJson.deObjeto().inserir("nome", "Lucas").construir()).construir();
+		comIdentificadorComClienteCotendoNomeCidadeContendoNomeEstado = ConstrutorJson.deObjeto()
+				.inserir("identificador", 1)
+				.inserir("cliente", ConstrutorJson.deObjeto()
+						.inserir("nome", "Lucas")
+						.inserir("cidade", ConstrutorJson.deObjeto()
+								.inserir("nome", "Florianópolis")
+								.inserir("estado", "SC")
+								.construir())
+						.construir())
+				.construir();
+		comIdentificadorComClienteCotendoNomeRevisaoCidadeContendoNomeEstado = ConstrutorJson.deObjeto()
+				.inserir("identificador", 1)
+				.inserir("cliente", ConstrutorJson.deObjeto()
+						.inserir("nome", "Lucas")
+						.inserir("revisao", 1)
+						.inserir("cidade", ConstrutorJson.deObjeto()
+								.inserir("nome", "Florianópolis")
+								.inserir("estado", "SC")
+								.construir())
+						.construir())
+				.construir();
+		comClienteNumero = ConstrutorJson.deObjeto().inserir("cliente", 1).construir();
 		mapeador = MapeadorObjetoJson.criar();
 	}
 
@@ -544,7 +572,7 @@ public class TesteMapeadorJson {
 		mapeador.comCampoOpcional("identificador").renomearCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
 		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
 	}
-	
+
 	@Test
 	public void transformarCampoClonadoExistente() {
 		mapeador.comCampo("identificador").clonarCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
@@ -556,10 +584,69 @@ public class TesteMapeadorJson {
 		mapeador.comCampoOpcional("identificador").clonarCampo("identificador", "uri").transformarCampo("uri", Json.criarTexto("/cliente/1"));
 		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
 	}
-	
+
 	@Test
 	public void transformarCampoAdicionado() {
 		mapeador.comCampo("identificador").adicionarCampo("uri", Json.criarTexto("/cliente/2")).transformarCampo("uri", Json.criarTexto("/cliente/1"));
 		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificadorComUri)));
+	}
+
+	@Test
+	public void mapearObjetoDentroDeObjeto() {
+		mapeador.comCampo("cliente", MapeadorObjetoJson.criar().comCampo("nome"));
+		assertThat(mapeador.mapear(comCliente), is(equalTo(comCliente)));
+	}
+
+	@Test
+	public void mapearObjetoDentroDeObjetoDentroDeObjetoComCampoOpcionalExistente() {
+		mapeador.comCampo("identificador")
+				.comCampo("cliente", MapeadorObjetoJson.criar()
+						.comCampo("nome")
+						.comCampo("cidade", MapeadorObjetoJson.criar()
+								.comCampo("nome")
+								.comCampoOpcional("estado"))
+						.adicionarCampo("revisao", Json.criarNumero(1)));
+		assertThat(mapeador.mapear(comIdentificadorComClienteCotendoNomeCidadeContendoNomeEstado), is(equalTo(comIdentificadorComClienteCotendoNomeRevisaoCidadeContendoNomeEstado)));
+	}
+
+	@Test
+	public void mapearObjetoOpcionalExistenteDentroDeObjeto() {
+		mapeador.comCampoOpcional("cliente", MapeadorObjetoJson.criar().comCampo("nome"));
+		assertThat(mapeador.mapear(comCliente), is(equalTo(comCliente)));
+	}
+
+	@Test
+	public void mapearObjetoOpcionalExistenteDentroDeObjetoDentroDeObjetoComCampoOpcionalExistente() {
+		mapeador.comCampo("identificador")
+				.comCampoOpcional("cliente", MapeadorObjetoJson.criar()
+						.comCampo("nome")
+						.comCampo("cidade", MapeadorObjetoJson.criar()
+								.comCampo("nome")
+								.comCampoOpcional("estado"))
+						.adicionarCampo("revisao", Json.criarNumero(1)));
+		assertThat(mapeador.mapear(comIdentificadorComClienteCotendoNomeCidadeContendoNomeEstado), is(equalTo(comIdentificadorComClienteCotendoNomeRevisaoCidadeContendoNomeEstado)));
+	}
+
+	@Test
+	public void mapearObjetoOpcionalInexistenteDentroDeObjeto() {
+		mapeador.comCampoOpcional("cliente", MapeadorObjetoJson.criar().comCampo("nome"));
+		assertThat(mapeador.mapear(vazio), is(equalTo(vazio)));
+	}
+
+	@Test
+	public void mapearObjetoOpcionalInexistenteDentroDeObjetoDentroDeObjetoComCampoOpcionalExistente() {
+		mapeador.comCampo("identificador")
+				.comCampoOpcional("cliente", MapeadorObjetoJson.criar()
+						.comCampo("nome")
+						.comCampo("cidade", MapeadorObjetoJson.criar()
+								.comCampo("nome")
+								.comCampoOpcional("estado"))
+						.adicionarCampo("revisao", Json.criarNumero(1)));
+		assertThat(mapeador.mapear(comIdentificador), is(equalTo(comIdentificador)));
+	}
+
+	@Test(expected = ExcecaoJsonDeTipo.class)
+	public void mapearObjetoComTipoInvalido() {
+		mapeador.comCampo("cliente", MapeadorObjetoJson.criar()).mapear(comClienteNumero);
 	}
 }
