@@ -22,7 +22,8 @@ public final class AmbienteSisPro implements Ambiente<CouchDb> {
 				.protocolo(ConfiguracoesSisPro.BANCO_PROTOCOLO)
 				.endereco(ConfiguracoesSisPro.BANCO_ENDERECO)
 				.porta(ConfiguracoesSisPro.BANCO_PORTA)
-				.caminho(ConfiguracoesSisPro.BANCO_CAMINHO_BASE);
+				.caminho(ConfiguracoesSisPro.BANCO_CAMINHO_BASE)
+				.caminho(ConfiguracoesSisPro.BANCO_NOME);
 	}
 
 	@Override
