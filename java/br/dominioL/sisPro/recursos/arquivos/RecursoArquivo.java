@@ -4,14 +4,21 @@ import java.io.File;
 
 import javax.ws.rs.core.Response;
 
-import br.dominioL.sisPro.http.CodigoDeEstado;
-import br.dominioL.sisPro.http.TipoDeMidia;
+import br.dominioL.sisPro.infraestrutura.http.CodigoDeEstado;
+import br.dominioL.sisPro.infraestrutura.http.ConstrutorDeResposta;
+import br.dominioL.sisPro.infraestrutura.http.TipoDeMidia;
 
 public final class RecursoArquivo {
-	public Response obterArquivo(File arquivo, CodigoDeEstado codigoDeEstado, TipoDeMidia tipoDeMidia) {
+
+	public Response obter(File arquivo, TipoDeMidia tipoDeMidia) {
 		if (!arquivo.exists()) {
-			return CodigoDeEstado.HTTP_404.fornecerResposta();
+			return CodigoDeEstado.HTTP_404.fornecerResposta().construir();
 		}
-		return codigoDeEstado.fornecerResposta(tipoDeMidia, arquivo);
+		return ConstrutorDeResposta
+				.codigoDeEstado(CodigoDeEstado.HTTP_200)
+				.tipoDeMidia(tipoDeMidia)
+				.entidade(arquivo)
+				.construir();
 	}
+
 }
