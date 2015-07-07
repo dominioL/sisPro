@@ -15,4 +15,5 @@ public abstract class MapeadorJson<T extends ValorJson> implements MapeadorJsonR
 	public abstract MapeadorJson<T> comCampo(String nome, MapeadorJsonCamposNaoMapeados<T> mapeador);
 
 	public abstract MapeadorJson<T> comCampoOpcional(String nome, MapeadorJsonCamposNaoMapeados<T> mapeador);
+
 }

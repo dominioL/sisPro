@@ -1,48 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="java"/>
-	<classpathentry kind="lib" path="jar/estruturados.jar"/>
-	<classpathentry kind="lib" path="jar/hamcrest.jar" sourcepath="jar/hamcrestSources.jar"/>
 	<classpathentry kind="lib" path="jar/jerseyServer.jar"/>
-	<classpathentry kind="lib" path="jar/antlr.jar"/>
-	<classpathentry kind="lib" path="jar/commonsCodec.jar"/>
-	<classpathentry kind="lib" path="jar/commonsLang.jar"/>
-	<classpathentry kind="lib" path="jar/commonsLogging.jar"/>
-	<classpathentry kind="lib" path="jar/httpClient.jar"/>
-	<classpathentry kind="lib" path="jar/httpCore.jar"/>
-	<classpathentry kind="lib" path="jar/httpMime.jar"/>
-	<classpathentry kind="lib" path="jar/tagSoup.jar"/>
-	<classpathentry kind="lib" path="jar/restAssured.jar" sourcepath="jar/restAssuredSources.jar"/>
-	<classpathentry kind="lib" path="jar/asm.jar"/>
-	<classpathentry kind="lib" path="jar/jsr311.jar"/>
 	<classpathentry kind="lib" path="jar/jerseyClient.jar"/>
 	<classpathentry kind="lib" path="jar/jerseyCommon.jar"/>
-	<classpathentry kind="lib" path="jar/jerseyContainerServlet.jar"/>
-	<classpathentry kind="lib" path="jar/jerseyContainerServletCore.jar"/>
-	<classpathentry kind="lib" path="jar/grizzly.jar"/>
-	<classpathentry kind="lib" path="jar/cglib.jar"/>
-	<classpathentry kind="lib" path="jar/guava.jar"/>
-	<classpathentry kind="lib" path="jar/hk2.jar"/>
-	<classpathentry kind="lib" path="jar/hk2Locator.jar"/>
-	<classpathentry kind="lib" path="jar/hk2Utils.jar"/>
-	<classpathentry kind="lib" path="jar/jsr222.jar"/>
-	<classpathentry kind="lib" path="jar/jsr250.jar"/>
-	<classpathentry kind="lib" path="jar/jsr303.jar"/>
-	<classpathentry kind="lib" path="jar/jsr315.jar"/>
-	<classpathentry kind="lib" path="jar/jsr317.jar"/>
-	<classpathentry kind="lib" path="jar/jsr330.jar"/>
-	<classpathentry kind="lib" path="jar/osgiCore.jar"/>
-	<classpathentry kind="lib" path="jar/osgiResourceLocator.jar"/>
-	<classpathentry kind="lib" path="jar/jerseyContainerGrizzly2.jar"/>
-	<classpathentry kind="lib" path="jar/asm4.jar"/>
-	<classpathentry kind="lib" path="jar/asm4Analysis.jar"/>
-	<classpathentry kind="lib" path="jar/asm4Commons.jar"/>
-	<classpathentry kind="lib" path="jar/asm4Tree.jar"/>
-	<classpathentry kind="lib" path="jar/asm4Util.jar"/>
-	<classpathentry kind="lib" path="jar/groovy.jar"/>
-	<classpathentry kind="lib" path="jar/groovyJson.jar"/>
-	<classpathentry kind="lib" path="jar/groovyXml.jar"/>
+	<classpathentry kind="lib" path="jar/estruturados.jar"/>
 	<classpathentry kind="lib" path="jar/jUnit.jar"/>
+	<classpathentry kind="lib" path="jar/hamcrest.jar"/>
+	<classpathentry kind="lib" path="jar/jerseyContainerJettyHttp.jar" sourcepath="jar/fontes/jerseyContainerJettyHttp.jar"/>
+	<classpathentry kind="lib" path="jar/javax.annotation.jar"/>
+	<classpathentry kind="lib" path="jar/jettyServer.jar"/>
+	<classpathentry kind="lib" path="jar/org.glassfish.hk2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jar/javax.ws.rs.jar"/>
 	<classpathentry kind="output" path="construcao/class"/>
 </classpath>

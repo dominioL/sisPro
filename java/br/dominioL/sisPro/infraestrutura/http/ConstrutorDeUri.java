@@ -1,5 +1,8 @@
 package br.dominioL.sisPro.infraestrutura.http;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.ws.rs.Path;
 
 import br.dominioL.estruturados.elemento.primitivos.Numero;
@@ -81,6 +84,14 @@ public final class ConstrutorDeUri {
 
 	private static Texto obterCaminhoDeRecurso(Class<?> classe) {
 		return Texto.criar(classe.getAnnotation(Path.class).value());
+	}
+
+	public URI comoUri() {
+		try {
+			return new URI(construirAbsoluto().valor());
+		} catch (URISyntaxException excecao) {
+			return null;
+		}
 	}
 
 }
